@@ -1,0 +1,22 @@
+[parity]
+chain = "./spec/spec.json"
+base_path = "./nodes/parity-moc"
+
+[network]
+port = 30300
+
+[rpc]
+cors = ["null"]
+hosts = ["all"]
+port = 8545
+apis = ["web3", "eth", "net", "personal", "parity", "parity_set", "traces", "rpc", "parity_accounts"]
+
+[account]
+unlock = []
+password = ["./keys/moc/moc.pwd"]
+
+[mining]
+force_sealing = true
+engine_signer = ""
+reseal_on_txs = "none"
+

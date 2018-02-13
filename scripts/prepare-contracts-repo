@@ -1,0 +1,12 @@
+#!/bin/bash
+
+directory=./submodules/poa-network-consensus-contracts
+build_dir=${directory}/build
+
+if [  -d ${directory} ]; then
+	if [ ! -d ${build_dir} ]; then
+
+		cmd=$(cd ${directory} && npm i && bash ./make_flat.sh && ./node_modules/.bin/truffle compile)
+
+	fi
+fi

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+initial_keys_number=1
+for i in {1..${initial_keys_number}}
+do
+	npm run generate-initial-key
+done
+
+echo "All initial keys are generated"

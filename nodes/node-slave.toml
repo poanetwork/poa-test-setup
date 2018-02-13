@@ -1,0 +1,31 @@
+[parity]
+chain = "./spec/spec.json"
+base_path = ""
+
+[network]
+port = 30301
+discovery=true
+reserved_peers="./reserved_peers"
+
+[rpc]
+cors = ["null"]
+hosts = ["all"]
+port = 8554
+apis = ["web3", "eth", "net", "personal", "parity", "parity_set", "traces", "rpc", "parity_accounts"]
+
+[account]
+unlock = []
+password = []
+
+[mining]
+force_sealing = true
+engine_signer = ""
+reseal_on_txs = "none"
+
+[websockets]
+disable = false
+port = 8546
+interface = "all"
+origins = ["all"]
+apis = ["web3", "eth", "net", "parity", "traces", "rpc", "secretstore"]
+hosts = ["all"]

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+directory=./submodules/poa-scripts-moc/generateInitialKey
+node_modules=${directory}/node_modules
+if [ ! -d ${node_modules} ]; then
+
+	cmd=$(cd ${directory} && npm i && node generateInitialKey.js)
+
+else
+
+	cmd2=$(cd ${directory} && node generateInitialKey.js)
+
+fi

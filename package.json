@@ -1,0 +1,38 @@
+{
+  "name": "poa-test-setup",
+  "version": "0.1.0",
+  "private": false,
+  "homepage": "",
+  "dependencies": {
+    "chromedriver": "^2.35.0",
+    "create-poa-crowdsale": "^1.0.33",
+    "download-git-repo": "^1.0.2",
+    "keythereum": "^1.0.2",
+    "node-dir": "^0.1.17",
+    "node-fetch": "^2.0.0",
+    "password-generator": "^2.2.0",
+    "path": "^0.12.7",
+    "selenium-webdriver": "^3.6.0",
+    "toml": "^2.3.3",
+    "toml-js": "0.0.8",
+    "web3": "^1.0.0-beta.29"
+  },
+  "scripts": {
+    "start-test-setup": "npm run download-repos && npm run prepare-contracts-repo && npm run prepare-moc-node && npm run start-moc-node && npm run deploy-secondary-contracts && npm run prepare-scrips-moc-repo && npm run prepare-ceremony-dapp && npm run prepare-ceremony-dapp-more && npm run generate-initial-keys && npm run get-private-initial-keys && npm run start-ceremony && npm run test-setup-is-started",
+    "download-repos": "git submodule update --init --recursive --remote",
+    "prepare-contracts-repo": "bash ./scripts/prepare-contracts-repo",
+    "prepare-moc-node": "node prepareMoCNode",
+    "start-moc-node": "parity --config ./nodes/parity-moc/moc.toml > /dev/null 2>&1 &",
+    "deploy-secondary-contracts": "bash ./scripts/deploy-secondary-contracts",
+    "prepare-scrips-moc-repo": "node prepareMoCScripts",
+    "prepare-ceremony-dapp": "node prepareCeremonyDapp",
+    "prepare-ceremony-dapp-more": "cd ./submodules/poa-dapps-keys-generation && npm i > /dev/null 2>&1",
+    "generate-initial-key": "bash ./scripts/generate-initial-key",
+    "generate-initial-keys": "bash ./scripts/generate-initial-keys",
+    "get-private-initial-keys": "node getPrivateInitialKeys",
+    "start-ceremony": "cd ./submodules/poa-dapps-keys-generation && npm start > /dev/null 2>&1 &",
+    "test-setup-is-started": "echo '### POA test setup is configured ###'",
+    "e2e-ceremony-test": "node e2eCeremonyTest",
+    "stop-test-setup": "rm -rf ./submodules/poa-dapps-keys-generation && rm -rf ./submodules/poa-scripts-moc/generateInitialKey/output/* && git clean -f -d && kill -9 $(lsof -t -i:8545)"
+  }
+}
