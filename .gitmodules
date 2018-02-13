@@ -1,0 +1,16 @@
+[submodule "submodules/poa-network-consensus-contracts"]
+	path = submodules/poa-network-consensus-contracts
+	url = https://github.com/vbaranov/poa-network-consensus-contracts
+	branch = update-test-deploy-script
+[submodule "submodules/poa-chain-spec"]
+	path = submodules/poa-chain-spec
+	url = https://github.com/poanetwork/poa-chain-spec
+	branch = sokol
+[submodule "submodules/poa-scripts-moc"]
+	path = submodules/poa-scripts-moc
+	url = https://github.com/poanetwork/poa-scripts-moc
+	branch = sokol
+[submodule "submodules/poa-dapps-keys-generation"]
+	path = submodules/poa-dapps-keys-generation
+	url = https://github.com/vbaranov/poa-dapps-keys-generation
+	branch = fix-quick-keys-generation
