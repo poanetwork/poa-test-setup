@@ -18,8 +18,10 @@
     "web3": "^1.0.0-beta.29"
   },
   "scripts": {
-    "start-test-setup": "npm run download-repos && npm run prepare-contracts-repo && npm run prepare-moc-node && npm run start-moc-node && npm run deploy-secondary-contracts && npm run prepare-scrips-moc-repo && npm run prepare-ceremony-dapp && npm run prepare-ceremony-dapp-more && npm run generate-initial-keys && npm run get-private-initial-keys && npm run start-ceremony && npm run test-setup-is-started",
-    "download-repos": "git submodule update --init --recursive --remote",
+    "start-moc-setup": "npm run get-contracts-submodule && npm run prepare-contracts-repo && npm run prepare-moc-node && npm run start-moc-node && npm run deploy-secondary-contracts && npm run test-setup-is-started",
+    "start-test-setup": "npm run get-all-submodules && npm run prepare-contracts-repo && npm run prepare-moc-node && npm run start-moc-node && npm run deploy-secondary-contracts && npm run prepare-scrips-moc-repo && npm run prepare-ceremony-dapp && npm run prepare-ceremony-dapp-more && npm run generate-initial-keys && npm run get-private-initial-keys && npm run start-ceremony && npm run test-setup-is-started",
+    "get-contracts-submodule": "git submodule update --init --recursive --remote submodules/poa-network-consensus-contracts",
+    "get-all-submodules": "git submodule update --init --recursive --remote",
     "prepare-contracts-repo": "bash ./scripts/prepare-contracts-repo",
     "prepare-moc-node": "node prepareMoCNode",
     "start-moc-node": "parity --config ./nodes/parity-moc/moc.toml > /dev/null 2>&1 &",
@@ -33,6 +35,6 @@
     "start-ceremony": "cd ./submodules/poa-dapps-keys-generation && npm start > /dev/null 2>&1 &",
     "test-setup-is-started": "echo '### POA test setup is configured ###'",
     "e2e-ceremony-test": "node e2eCeremonyTest",
-    "stop-test-setup": "rm -rf ./submodules/poa-dapps-keys-generation && rm -rf ./submodules/poa-scripts-moc/generateInitialKey/output/* && git clean -f -d && kill -9 $(lsof -t -i:8545)"
+    "stop-test-setup": "rm -rf ./submodules/poa-dapps-keys-generation/* && rm -rf ./submodules/poa-scripts-moc/generateInitialKey/output/* && git clean -f -d && kill -9 $(lsof -t -i:8545)"
   }
 }
