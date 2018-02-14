@@ -1,4 +1,3 @@
-const downloadRepo = require("./utils/downloadRepo");
 const Constants = require("./utils/constants");
 const constants = Constants.constants;
 const fs = require('fs');
