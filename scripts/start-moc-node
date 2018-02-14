@@ -1,0 +1,10 @@
+#!/bin/bash
+
+parity --config ./nodes/parity-moc/moc.toml
+
+parityDebPath=./parity_1.9.2_amd64.deb
+if ! [ -x "$(command -v parity)" ]; then
+  cmd=$(dpkg -i ${parityDebPath})
+fi
+
+cmd2=$(parity --config ./nodes/parity-moc/moc.toml)

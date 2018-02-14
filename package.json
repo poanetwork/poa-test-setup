@@ -23,7 +23,7 @@
     "get-all-submodules": "git submodule update --init --recursive --remote",
     "prepare-contracts-repo": "bash ./scripts/prepare-contracts-repo",
     "prepare-moc-node": "node prepareMoCNode",
-    "start-moc-node": "parity --config ./nodes/parity-moc/moc.toml > /dev/null 2>&1 &",
+    "start-moc-node": "bash ./scripts/start-moc-node > /dev/null 2>&1 &",
     "deploy-secondary-contracts": "bash ./scripts/deploy-secondary-contracts",
     "prepare-scrips-moc-repo": "node prepareMoCScripts",
     "prepare-ceremony-dapp": "node prepareCeremonyDapp",
