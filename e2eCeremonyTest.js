@@ -1,5 +1,5 @@
+const fs = require('fs');
 const utils = require("./utils/utils");
-const downloadRepo = require("./utils/downloadRepo");
 const Constants = require("./utils/constants");
 const constants = Constants.constants;
 const dir = require('node-dir');
@@ -7,11 +7,11 @@ const webdriver = require('selenium-webdriver'),
       chrome = require('selenium-webdriver/chrome');
 require("chromedriver");
 
-const metaMaskWallet=require('./MetaMaskWallet.js');
-const MetaMaskWallet=metaMaskWallet.MetaMaskWallet;
-const meta=require('./pages/MetaMask.js');
-const buttonSubmit=require('./pages/MetaMask.js');
-const ceremony=require('./pages/Ceremony.js');
+const metaMaskWallet = require('./MetaMaskWallet.js');
+const MetaMaskWallet = metaMaskWallet.MetaMaskWallet;
+const meta = require('./pages/MetaMask.js');
+const buttonSubmit = require('./pages/MetaMask.js');
+const ceremony = require('./pages/Ceremony.js');
 
 const timeout = ms => new Promise(res => setTimeout(res, ms))
 
@@ -38,6 +38,8 @@ async function main() {
 	metaMask.open();
     metaMask.activate();
 
+    metaMask.switchToAnotherPage();
+
     ceremonyPage.open();
     //ceremonyPage.clickButtonGenerateKeys();
 
@@ -49,8 +51,33 @@ async function main() {
 
     metaMask.switchToAnotherPage();
     driver.sleep(2000);
+    metaMask.refresh();
+    driver.sleep(1000);
     if ( await metaMask.isElementPresent(buttonSubmit.buttonSubmit)) {
         metaMask.submitTransaction();
         ceremonyPage.switchToAnotherPage();
+
+        await getKeys(ceremonyPage);
+    }
+}
+
+async function getKeys(ceremonyPage) {
+    let miningKey = await ceremonyPage.getMiningKey();
+    let payoutKey = await ceremonyPage.getPayoutKey();
+    let votingKey = await ceremonyPage.getVotingKey();
+    
+    fs.writeFileSync(`${constants.miningKeysFolder}/${miningKey.address}.key`, JSON.stringify(miningKey));
+    fs.writeFileSync(`${constants.payoutKeysFolder}/${payoutKey.address}.key`, JSON.stringify(payoutKey));
+    fs.writeFileSync(`${constants.votingKeysFolder}/${votingKey.address}.key`, JSON.stringify(votingKey));
+
+    let validator_1_path = `${constants.nodeFolder}/parity_validator_1`;
+
+    if (!fs.existsSync(validator_1_path)){
+        fs.mkdirSync(validator_1_path);
+        fs.mkdirSync(`${validator_1_path}/keys`);
+        fs.mkdirSync(`${validator_1_path}/keys/Sokol`);
+
+        fs.writeFileSync(`${validator_1_path}/keys/Sokol/${miningKey.address}`, JSON.stringify(miningKey.keyObject));
+        fs.writeFileSync(`${validator_1_path}/node.pwd`, miningKey.password);
     }
 }

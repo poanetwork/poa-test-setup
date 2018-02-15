@@ -20,6 +20,9 @@ constants.masterNodeKeysFolder = `${constants.masterNodeFolder}keys/`;
 constants.specFolder = `./spec/`;
 constants.mocKeysFolder = `${constants.keysFolder}moc/`;
 constants.initialKeysFolder = `${constants.keysFolder}initial_keys/`;
+constants.miningKeysFolder = `${constants.keysFolder}mining_keys/`;
+constants.votingKeysFolder = `${constants.keysFolder}voting_keys/`;
+constants.payoutKeysFolder = `${constants.keysFolder}payout_keys/`;
 constants.poaNetworkConsensusContractAddress = '0x8bf38d4764929064f2d4d3a56520a76ab3df415b';
 constants.ABIsSources = {
 	'KeysManager': 'KeysManager.abi.json',
