@@ -33,16 +33,27 @@
 At the successful end of POA test setup start you'll see this message `### POA test setup is configured ###`
 
 ### Expected result:
-- RPC of Parity node with unlocked MoC account will be on http://localhost:8545
+- RPC of Parity node with unlocked MoC account will be on `http://localhost:8545`
 - Spec of the network is generated to `./spec` folder
 - MoC keystore file, password, private key is generated to `./keys/moc` folder
 - Initial key password, private key is generated to `.keys/initial_keys` folder
 - Parity config of MoC node is generated to `./nodes/parity-moc/moc.toml` file
 - Addresses of governance smart contracts are generated to `./submodules/poa-network-consensus-contracts/contracts.json`
 - ABI of smart contracts are generated to `./submodules/poa-network-consensus-contracts/build/contracts`
+- Ceremony Dapp is started on `http://localhost:3000`
 
 ## Start e2e Ceremony test
-`npm run e2e-ceremony-test` (you need start test POA setup before)
+1. `npm i`
+2. `npm run start-test-setup-e2e-ceremony-test`
+
+### Expected result:
+- All expected results from [Start test POA setup script](#start-test-poa-setup)
+- e2e test of Ceremony DApp was executed
+- Mining address, password and private key is copied to `./keys/mining_keys` folder
+- Payout address, password and private key is copied to `./keys/payout_keys` folder
+- Voting address, password and private key is copied to `./keys/voting_keys` folder
+
+If you have already started test POA setup before with [Start test POA setup script](#start-test-poa-setup)  you can run e2e ceremony test with `npm run e2e-ceremony-test` 
 
 ## Finish test POA setup
 `npm run stop-test-setup`
