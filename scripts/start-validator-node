@@ -1,0 +1,8 @@
+#!/bin/bash
+
+parityDebPath=./parity_1.9.2_amd64.deb
+if ! [ -x "$(command -v parity)" ]; then
+  cmd=$(sudo dpkg -i ${parityDebPath})
+fi
+
+cmd2=$(parity --config ./nodes/parity_validator_1/node.toml)
