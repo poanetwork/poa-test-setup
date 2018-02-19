@@ -17,4 +17,4 @@
 [submodule "submodules/poa-dapps-validators"]
 	path = submodules/poa-dapps-validators
 	url = https://github.com/poanetwork/poa-dapps-validators
-	branch = sokol
+	branch = core

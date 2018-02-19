@@ -15,7 +15,7 @@
 - [x] launches Ceremony DApp is locally builded from repo
 - [x] runs e2e tests on Ceremony DApp
 - [x] saves generated production keys with Ceremony DApp to `./keys` folder
-- [ ] runs miner node
+- [x] runs validator node
 - [ ] gets content of sokol branch of `poa-dapps-validators` repo
 - [ ] launches Validators DApp is locally builded from repo
 - [ ] runs e2e tests on Validators DApp
