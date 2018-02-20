@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -u
+set -e
+
 parityDebPath=./parity_1.9.2_amd64.deb
 if ! [ -x "$(command -v parity)" ]; then
   cmd=$(sudo dpkg -i ${parityDebPath})

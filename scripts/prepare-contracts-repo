@@ -1,10 +1,20 @@
 #!/bin/bash
 
+set -u
+set -e
+
 directory=./submodules/poa-network-consensus-contracts
 build_dir=${directory}/build
 
 if [  -d ${directory} ]; then
 	if [ ! -d ${build_dir} ]; then
-		cmd=$(cd ${directory} && npm i --production && bash ./make_flat.sh && ./node_modules/.bin/truffle compile)
+		if ! [ -x "$(command -v pip3)" ]; then
+		  	cmd1=$(sudo apt-get update)
+			cmd2$(sudo apt-get install python3)
+		fi
+		if ! [-x "$(command -v solidity_flattener)"]; then
+			cmd3=$(pip3 install solidity-flattener)
+		fi
+		cmd4=$(cd ${directory} && npm i && bash ./make_flat.sh && ./node_modules/.bin/truffle compile)
 	fi
 fi

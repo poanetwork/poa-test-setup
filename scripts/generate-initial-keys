@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -u
+set -e
+
 initial_keys_number=1
 for i in {1..${initial_keys_number}}
 do

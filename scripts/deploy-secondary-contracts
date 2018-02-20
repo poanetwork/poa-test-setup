@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -u
+set -e
+
 directory=./submodules/poa-network-consensus-contracts
 
 consensus="0x8bf38d4764929064f2d4d3a56520a76ab3df415b"

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -u
+set -e
+
 directory=./submodules/poa-scripts-moc/generateInitialKey
 node_modules=${directory}/node_modules
 if [ ! -d ${node_modules} ]; then
