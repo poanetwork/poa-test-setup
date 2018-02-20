@@ -41,6 +41,6 @@
     "prepare-validators-dapp": "node prepareValidatorsDapp",
     "prepare-validators-dapp-more": "cd ./submodules/poa-dapps-validators && npm i --production > /dev/null 2>&1",
     "e2e-validators-test": "node e2eValidatorsTest",
-    "stop-test-setup": "rm -rf ./submodules/poa-dapps-keys-generation && rm -rf ./submodules/poa-dapps-validators && rm -rf ./submodules/poa-scripts-moc/generateInitialKey/output/* && git clean -f -d && git checkout nodes/reserved_peers && kill -9 $(lsof -t -i:8545)"
+    "stop-test-setup": "rm -rf ./submodules/poa-dapps-keys-generation/* && rm -rf ./submodules/poa-dapps-validators/* && rm -rf ./submodules/poa-scripts-moc/generateInitialKey/output/* && git clean -f -d && git checkout nodes/reserved_peers && kill -9 $(lsof -t -i:8545)"
   }
 }

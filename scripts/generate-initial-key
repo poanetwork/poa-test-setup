@@ -4,10 +4,10 @@ directory=./submodules/poa-scripts-moc/generateInitialKey
 node_modules=${directory}/node_modules
 if [ ! -d ${node_modules} ]; then
 
-	cmd=$(cd ${directory} && npm i && node generateInitialKey.js)
+	cmd=$(cd ${directory} && npm i --production && node generateInitialKey.js)
 
 else
 
-	cmd2=$(cd ${directory} && node generateInitialKey.js)
+	cmd2=$(cd ${directory} && npm start)
 
 fi
