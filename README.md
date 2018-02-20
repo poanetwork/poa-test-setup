@@ -24,7 +24,8 @@
 - [ ] runs e2e tests on Governance DApp
 
 ## Requirements
-1. Parity 1.9.2+
+1. Linux, Mac OS
+2. Parity 1.9.2+
 
 ## Start test POA setup
 1. `npm i`
