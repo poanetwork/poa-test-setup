@@ -6,15 +6,11 @@
 	path = submodules/poa-scripts-moc
 	url = https://github.com/poanetwork/poa-scripts-moc
 	branch = sokol
-[submodule "submodules/poa-dapps-keys-generation"]
-	path = submodules/poa-dapps-keys-generation
-	url = https://github.com/vbaranov/poa-dapps-keys-generation
-	branch = fix-quick-keys-generation
 [submodule "submodules/poa-network-consensus-contracts"]
 	path = submodules/poa-network-consensus-contracts
 	url = https://github.com/poanetwork/poa-network-consensus-contracts
 	branch = master
-[submodule "submodules/poa-dapps-validators"]
-	path = submodules/poa-dapps-validators
-	url = https://github.com/poanetwork/poa-dapps-validators
-	branch = core
+[submodule "submodules/poa-dapps-keys-generation"]
+	path = submodules/poa-dapps-keys-generation
+	url = https://github.com/vbaranov/poa-dapps-keys-generation
+	branch = fix-quick-keys-generation
