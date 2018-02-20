@@ -25,7 +25,8 @@
 
 ## Requirements
 1. Linux, Mac OS
-2. Parity 1.9.2+
+2. Python 2.7+
+3. Parity 1.9.2+
 
 ## Start test POA setup
 1. `npm i`
