@@ -29,7 +29,7 @@
     "deploy-secondary-contracts": "bash ./scripts/deploy-secondary-contracts",
     "prepare-scrips-moc-repo": "node prepareMoCScripts",
     "prepare-ceremony-dapp": "node prepareCeremonyDapp",
-    "prepare-ceremony-dapp-more": "cd ./submodules/poa-dapps-keys-generation && npm i > /dev/null 2>&1",
+    "prepare-ceremony-dapp-more": "cd ./submodules/poa-dapps-keys-generation && npm i --production > /dev/null 2>&1",
     "generate-initial-key": "bash ./scripts/generate-initial-key",
     "generate-initial-keys": "bash ./scripts/generate-initial-keys",
     "get-private-initial-keys": "node getPrivateInitialKeys",
@@ -39,7 +39,7 @@
     "prepare-validator-node": "node prepareValidatorNode",
     "start-validator-node": "bash ./scripts/start-validator-node > /dev/null 2>&1 &",
     "prepare-validators-dapp": "node prepareValidatorsDapp",
-    "prepare-validators-dapp-more": "cd ./submodules/poa-dapps-validators && npm i > /dev/null 2>&1",
+    "prepare-validators-dapp-more": "cd ./submodules/poa-dapps-validators && npm i --production > /dev/null 2>&1",
     "e2e-validators-test": "node e2eValidatorsTest",
     "stop-test-setup": "rm -rf ./submodules/poa-dapps-keys-generation && rm -rf ./submodules/poa-dapps-validators && rm -rf ./submodules/poa-scripts-moc/generateInitialKey/output/* && git clean -f -d && git checkout nodes/reserved_peers && kill -9 $(lsof -t -i:8545)"
   }
