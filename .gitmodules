@@ -14,3 +14,7 @@
 	path = submodules/poa-dapps-keys-generation
 	url = https://github.com/vbaranov/poa-dapps-keys-generation
 	branch = fix-quick-keys-generation
+[submodule "submodules/poa-dapps-validators"]
+	path = submodules/poa-dapps-validators
+	url = https://github.com/poanetwork/poa-dapps-validators
+	branch = core
