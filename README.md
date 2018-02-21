@@ -30,9 +30,9 @@
 4. Parity 1.9.2+
 
 There are some options to start POA Network test setup depending on your needs:
-- [Start MoC node](#start_moc_node) - launches only MoC node, generates initial key, launches Ceremony Dapp
-- [Start MoC node + e2e Ceremony test](#start_moc_node_+_e2e_ceremony_test) - launches only MoC node, generates initial key, launches Ceremony Dapp and generates production keys from it
-- [Start MoC + 1 validator nodes + e2e Ceremony test](#start_moc_+_1_validator_nodes_+_e2e_ceremony_test) - launches MoC node, generates initial key, launches Ceremony Dapp and generates production keys from it, launches 1 validator node, launches Validators Dapp
+- [Start MoC node](#start-moc-node) - launches only MoC node, generates initial key, launches Ceremony Dapp
+- [Start MoC node + e2e Ceremony test](#start-moc-node--e2e-ceremony-test) - launches only MoC node, generates initial key, launches Ceremony Dapp and generates production keys from it
+- [Start MoC + 1 validator nodes + e2e Ceremony test](#start-moc--1-validator-nodes--e2e-ceremony-test) - launches MoC node, generates initial key, launches Ceremony Dapp and generates production keys from it, launches 1 validator node, launches Validators Dapp
 
 ## Start MoC node
 1. `npm i`
@@ -55,20 +55,20 @@ At the successful end of POA test setup start you'll see this message `### POA t
 2. `npm run start-test-setup-e2e-ceremony-test`
 
 ### Expected result:
-- All expected results from [Start MoC node script](#start_moc_node)
+- All expected results from [Start MoC node script](#start-moc-node)
 - e2e test of Ceremony DApp was executed
 - Mining address, password and private key is copied to `./keys/mining_keys` folder
 - Payout address, password and private key is copied to `./keys/payout_keys` folder
 - Voting address, password and private key is copied to `./keys/voting_keys` folder
 
-If you have already started test POA setup before with [Start MoC node script](#start_moc_node)  you can run e2e ceremony test with `npm run e2e-ceremony-test` 
+If you have already started test POA setup before with [Start MoC node script](#start-moc-node)  you can run e2e ceremony test with `npm run e2e-ceremony-test` 
 
 ## Start MoC, one validator nodes + e2e Ceremony test
 1. `npm i`
 2. `npm run start-moc-validator-setup`
 
 ### Expected result:
-- All expected results from [Start MoC node + e2e Ceremony test](#start_moc_node_+_e2e_ceremony_test)
+- All expected results from [Start MoC node + e2e Ceremony test](#start-moc-node--e2e-ceremony-test)
 - RPC of Parity node with unlocked validator account will be on `http://localhost:8554`
 - Validators Dapp is started on `http://localhost:3001`
 
