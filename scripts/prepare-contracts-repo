@@ -12,7 +12,7 @@ if [  -d ${directory} ]; then
 		  	cmd1=$(sudo apt-get update)
 			cmd2$(sudo apt-get install python3)
 		fi
-		if ! [-x "$(command -v solidity_flattener)"]; then
+		if ! [ -x "$(command -v solidity_flattener)" ]; then
 			cmd3=$(pip3 install solidity-flattener)
 		fi
 		cmd4=$(cd ${directory} && npm i && bash ./make_flat.sh && ./node_modules/.bin/truffle compile)

@@ -5,7 +5,6 @@
   "homepage": "",
   "dependencies": {
     "chromedriver": "^2.35.0",
-    "create-poa-crowdsale": "^1.0.33",
     "keythereum": "^1.0.2",
     "node-dir": "^0.1.17",
     "node-fetch": "^2.0.0",

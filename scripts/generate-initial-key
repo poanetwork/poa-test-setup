@@ -7,7 +7,7 @@ directory=./submodules/poa-scripts-moc/generateInitialKey
 node_modules=${directory}/node_modules
 if [ ! -d ${node_modules} ]; then
 
-	cmd=$(cd ${directory} && npm i --production && node generateInitialKey.js)
+	cmd=$(cd ${directory} && npm i --production && npm start)
 
 else
 
