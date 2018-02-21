@@ -5,7 +5,7 @@ base_path = "./nodes/parity_validator_1"
 [network]
 port = 30301
 discovery=true
-reserved_peers="./reserved_peers"
+reserved_peers="./nodes/reserved_peers"
 
 [rpc]
 cors = ["null"]

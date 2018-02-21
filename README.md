@@ -16,8 +16,8 @@
 - [x] runs e2e tests on Ceremony DApp
 - [x] saves generated production keys with Ceremony DApp to `./keys` folder
 - [x] runs validator node
-- [ ] gets content of sokol branch of `poa-dapps-validators` repo
-- [ ] launches Validators DApp is locally builded from repo
+- [x] gets content of sokol branch of `poa-dapps-validators` repo
+- [x] launches Validators DApp is locally builded from repo
 - [ ] runs e2e tests on Validators DApp
 - [ ] gets content of sokol branch of `poa-dapps-voting` repo
 - [ ] launches Voting DApp is locally builded from repo
@@ -29,7 +29,12 @@
 3. [Solidity flattener](https://github.com/BlockCatIO/solidity-flattener)
 4. Parity 1.9.2+
 
-## Start test POA setup
+There are some options to start POA Network test setup depending on your needs:
+- [Start MoC node](#start_moc_node) - launches only MoC node, generates initial key, launches Ceremony Dapp
+- [Start MoC node + e2e Ceremony test](#start_moc_node_+_e2e_ceremony_test) - launches only MoC node, generates initial key, launches Ceremony Dapp and generates production keys from it
+- [Start MoC + 1 validator nodes + e2e Ceremony test](#start_moc_+_1_validator_nodes_+_e2e_ceremony_test) - launches MoC node, generates initial key, launches Ceremony Dapp and generates production keys from it, launches 1 validator node, launches Validators Dapp
+
+## Start MoC node
 1. `npm i`
 2. `npm run start-test-setup`
 
@@ -45,18 +50,27 @@ At the successful end of POA test setup start you'll see this message `### POA t
 - ABI of smart contracts are generated to `./submodules/poa-network-consensus-contracts/build/contracts`
 - Ceremony Dapp is started on `http://localhost:3000`
 
-## Start e2e Ceremony test
+## Start MoC node + e2e Ceremony test
 1. `npm i`
 2. `npm run start-test-setup-e2e-ceremony-test`
 
 ### Expected result:
-- All expected results from [Start test POA setup script](#start-test-poa-setup)
+- All expected results from [Start MoC node script](#start_moc_node)
 - e2e test of Ceremony DApp was executed
 - Mining address, password and private key is copied to `./keys/mining_keys` folder
 - Payout address, password and private key is copied to `./keys/payout_keys` folder
 - Voting address, password and private key is copied to `./keys/voting_keys` folder
 
-If you have already started test POA setup before with [Start test POA setup script](#start-test-poa-setup)  you can run e2e ceremony test with `npm run e2e-ceremony-test` 
+If you have already started test POA setup before with [Start MoC node script](#start_moc_node)  you can run e2e ceremony test with `npm run e2e-ceremony-test` 
+
+## Start MoC, one validator nodes + e2e Ceremony test
+1. `npm i`
+2. `npm run start-moc-validator-setup`
+
+### Expected result:
+- All expected results from [Start MoC node + e2e Ceremony test](#start_moc_node_+_e2e_ceremony_test)
+- RPC of Parity node with unlocked validator account will be on `http://localhost:8554`
+- Validators Dapp is started on `http://localhost:3001`
 
 ## Finish test POA setup
 `npm run stop-test-setup`

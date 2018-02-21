@@ -36,7 +36,7 @@
     "test-setup-is-started": "echo '### POA test setup is configured ###'",
     "e2e-ceremony-test": "node e2eCeremonyTest",
     "prepare-validator-node": "node prepareValidatorNode",
-    "start-validator-node": "bash ./scripts/start-validator-node &",
+    "start-validator-node": "bash ./scripts/start-validator-node > /dev/null 2>&1 &",
     "prepare-validators-dapp": "node prepareValidatorsDapp",
     "prepare-validators-dapp-more": "cd ./submodules/poa-dapps-validators && npm i --production > /dev/null 2>&1",
     "start-validators-dapp": "cd ./submodules/poa-dapps-validators && PORT=3001 BROWSER=none npm start > /dev/null 2>&1 &",
