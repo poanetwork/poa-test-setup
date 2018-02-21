@@ -28,5 +28,5 @@ function main() {
 
 	fs.writeFileSync(dappAddresses, addressesFromDapp);
 
-	console.log("Validators Dapp is prepared");
+	console.log("Validators Repo is prepared");
 }

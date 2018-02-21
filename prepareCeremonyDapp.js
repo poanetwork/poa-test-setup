@@ -18,5 +18,5 @@ function main() {
 
 	fs.writeFileSync(`${constants.pathToCeremonyDAppRepo}/src/addresses.js`, addressesFromDapp);
 
-	console.log("Ceremony Dapp is prepared");
+	console.log("Ceremony Repo is prepared");
 }

@@ -30,5 +30,5 @@ function main() {
 
 	fs.writeFileSync(dappAddresses, addressesFromDapp);
 
-	console.log("Governance Dapp is prepared");
+	console.log("Governance Repo is prepared");
 }

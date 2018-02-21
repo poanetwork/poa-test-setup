@@ -20,7 +20,7 @@
     "launch-ceremony": "npm run prepare-ceremony-dapp && npm run prepare-ceremony-dapp-more && npm run start-ceremony",
     "launch-validators": "npm run prepare-validators-dapp && npm run prepare-validators-dapp-more && npm run start-validators-dapp",
     "launch-governance": "npm run prepare-governance-dapp && npm run prepare-governance-dapp-more && npm run start-governance-dapp",
-    "start-dapps": "npm run launch-ceremony && npm run launch-validators && pnm run launch-governance",
+    "start-dapps": "npm run launch-ceremony && npm run launch-validators && npm run launch-governance",
     "start-test-setup": "npm run get-all-submodules && npm run prepare-contracts-repo && npm run prepare-moc-node && npm run start-moc-node && npm run deploy-secondary-contracts && npm run prepare-scrips-moc-repo && npm run prepare-ceremony-dapp && npm run prepare-ceremony-dapp-more && npm run generate-initial-keys && npm run get-private-initial-keys && npm run start-ceremony && npm run test-setup-is-started",
     "start-test-setup-e2e-ceremony-test": "npm run start-test-setup && npm run e2e-ceremony-test",
     "start-moc-validator-setup": "npm run start-test-setup-e2e-ceremony-test && npm run prepare-validator-node && npm run start-validator-node && npm run prepare-validators-dapp && npm run prepare-validators-dapp-more && npm run start-validators-dapp",
@@ -48,6 +48,6 @@
     "prepare-governance-dapp-more": "cd ./submodules/poa-dapps-voting && npm i --production > /dev/null 2>&1",
     "start-governance-dapp": "cd ./submodules/poa-dapps-voting && PORT=3002 BROWSER=none npm start > /dev/null 2>&1 &",
     "e2e-validators-test": "node e2eValidatorsTest",
-    "stop-test-setup": "rm -rf ./submodules/poa-dapps-keys-generation && rm -rf ./submodules/poa-dapps-validators && rm -rf ./submodules/poa-scripts-moc/generateInitialKey/output/* && git submodule update --init --remote && git clean -f -d && git checkout nodes/reserved_peers && kill -9 $(lsof -t -i:8545)"
+    "stop-test-setup": "rm -rf ./submodules/poa-dapps-keys-generation && rm -rf ./submodules/poa-dapps-validators && rm -rf ./submodules/poa-scripts-moc/generateInitialKey/output/* && git submodule update --init --remote && git clean -f -d && git checkout nodes/reserved_peers && kill -9 $(lsof -t -i:8545) && kill -9 $(lsof -t -i:8554) && kill -9 $(lsof -t -i:8555) && kill -9 $(lsof -t -i:8556) && kill -9 $(lsof -t -i:3000) && kill -9 $(lsof -t -i:3001) && kill -9 $(lsof -t -i:3002)"
   }
 }
