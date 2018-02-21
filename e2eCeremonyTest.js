@@ -18,7 +18,9 @@ const timeout = ms => new Promise(res => setTimeout(res, ms))
 const ceremonyURL = 'http://localhost:3000'
 
 let args = process.argv.slice(2);
+console.log("args:", args)
 let validator_num = args[0];
+console.log("validator_num:", validator_num)
 
 main()
 
@@ -75,10 +77,14 @@ async function getKeys(ceremonyPage) {
 
     let validator_path = `${constants.nodeFolder}/parity_validator_${validator_num}`;
 
-    if (!fs.existsSync(validator_path)){
+    if (!fs.existsSync(validator_path)) {
         fs.mkdirSync(validator_path);
-        fs.mkdirSync(`${validator_path}/keys`);
-        fs.mkdirSync(`${validator_path}/keys/Sokol`);
+        if (!fs.existsSync(`${validator_path}/keys`)) {
+            fs.mkdirSync(`${validator_path}/keys`);
+        }
+        if (!fs.existsSync(`${validator_path}/keys/Sokol`)) {
+            fs.mkdirSync(`${validator_path}/keys/Sokol`);
+        }
 
         fs.writeFileSync(`${validator_path}/keys/Sokol/${miningKey.address}`, JSON.stringify(miningKey.keyObject));
         fs.writeFileSync(`${validator_path}/node.pwd`, miningKey.password);
