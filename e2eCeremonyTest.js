@@ -17,6 +17,9 @@ const timeout = ms => new Promise(res => setTimeout(res, ms))
 
 const ceremonyURL = 'http://localhost:3000'
 
+let args = process.argv.slice(2);
+let validator_num = args[0];
+
 main()
 
 async function main() {
@@ -70,14 +73,14 @@ async function getKeys(ceremonyPage) {
     fs.writeFileSync(`${constants.payoutKeysFolder}/${payoutKey.address}.key`, JSON.stringify(payoutKey));
     fs.writeFileSync(`${constants.votingKeysFolder}/${votingKey.address}.key`, JSON.stringify(votingKey));
 
-    let validator_1_path = `${constants.nodeFolder}/parity_validator_1`;
+    let validator_path = `${constants.nodeFolder}/parity_validator_${validator_num}`;
 
-    if (!fs.existsSync(validator_1_path)){
-        fs.mkdirSync(validator_1_path);
-        fs.mkdirSync(`${validator_1_path}/keys`);
-        fs.mkdirSync(`${validator_1_path}/keys/Sokol`);
+    if (!fs.existsSync(validator_path)){
+        fs.mkdirSync(validator_path);
+        fs.mkdirSync(`${validator_path}/keys`);
+        fs.mkdirSync(`${validator_path}/keys/Sokol`);
 
-        fs.writeFileSync(`${validator_1_path}/keys/Sokol/${miningKey.address}`, JSON.stringify(miningKey.keyObject));
-        fs.writeFileSync(`${validator_1_path}/node.pwd`, miningKey.password);
+        fs.writeFileSync(`${validator_path}/keys/Sokol/${miningKey.address}`, JSON.stringify(miningKey.keyObject));
+        fs.writeFileSync(`${validator_path}/node.pwd`, miningKey.password);
     }
 }
