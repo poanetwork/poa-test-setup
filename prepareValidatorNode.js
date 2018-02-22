@@ -25,8 +25,8 @@ async function main() {
 
 	fs.writeFileSync(`${constants.nodeFolder}reserved_peers`, mocEnodeURL);
 	
-	let validatorNodeFolder = `${constants.nodeFolder}parity_validator_${validator_num}`;
-	let keysFolder = `${validatorNodeFolder}/keys/Sokol`;
+	let validatorNodeFolder = `${constants.nodeFolder}parity_validator_${validator_num}/`;
+	let keysFolder = `${validatorNodeFolder}keys/Sokol`;
 	
 	let validatorKeyPath
 	let files = dir.files(keysFolder, {sync: true});
@@ -50,8 +50,8 @@ async function main() {
 	validator = `0x${validator}`;
 
 	const validatorNodeExampleTomlPath = `${constants.nodeFolder}node-slave.toml`;
-	const validatorNodeTomlContent = fs.readFileSync(validatorNodeExampleTomlPath, "utf8");
-	validatorNodeTomlContent.replace("parity_validator_/",`parity_validator_${validator_num}/`);
+	let validatorNodeTomlContent = fs.readFileSync(validatorNodeExampleTomlPath, "utf8");
+	validatorNodeTomlContent = validatorNodeTomlContent.split("parity_validator_/").join(`parity_validator_${validator_num}/`);
 	const validatorNodeToml = toml.parse(validatorNodeTomlContent);
 
 	validatorNodeToml.account.unlock = [validator];
@@ -63,8 +63,9 @@ async function main() {
 	utils.removeFolderRecursive(`${validatorNodeFolder}dapps`);
 	utils.removeFolderRecursive(`${validatorNodeFolder}network`);
 
-	const validator1TomlPath = `${validatorNodeFolder}node.toml`;
-	try { await utils.saveToFile(`${validator1TomlPath}`, newToml)}
+	const validatorTomlPath = `${validatorNodeFolder}node.toml`;
+	console.log("validatorTomlPath:", validatorTomlPath)
+	try { await utils.saveToFile(`${validatorTomlPath}`, newToml)}
 	catch (err) { return console.log(err.message); }
 
 	console.log(`Validator ${validator_num} node is prepared`);
