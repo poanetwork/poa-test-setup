@@ -1,4 +1,3 @@
-
 const webdriver = require('selenium-webdriver'),
 chrome = require('selenium-webdriver/chrome'),
 firefox = require('selenium-webdriver/firefox'),
@@ -7,8 +6,8 @@ const key = require('selenium-webdriver').Key;
 const Twait=20000;
 
 console.log(module.filename);
-class Page {
 
+class Page {
   constructor(driver){
     this.driver=driver;
     this.pageID;
@@ -25,14 +24,14 @@ class Page {
    }
 
    return q;
- }
+  }
 
 
- clearField(element){
-  let field = this.driver.wait(webdriver.until.elementLocated(element), Twait);
-  const c=key.chord(key.CONTROL,"a");
-  const action=this.driver.actions();
-  action.click(field).perform();
+  clearField(element){
+    let field = this.driver.wait(webdriver.until.elementLocated(element), Twait);
+    const c=key.chord(key.CONTROL,"a");
+    const action=this.driver.actions();
+    action.click(field).perform();
     //action.click(field).perform();
     this.driver.sleep(500);
     action.sendKeys(c).perform();
@@ -48,7 +47,6 @@ class Page {
   fillWithWait(element,k) {
     let field = this.driver.wait(webdriver.until.elementLocated(element), Twait);
     field.sendKeys(k);
-
   }
   
   refresh(){

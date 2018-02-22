@@ -6,19 +6,18 @@ const webdriver = require('selenium-webdriver'),
       by = require('selenium-webdriver/lib/by');
 
 class Validators extends page.Page {
+  constructor(driver,URL){
+    super(driver);
+    this.URL=URL;
+  }
 
-    constructor(driver,URL){
-        super(driver);
-        this.URL=URL;
-    }
+  open() {
+    this.driver.get(this.URL);
+  }
 
-    open() {
-        this.driver.get(this.URL);
-    }
-
-    open() {
-        this.driver.get(this.URL);
-    }
+  open() {
+    this.driver.get(this.URL);
+  }
 }
 
 module.exports.Validators = Validators;

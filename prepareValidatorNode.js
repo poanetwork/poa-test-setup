@@ -8,11 +8,10 @@ const utils = require("./utils/utils");
 const toml = require('toml');
 const tomlJS = require('toml-js');
 const dir = require('node-dir');
+const path = require('path');
 
 let args = process.argv.slice(2);
 let validator_num = args[0];
-
-console.log("validator_num:", validator_num)
 
 main()
 
@@ -28,8 +27,20 @@ async function main() {
 	
 	let validatorNodeFolder = `${constants.nodeFolder}parity_validator_${validator_num}`;
 	let keysFolder = `${validatorNodeFolder}/keys/Sokol`;
+	
+	let validatorKeyPath
 	let files = dir.files(keysFolder, {sync: true});
-	let content = fs.readFileSync(files[0], "utf8");
+	for (let i = 0; i < files.length; i++) {
+		let filePath = files[i]
+		let filename = path.basename(filePath)
+		if (filename != ".gitkeep") {
+			validatorKeyPath = filePath;
+			break;
+		}
+	}
+
+	let content = fs.readFileSync(validatorKeyPath, "utf8");
+	
 	let validator
 	try {
 		validator = JSON.parse(content).address;
@@ -56,7 +67,7 @@ async function main() {
 	try { await utils.saveToFile(`${validator1TomlPath}`, newToml)}
 	catch (err) { return console.log(err.message); }
 
-	console.log("Validator 1 node is prepared");
+	console.log(`Validator ${validator_num} node is prepared`);
 }
 
 function getMocEnodeURL() {
