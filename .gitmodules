@@ -10,10 +10,6 @@
 	path = submodules/poa-network-consensus-contracts
 	url = https://github.com/poanetwork/poa-network-consensus-contracts
 	branch = master
-[submodule "submodules/poa-dapps-keys-generation"]
-	path = submodules/poa-dapps-keys-generation
-	url = https://github.com/vbaranov/poa-dapps-keys-generation
-	branch = fix-quick-keys-generation
 [submodule "submodules/poa-dapps-validators"]
 	path = submodules/poa-dapps-validators
 	url = https://github.com/poanetwork/poa-dapps-validators
@@ -21,4 +17,8 @@
 [submodule "submodules/poa-dapps-voting"]
 	path = submodules/poa-dapps-voting
 	url = https://github.com/poanetwork/poa-dapps-voting
+	branch = core
+[submodule "submodules/poa-dapps-keys-generation"]
+	path = submodules/poa-dapps-keys-generation
+	url = https://github.com/vbaranov/poa-dapps-keys-generation
 	branch = core
