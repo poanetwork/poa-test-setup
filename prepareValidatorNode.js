@@ -9,6 +9,11 @@ const toml = require('toml');
 const tomlJS = require('toml-js');
 const dir = require('node-dir');
 
+let args = process.argv.slice(2);
+let validator_num = args[0];
+
+console.log("validator_num:", validator_num)
+
 main()
 
 async function main() {
@@ -21,7 +26,8 @@ async function main() {
 
 	fs.writeFileSync(`${constants.nodeFolder}reserved_peers`, mocEnodeURL);
 	
-	let keysFolder = `${constants.nodeFolder}parity_validator_1/keys/Sokol`;
+	let validatorNodeFolder = `${constants.nodeFolder}parity_validator_${validator_num}`;
+	let keysFolder = `${validatorNodeFolder}/keys/Sokol`;
 	let files = dir.files(keysFolder, {sync: true});
 	let content = fs.readFileSync(files[0], "utf8");
 	let validator
@@ -34,18 +40,19 @@ async function main() {
 
 	const validatorNodeExampleTomlPath = `${constants.nodeFolder}node-slave.toml`;
 	const validatorNodeTomlContent = fs.readFileSync(validatorNodeExampleTomlPath, "utf8");
+	validatorNodeTomlContent.replace("parity_validator_/",`parity_validator_${validator_num}/`);
 	const validatorNodeToml = toml.parse(validatorNodeTomlContent);
 
 	validatorNodeToml.account.unlock = [validator];
 	validatorNodeToml.mining.engine_signer = validator;
 	const newToml = tomlJS.dump(validatorNodeToml);
 
-	utils.removeFolderRecursive(`${constants.validator1NodeFolder}cache`);
-	utils.removeFolderRecursive(`${constants.validator1NodeFolder}chains`);
-	utils.removeFolderRecursive(`${constants.validator1NodeFolder}dapps`);
-	utils.removeFolderRecursive(`${constants.validator1NodeFolder}network`);
+	utils.removeFolderRecursive(`${validatorNodeFolder}cache`);
+	utils.removeFolderRecursive(`${validatorNodeFolder}chains`);
+	utils.removeFolderRecursive(`${validatorNodeFolder}dapps`);
+	utils.removeFolderRecursive(`${validatorNodeFolder}network`);
 
-	const validator1TomlPath = `${constants.validator1NodeFolder}node.toml`;
+	const validator1TomlPath = `${validatorNodeFolder}node.toml`;
 	try { await utils.saveToFile(`${validator1TomlPath}`, newToml)}
 	catch (err) { return console.log(err.message); }
 

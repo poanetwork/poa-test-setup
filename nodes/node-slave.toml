@@ -1,6 +1,6 @@
 [parity]
 chain = "./spec/spec.json"
-base_path = "./nodes/parity_validator_1"
+base_path = "./nodes/parity_validator_/"
 
 [network]
 port = 30301
@@ -15,7 +15,7 @@ apis = ["web3", "eth", "net", "personal", "parity", "parity_set", "traces", "rpc
 
 [account]
 unlock = []
-password = ["./nodes/parity_validator_1/node.pwd"]
+password = ["./nodes/parity_validator_/node.pwd"]
 
 [mining]
 force_sealing = true
