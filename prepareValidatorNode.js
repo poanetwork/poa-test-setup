@@ -33,7 +33,7 @@ async function main() {
 	for (let i = 0; i < files.length; i++) {
 		let filePath = files[i]
 		let filename = path.basename(filePath)
-		if (filename != ".gitkeep") {
+		if (filename != ".gitkeep" && filename != ".DS_Store") {
 			validatorKeyPath = filePath;
 			break;
 		}
@@ -51,11 +51,16 @@ async function main() {
 
 	const validatorNodeExampleTomlPath = `${constants.nodeFolder}node-slave.toml`;
 	let validatorNodeTomlContent = fs.readFileSync(validatorNodeExampleTomlPath, "utf8");
-	validatorNodeTomlContent = validatorNodeTomlContent.split("parity_validator_/").join(`parity_validator_${validator_num}/`);
-	const validatorNodeToml = toml.parse(validatorNodeTomlContent);
+	//validatorNodeTomlContent = validatorNodeTomlContent.split("parity_validator_/").join(`parity_validator_${validator_num}/`);
+	let validatorNodeToml = toml.parse(validatorNodeTomlContent);
 
 	validatorNodeToml.account.unlock = [validator];
+	validatorNodeToml.account.password = [`./nodes/parity_validator_${validator_num}/node.pwd`];
+	validatorNodeToml.network.port = validatorNodeToml.network.port + (validator_num - 1);
+	validatorNodeToml.rpc.port = validatorNodeToml.rpc.port + (validator_num - 1);
+	validatorNodeToml.websockets.port = validatorNodeToml.websockets.port + (validator_num - 1);
 	validatorNodeToml.mining.engine_signer = validator;
+	validatorNodeToml.parity.base_path = `./nodes/parity_validator_${validator_num}/`;
 	const newToml = tomlJS.dump(validatorNodeToml);
 
 	utils.removeFolderRecursive(`${validatorNodeFolder}cache`);
@@ -64,7 +69,6 @@ async function main() {
 	utils.removeFolderRecursive(`${validatorNodeFolder}network`);
 
 	const validatorTomlPath = `${validatorNodeFolder}node.toml`;
-	console.log("validatorTomlPath:", validatorTomlPath)
 	try { await utils.saveToFile(`${validatorTomlPath}`, newToml)}
 	catch (err) { return console.log(err.message); }
 

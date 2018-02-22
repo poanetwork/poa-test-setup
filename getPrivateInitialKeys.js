@@ -13,7 +13,7 @@ function main() {
 	    function(err, content, filepath, next) {
 	    	let filename = path.basename(filepath)
 	    	
-	    	if (filename == '.gitkeep') {
+	    	if (filename == '.gitkeep' && filename != ".DS_Store") {
 	    		return next();
 	    	}
 

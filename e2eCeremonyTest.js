@@ -54,9 +54,9 @@ async function main() {
     driver.sleep(2000);
 
     metaMask.switchToAnotherPage();
-    driver.sleep(2000);
+    driver.sleep(3000);
     metaMask.refresh();
-    driver.sleep(1000);
+    driver.sleep(2000);
     let el = await metaMask.isElementPresent(buttonSubmit.buttonSubmit)
     if (el) {
         confirmTx(el)
@@ -71,7 +71,7 @@ async function main() {
         metaMask.submitTransaction();
         ceremonyPage.switchToAnotherPage();
 
-        driver.sleep(3000);
+        driver.sleep(5000);
 
         await getKeys(ceremonyPage);
         console.log("Productions keys are saved")
@@ -111,7 +111,7 @@ async function getKeys(ceremonyPage) {
         if (err) throw err;
 
         for (const file of files) {
-            if (file != '.gitkeep') {
+            if (file != '.gitkeep' && file != '.DS_Store') {
                 fs.unlinkSync(path.join(constants.scriptsMocOutputFolder, file));
             }
         }
