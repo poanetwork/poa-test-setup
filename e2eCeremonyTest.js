@@ -3,6 +3,7 @@ const utils = require("./utils/utils");
 const Constants = require("./utils/constants");
 const constants = Constants.constants;
 const dir = require('node-dir');
+const path = require('path');
 const webdriver = require('selenium-webdriver'),
       chrome = require('selenium-webdriver/chrome');
 require("chromedriver");
@@ -17,6 +18,12 @@ const timeout = ms => new Promise(res => setTimeout(res, ms))
 
 const ceremonyURL = 'http://localhost:3000'
 
+let args = process.argv.slice(2);
+let validator_num = args[0];
+
+let files = dir.files(constants.initialKeysFolder, {sync:true});
+let initialKeyPath = files[1];
+
 main()
 
 async function main() {
@@ -28,12 +35,10 @@ async function main() {
 	.withCapabilities(options.toCapabilities())
 	.build();
 
-	var files = dir.files(constants.initialKeysFolder, {sync:true});
+	let wallet = MetaMaskWallet.createMetaMaskWallet(initialKeyPath);
 
-	var wallet = MetaMaskWallet.createMetaMaskWallet(files[1]);
-
-	var metaMask = new meta.MetaMask(driver, wallet);
-    var ceremonyPage = await new ceremony.Ceremony(driver,ceremonyURL);
+	let metaMask = new meta.MetaMask(driver, wallet);
+    let ceremonyPage = await new ceremony.Ceremony(driver,ceremonyURL);
 
 	metaMask.open();
     metaMask.activate();
@@ -41,8 +46,7 @@ async function main() {
     metaMask.switchToAnotherPage();
 
     ceremonyPage.open();
-    //ceremonyPage.clickButtonGenerateKeys();
-
+    
     driver.sleep(2000);
 
     ceremonyPage.clickButtonGenerateKeys();
@@ -50,18 +54,32 @@ async function main() {
     driver.sleep(2000);
 
     metaMask.switchToAnotherPage();
-    driver.sleep(2000);
+    driver.sleep(3000);
     metaMask.refresh();
-    driver.sleep(1000);
-    if ( await metaMask.isElementPresent(buttonSubmit.buttonSubmit)) {
+    driver.sleep(2000);
+    let el = await metaMask.isElementPresent(buttonSubmit.buttonSubmit)
+    if (el) {
+        confirmTx(el)
+    } else {
+        console.log("Something went wrong. Let's try once more...")
+        driver.sleep(2000);
+        let el = await metaMask.isElementPresent(buttonSubmit.buttonSubmit)
+        confirmTx(el)
+    }
+
+    async function confirmTx(el) {
         metaMask.submitTransaction();
         ceremonyPage.switchToAnotherPage();
 
+        driver.sleep(5000);
+
         await getKeys(ceremonyPage);
+        console.log("Productions keys are saved")
     }
 }
 
 async function getKeys(ceremonyPage) {
+    console.log("Productions keys saving...")
     let miningKey = await ceremonyPage.getMiningKey();
     let payoutKey = await ceremonyPage.getPayoutKey();
     let votingKey = await ceremonyPage.getVotingKey();
@@ -70,14 +88,32 @@ async function getKeys(ceremonyPage) {
     fs.writeFileSync(`${constants.payoutKeysFolder}/${payoutKey.address}.key`, JSON.stringify(payoutKey));
     fs.writeFileSync(`${constants.votingKeysFolder}/${votingKey.address}.key`, JSON.stringify(votingKey));
 
-    let validator_1_path = `${constants.nodeFolder}/parity_validator_1`;
+    let validator_path = `${constants.nodeFolder}/parity_validator_${validator_num}`;
 
-    if (!fs.existsSync(validator_1_path)){
-        fs.mkdirSync(validator_1_path);
-        fs.mkdirSync(`${validator_1_path}/keys`);
-        fs.mkdirSync(`${validator_1_path}/keys/Sokol`);
-
-        fs.writeFileSync(`${validator_1_path}/keys/Sokol/${miningKey.address}`, JSON.stringify(miningKey.keyObject));
-        fs.writeFileSync(`${validator_1_path}/node.pwd`, miningKey.password);
+    if (!fs.existsSync(validator_path)) {
+        fs.mkdirSync(validator_path);
     }
+
+    if (!fs.existsSync(`${validator_path}/keys`)) {
+        fs.mkdirSync(`${validator_path}/keys`);
+    }
+
+    if (!fs.existsSync(`${validator_path}/keys/Sokol`)) {
+        fs.mkdirSync(`${validator_path}/keys/Sokol`);
+    }
+
+    fs.writeFileSync(`${validator_path}/keys/Sokol/${miningKey.address}`, JSON.stringify(miningKey.keyObject));
+    fs.writeFileSync(`${validator_path}/node.pwd`, miningKey.password);
+
+    fs.unlinkSync(initialKeyPath);
+
+    await fs.readdir(constants.scriptsMocOutputFolder, (err, files) => {
+        if (err) throw err;
+
+        for (const file of files) {
+            if (file != '.gitkeep' && file != '.DS_Store') {
+                fs.unlinkSync(path.join(constants.scriptsMocOutputFolder, file));
+            }
+        }
+    });
 }

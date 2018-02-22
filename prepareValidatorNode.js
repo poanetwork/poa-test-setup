@@ -8,6 +8,10 @@ const utils = require("./utils/utils");
 const toml = require('toml');
 const tomlJS = require('toml-js');
 const dir = require('node-dir');
+const path = require('path');
+
+let args = process.argv.slice(2);
+let validator_num = args[0];
 
 main()
 
@@ -21,9 +25,22 @@ async function main() {
 
 	fs.writeFileSync(`${constants.nodeFolder}reserved_peers`, mocEnodeURL);
 	
-	let keysFolder = `${constants.nodeFolder}parity_validator_1/keys/Sokol`;
+	let validatorNodeFolder = `${constants.nodeFolder}parity_validator_${validator_num}/`;
+	let keysFolder = `${validatorNodeFolder}keys/Sokol`;
+	
+	let validatorKeyPath
 	let files = dir.files(keysFolder, {sync: true});
-	let content = fs.readFileSync(files[0], "utf8");
+	for (let i = 0; i < files.length; i++) {
+		let filePath = files[i]
+		let filename = path.basename(filePath)
+		if (filename != ".gitkeep" && filename != ".DS_Store") {
+			validatorKeyPath = filePath;
+			break;
+		}
+	}
+
+	let content = fs.readFileSync(validatorKeyPath, "utf8");
+	
 	let validator
 	try {
 		validator = JSON.parse(content).address;
@@ -33,23 +50,29 @@ async function main() {
 	validator = `0x${validator}`;
 
 	const validatorNodeExampleTomlPath = `${constants.nodeFolder}node-slave.toml`;
-	const validatorNodeTomlContent = fs.readFileSync(validatorNodeExampleTomlPath, "utf8");
-	const validatorNodeToml = toml.parse(validatorNodeTomlContent);
+	let validatorNodeTomlContent = fs.readFileSync(validatorNodeExampleTomlPath, "utf8");
+	//validatorNodeTomlContent = validatorNodeTomlContent.split("parity_validator_/").join(`parity_validator_${validator_num}/`);
+	let validatorNodeToml = toml.parse(validatorNodeTomlContent);
 
 	validatorNodeToml.account.unlock = [validator];
+	validatorNodeToml.account.password = [`./nodes/parity_validator_${validator_num}/node.pwd`];
+	validatorNodeToml.network.port = validatorNodeToml.network.port + (validator_num - 1);
+	validatorNodeToml.rpc.port = validatorNodeToml.rpc.port + (validator_num - 1);
+	validatorNodeToml.websockets.port = validatorNodeToml.websockets.port + (validator_num - 1);
 	validatorNodeToml.mining.engine_signer = validator;
+	validatorNodeToml.parity.base_path = `./nodes/parity_validator_${validator_num}/`;
 	const newToml = tomlJS.dump(validatorNodeToml);
 
-	utils.removeFolderRecursive(`${constants.validator1NodeFolder}cache`);
-	utils.removeFolderRecursive(`${constants.validator1NodeFolder}chains`);
-	utils.removeFolderRecursive(`${constants.validator1NodeFolder}dapps`);
-	utils.removeFolderRecursive(`${constants.validator1NodeFolder}network`);
+	utils.removeFolderRecursive(`${validatorNodeFolder}cache`);
+	utils.removeFolderRecursive(`${validatorNodeFolder}chains`);
+	utils.removeFolderRecursive(`${validatorNodeFolder}dapps`);
+	utils.removeFolderRecursive(`${validatorNodeFolder}network`);
 
-	const validator1TomlPath = `${constants.validator1NodeFolder}node.toml`;
-	try { await utils.saveToFile(`${validator1TomlPath}`, newToml)}
+	const validatorTomlPath = `${validatorNodeFolder}node.toml`;
+	try { await utils.saveToFile(`${validatorTomlPath}`, newToml)}
 	catch (err) { return console.log(err.message); }
 
-	console.log("Validator 1 node is prepared");
+	console.log(`Validator ${validator_num} node is prepared`);
 }
 
 function getMocEnodeURL() {

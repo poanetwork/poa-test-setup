@@ -3,9 +3,10 @@
 set -u
 set -e
 
+validator_num=$1
 parityDebPath=./parity_1.9.2_amd64.deb
 if ! [ -x "$(command -v parity)" ]; then
   cmd=$(sudo dpkg -i ${parityDebPath})
 fi
 
-cmd2=$(parity --config ./nodes/parity_validator_1/node.toml)
+cmd2=$(parity --config ./nodes/parity_validator_${validator_num}/node.toml > /dev/null 2>&1 &)

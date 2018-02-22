@@ -12,11 +12,20 @@ function main() {
 	const addition = `const local = { "KEYS_MANAGER_ADDRESS": "${addresses.KEYS_MANAGER_ADDRESS}" };`
 
 	let addressesFromDapp = fs.readFileSync(`${constants.pathToCeremonyDAppRepo}/src/addresses.js`, 'utf8');
+	
 	let lastImport = `import helpers from "./helpers";`;
-	addressesFromDapp = addressesFromDapp.replace(lastImport, lastImport + addition)
+	let lines = addressesFromDapp.split('\n');
+	lines = lines.map((line) => {
+		if (line.includes(lastImport)) {
+			return lastImport + addition
+		} else {
+			return line
+		}
+	})
+	addressesFromDapp = lines.join(`\n`);
 	addressesFromDapp = addressesFromDapp.replace('resolve({addresses: json', 'resolve({addresses: local')
 
 	fs.writeFileSync(`${constants.pathToCeremonyDAppRepo}/src/addresses.js`, addressesFromDapp);
 
-	console.log("Ceremony Dapp is prepared");
+	console.log("Ceremony Repo is prepared");
 }
