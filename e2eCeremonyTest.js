@@ -4,6 +4,8 @@ const Constants = require("./utils/constants");
 const constants = Constants.constants;
 const dir = require('node-dir');
 const path = require('path');
+const Web3 = require('web3');
+const EthereumTx = require('ethereumjs-tx');
 const webdriver = require('selenium-webdriver'),
       chrome = require('selenium-webdriver/chrome');
 require("chromedriver");
@@ -23,6 +25,18 @@ let validator_num = args[0];
 
 let files = dir.files(constants.initialKeysFolder, {sync:true});
 let initialKeyPath = files[1];
+
+let initialKeyContent = fs.readFileSync(initialKeyPath, "utf8");
+let initialKey
+let initialKeyPrivateKeyHex
+try {
+    let initialKeyObj = JSON.parse(initialKeyContent);
+    initialKey = initialKeyObj.address;
+    initialKeyPrivateKeyHex = initialKeyObj.privateKey;
+} catch(e) {
+    console.log(e.message);
+}
+//initialKey = `0x${initialKey}`;
 
 main()
 
@@ -47,7 +61,7 @@ async function main() {
 
     ceremonyPage.open();
     
-    driver.sleep(2000);
+    driver.sleep(4000);
 
     ceremonyPage.clickButtonGenerateKeys();
 
@@ -71,10 +85,20 @@ async function main() {
         metaMask.submitTransaction();
         ceremonyPage.switchToAnotherPage();
 
+        driver.sleep(7000);
+
+        let votingKey = await getKeys(ceremonyPage);
+        console.log("Productions keys are saved")
+        await transferETHToVotingKey(initialKey, votingKey);
+        console.log("ETH was transfered from initial key to voting key");
+
         driver.sleep(5000);
 
-        await getKeys(ceremonyPage);
-        console.log("Productions keys are saved")
+        let handles = await driver.getAllWindowHandles();
+        for (let i = 0; i < handles.length; i++) {
+            driver.switchTo().window(handles[i]);
+            driver.close();
+        }
     }
 }
 
@@ -116,4 +140,39 @@ async function getKeys(ceremonyPage) {
             }
         }
     });
+
+    return votingKey.address;
+}
+
+async function transferETHToVotingKey(initialKey, votingKey) {
+    console.log("initialKey:", initialKey);
+    console.log("votingKey:", votingKey);
+    let web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+    
+    var nonce = await web3.eth.getTransactionCount(initialKey);
+    var nonceHex = web3.utils.toHex(nonce);
+
+    var BN = web3.utils.BN;
+    var ethToSend = web3.utils.toWei(new BN(90), "milliether");
+
+    const rawTx = {
+      nonce: nonceHex,
+      gasPrice: 21000,
+      gasLimit: 100000,
+      to: votingKey, 
+      value: ethToSend,
+      data: '0x0',
+      chainId: web3.utils.toHex(web3.version.network)
+    };
+
+    const initialKeyPrivateKeyBuf = Buffer.from(initialKeyPrivateKeyHex, 'hex')
+    
+    var tx = new EthereumTx(rawTx);
+    tx.sign(initialKeyPrivateKeyBuf);
+
+    var serializedTx = tx.serialize();
+
+    let receipt;
+    try { receipt = await web3.eth.sendSignedTransaction("0x" + serializedTx.toString('hex')) }
+    catch (err) { return console.log(err.message); }
 }

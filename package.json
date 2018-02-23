@@ -5,6 +5,7 @@
   "homepage": "",
   "dependencies": {
     "chromedriver": "^2.35.0",
+    "ethereumjs-tx": "^1.3.3",
     "faker": "^4.1.0",
     "keythereum": "^1.0.2",
     "node-dir": "^0.1.17",
@@ -21,7 +22,7 @@
     "launch-dapps": "npm run launch-ceremony-dapp && npm run launch-validators-dapp && npm run launch-governance-dapp",
     "launch-dapps-light": "npm run launch-ceremony-dapp",
     "launch-ceremony": "npm run launch-ceremony-1 && npm run launch-ceremony-2 && npm run launch-ceremony-3",
-    "launch-ceremony-light": "npm run launch-ceremony-1",
+    "launch-ceremony-light": "npm run launch-ceremony-2",
     "launch-ceremony-dapp": "npm run prepare-ceremony-dapp && npm run prepare-ceremony-dapp-more && npm run start-ceremony",
     "launch-validators-dapp": "npm run prepare-validators-dapp && npm run prepare-validators-dapp-more && npm run start-validators-dapp",
     "launch-governance-dapp": "npm run prepare-governance-dapp && npm run prepare-governance-dapp-more && npm run start-governance-dapp",
@@ -55,6 +56,7 @@
     "prepare-governance-dapp-more": "cd ./submodules/poa-dapps-voting && npm i --production > /dev/null 2>&1",
     "start-governance-dapp": "cd ./submodules/poa-dapps-voting && PORT=3002 BROWSER=none npm start > /dev/null 2>&1 &",
     "e2e-validators-test": "node e2eValidatorsTest",
-    "stop-test-setup": "rm -rf ./submodules/poa-dapps-keys-generation && rm -rf ./submodules/poa-dapps-validators && rm -rf ./submodules/poa-scripts-moc/generateInitialKey/output/* && git submodule update --init --remote && git clean -f -d && git checkout nodes/reserved_peers && kill -9 $(lsof -t -i:8545) && kill -9 $(lsof -t -i:3000) && kill -9 $(lsof -t -i:3001) && kill -9 $(lsof -t -i:3002) && kill -9 $(lsof -t -i:8554) && kill -9 $(lsof -t -i:8555) && kill -9 $(lsof -t -i:8556)"
+    "kill-processes": "bash ./scripts/kill-processes",
+    "stop-test-setup": "npm run kill-processes && rm -rf ./submodules/poa-dapps-keys-generation && rm -rf ./submodules/poa-dapps-validators && rm -rf ./submodules/poa-scripts-moc/generateInitialKey/output/* && git submodule update --init --remote && git clean -f -d && git checkout nodes/reserved_peers"
   }
 }

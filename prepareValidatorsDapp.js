@@ -13,7 +13,7 @@ function main() {
 
 	const addition = `
 		const local = { 
-			"METADATA_ADDRESS": "${addresses.KEYS_MANAGER_ADDRESS}",
+			"METADATA_ADDRESS": "${addresses.METADATA_ADDRESS}",
 			"KEYS_MANAGER_ADDRESS": "${addresses.KEYS_MANAGER_ADDRESS}",
 			"POA_ADDRESS": '${constants.poaNetworkConsensusContractAddress}',
 			"MOC": '${moc.address}'

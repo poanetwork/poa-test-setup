@@ -32,7 +32,7 @@
 There are some options to start POA Network test setup depending on your needs:
 - [Start MoC node](#start-moc-node) - launches only MoC node, generates initial key
 - [Launch DApps](#launch-dapps) - launches Ceremony, Validators, Governance DApps
-- [Launch Ceremony](#launch-ceremony) - holds Ceremony 
+- [Launch Ceremony](#launch-ceremony) - conducts Ceremony 
 - [Start MoC node + e2e Ceremony test](#start-moc-node--e2e-ceremony-test) - launches only MoC node, generates initial key, launches Ceremony Dapp and generates production keys from it
 - [Start MoC + 1 validator nodes + e2e Ceremony test](#start-moc-one-validator-nodes--e2e-ceremony-test) - launches MoC node, generates initial key, launches Ceremony Dapp and generates production keys from it, launches 1 validator node, launches Validators Dapp
 
@@ -54,7 +54,7 @@ At the successful end of POA test setup start you'll see this message `### POA t
 
 ### Launch DApps
 
-*Note*: can be started after [previous step is complited](#start-moc-node)
+*Note*: can be started after [previous step is completed](#start-moc-node)
 
 1. `npm i`
 2. `npm run launch-dapps`
@@ -66,19 +66,21 @@ At the successful end of POA test setup start you'll see this message `### POA t
 
 ### Launch Ceremony
 
-*Note*: can be started after [previous step is complited](#launch-dapps)
+*Note*: can be started after [previous step is completed](#launch-dapps)
 
 1. `npm i`
 2. `npm run launch-ceremony`
 
 #### Expected results:
-- Initital key is generated
-- Initial key password, private key is generated to `.keys/initial_keys` folder
+- 3 initital key are generated
+- Initial key passwords, private keys are generated to `.keys/initial_keys` folder
 - e2e test of Ceremony DApp is executed
-- Mining address, password and private key is copied to `./keys/mining_keys` folder
-- Payout address, password and private key is copied to `./keys/payout_keys` folder
-- Voting address, password and private key is copied to `./keys/voting_keys` folder
-- Initital key is removed
+- Mining addresses, passwords and private keys are copied to `./keys/mining_keys` folder
+- Payout addresses, passwords and private keys are copied to `./keys/payout_keys` folder
+- Voting addresses, passwords and private keys are copied to `./keys/voting_keys` folder
+- Initital keys are removed
+- Most ETH from initial keys are transfered to voting keys
+- Validator nodes are started at RPC ports `8550`, `8551`, `8552`
 
 ## Additional scenarios
 

@@ -1,0 +1,44 @@
+#!/bin/bash
+
+#set -x
+set -u
+set -e
+
+ceremony_pid=3000
+validators_pid=3001
+governance_pid=3002
+moc_rpc_pid=8545
+moc_websockets_pid=8546
+
+function kill_process {
+	if lsof -t -i:$1 > /dev/null
+	then
+		kill -9 $(lsof -t -i:${1})
+	   	echo 1
+	else
+		echo 0
+	fi
+}
+
+kill_process $ceremony_pid
+
+kill_process $validators_pid
+
+kill_process $governance_pid
+
+kill_process $moc_rpc_pid
+
+node_rpc_port=8550
+while true; do
+	res=$(kill_process $node_rpc_port)
+	echo $res
+	if [ "$res" -eq "0" ];
+	then
+		break;
+	else
+		node_rpc_port=$((node_rpc_port+1))
+		echo $node_rpc_port
+	fi
+done
+
+#kill -0 $(lsof -t -i:8545) && kill -0 $(lsof -t -i:3000) && kill -0 $(lsof -t -i:3001) && kill -0 $(lsof -t -i:3002) && kill -0 $(lsof -t -i:8554) && kill -0 $(lsof -t -i:8555) && kill -0 $(lsof -t -i:8556)

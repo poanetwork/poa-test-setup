@@ -3,7 +3,6 @@ const constants = Constants.constants;
 const fs = require('fs');
 const keythereum = require("keythereum");
 const generatePassword = require('password-generator');
-const Web3 = require('web3');
 const utils = require("./utils/utils");
 const toml = require('toml');
 const tomlJS = require('toml-js');
