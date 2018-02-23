@@ -72,14 +72,15 @@ At the successful end of POA test setup start you'll see this message `### POA t
 2. `npm run launch-ceremony`
 
 #### Expected results:
-- Initital key is generated
-- Initial key password, private key is generated to `.keys/initial_keys` folder
+- 3 initital key are generated
+- Initial key passwords, private keys are generated to `.keys/initial_keys` folder
 - e2e test of Ceremony DApp is executed
-- Mining address, password and private key is copied to `./keys/mining_keys` folder
-- Payout address, password and private key is copied to `./keys/payout_keys` folder
-- Voting address, password and private key is copied to `./keys/voting_keys` folder
-- Initital key is removed
-- Most ETH from initial key is transfered to voting key
+- Mining addresses, passwords and private keys are copied to `./keys/mining_keys` folder
+- Payout addresses, passwords and private keys are copied to `./keys/payout_keys` folder
+- Voting addresses, passwords and private keys are copied to `./keys/voting_keys` folder
+- Initital keys are removed
+- Most ETH from initial keys are transfered to voting keys
+- Validator nodes are started at RPC ports `8550`, `8551`, `8552`
 
 ## Additional scenarios
 

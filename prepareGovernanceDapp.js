@@ -17,7 +17,7 @@ function main() {
 		    "VOTING_TO_CHANGE_MIN_THRESHOLD_ADDRESS": "${addresses.VOTING_TO_CHANGE_MIN_THRESHOLD_ADDRESS}",
 		    "VOTING_TO_CHANGE_PROXY_ADDRESS": "${addresses.VOTING_TO_CHANGE_PROXY_ADDRESS}",
 		    "BALLOTS_STORAGE_ADDRESS": "${addresses.BALLOTS_STORAGE_ADDRESS}",
-		    "METADATA_ADDRESS": "${addresses.KEYS_MANAGER_ADDRESS}",
+		    "METADATA_ADDRESS": "${addresses.METADATA_ADDRESS}",
 		    "POA_ADDRESS": "${constants.poaNetworkConsensusContractAddress}",
 		};
 	`
