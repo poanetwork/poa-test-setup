@@ -54,7 +54,7 @@ At the successful end of POA test setup start you'll see this message `### POA t
 
 ### Launch DApps
 
-*Note*: can be started after [previous step is complited](#start-moc-node)
+*Note*: can be started after [previous step is completed](#start-moc-node)
 
 1. `npm i`
 2. `npm run launch-dapps`
@@ -66,7 +66,7 @@ At the successful end of POA test setup start you'll see this message `### POA t
 
 ### Launch Ceremony
 
-*Note*: can be started after [previous step is complited](#launch-dapps)
+*Note*: can be started after [previous step is completed](#launch-dapps)
 
 1. `npm i`
 2. `npm run launch-ceremony`

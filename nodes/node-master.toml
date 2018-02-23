@@ -20,3 +20,6 @@ force_sealing = true
 engine_signer = ""
 reseal_on_txs = "none"
 
+[websockets]
+port = 8546
+
