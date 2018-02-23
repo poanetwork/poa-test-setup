@@ -32,7 +32,7 @@
 There are some options to start POA Network test setup depending on your needs:
 - [Start MoC node](#start-moc-node) - launches only MoC node, generates initial key
 - [Launch DApps](#launch-dapps) - launches Ceremony, Validators, Governance DApps
-- [Launch Ceremony](#launch-ceremony) - holds Ceremony 
+- [Launch Ceremony](#launch-ceremony) - conducts Ceremony 
 - [Start MoC node + e2e Ceremony test](#start-moc-node--e2e-ceremony-test) - launches only MoC node, generates initial key, launches Ceremony Dapp and generates production keys from it
 - [Start MoC + 1 validator nodes + e2e Ceremony test](#start-moc-one-validator-nodes--e2e-ceremony-test) - launches MoC node, generates initial key, launches Ceremony Dapp and generates production keys from it, launches 1 validator node, launches Validators Dapp
 
@@ -79,6 +79,7 @@ At the successful end of POA test setup start you'll see this message `### POA t
 - Payout address, password and private key is copied to `./keys/payout_keys` folder
 - Voting address, password and private key is copied to `./keys/voting_keys` folder
 - Initital key is removed
+- Most ETH from initial key is transfered to voting key
 
 ## Additional scenarios
 

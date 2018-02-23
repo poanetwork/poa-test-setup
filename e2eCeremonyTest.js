@@ -85,12 +85,20 @@ async function main() {
         metaMask.submitTransaction();
         ceremonyPage.switchToAnotherPage();
 
-        driver.sleep(5000);
+        driver.sleep(7000);
 
         let votingKey = await getKeys(ceremonyPage);
         console.log("Productions keys are saved")
         await transferETHToVotingKey(initialKey, votingKey);
         console.log("ETH was transfered from initial key to voting key");
+
+        driver.sleep(5000);
+
+        let handles = await driver.getAllWindowHandles();
+        for (let i = 0; i < handles.length; i++) {
+            driver.switchTo().window(handles[i]);
+            driver.close();
+        }
     }
 }
 

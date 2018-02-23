@@ -22,7 +22,7 @@
     "launch-dapps": "npm run launch-ceremony-dapp && npm run launch-validators-dapp && npm run launch-governance-dapp",
     "launch-dapps-light": "npm run launch-ceremony-dapp",
     "launch-ceremony": "npm run launch-ceremony-1 && npm run launch-ceremony-2 && npm run launch-ceremony-3",
-    "launch-ceremony-light": "npm run launch-ceremony-3",
+    "launch-ceremony-light": "npm run launch-ceremony-2",
     "launch-ceremony-dapp": "npm run prepare-ceremony-dapp && npm run prepare-ceremony-dapp-more && npm run start-ceremony",
     "launch-validators-dapp": "npm run prepare-validators-dapp && npm run prepare-validators-dapp-more && npm run start-validators-dapp",
     "launch-governance-dapp": "npm run prepare-governance-dapp && npm run prepare-governance-dapp-more && npm run start-governance-dapp",
