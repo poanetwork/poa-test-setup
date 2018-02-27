@@ -8,6 +8,7 @@
     "ethereumjs-tx": "^1.3.3",
     "faker": "^4.1.0",
     "keythereum": "^1.0.2",
+    "moment": "^2.20.1",
     "node-dir": "^0.1.17",
     "node-fetch": "^2.0.0",
     "password-generator": "^2.2.0",
@@ -19,9 +20,10 @@
   },
   "scripts": {
     "start-moc-setup": "npm run get-contracts-submodule && npm run prepare-contracts-repo && npm run prepare-moc-node && npm run start-moc-node && npm run deploy-secondary-contracts && npm run prepare-scrips-moc-repo && npm run test-setup-is-started",
-    "launch-dapps": "npm run launch-ceremony-dapp && npm run launch-validators-dapp && npm run launch-governance-dapp",
+    "launch-dapps": "npm run get-dapps-submodules && npm run launch-ceremony-dapp && npm run launch-validators-dapp && npm run launch-governance-dapp",
     "launch-dapps-light": "npm run launch-ceremony-dapp",
     "launch-ceremony": "npm run launch-ceremony-1 && npm run launch-ceremony-2 && npm run launch-ceremony-3",
+    "set-validators-data": "npm run e2e-validators-test 1 && npm run e2e-validators-test 2 && npm run e2e-validators-test 3",
     "launch-ceremony-light": "npm run launch-ceremony-2",
     "launch-ceremony-dapp": "npm run prepare-ceremony-dapp && npm run prepare-ceremony-dapp-more && npm run start-ceremony",
     "launch-validators-dapp": "npm run prepare-validators-dapp && npm run prepare-validators-dapp-more && npm run start-validators-dapp",
@@ -33,6 +35,7 @@
     "start-test-setup-e2e-ceremony-test": "npm run start-test-setup && npm run e2e-ceremony-test",
     "start-moc-validator-setup": "npm run start-test-setup-e2e-ceremony-test && npm run prepare-validator-node 1 && npm run start-validator-node 1 > /dev/null 2>&1 & && npm run prepare-validators-dapp && npm run prepare-validators-dapp-more && npm run start-validators-dapp",
     "get-contracts-submodule": "git submodule update --init --remote submodules/poa-network-consensus-contracts",
+    "get-dapps-submodules": "git submodule update --init --remote submodules/poa-dapps-validators && git submodule update --init --remote submodules/poa-dapps-voting && git submodule update --init --remote submodules/poa-dapps-keys-generation",
     "get-all-submodules": "git submodule update --init --remote",
     "prepare-contracts-repo": "bash ./scripts/prepare-contracts-repo",
     "prepare-moc-node": "node prepareMoCNode",
@@ -47,6 +50,7 @@
     "start-ceremony": "cd ./submodules/poa-dapps-keys-generation && PORT=3000 BROWSER=none npm start > /dev/null 2>&1 &",
     "test-setup-is-started": "echo '### POA test setup is configured ###'",
     "e2e-ceremony-test": "node e2eCeremonyTest",
+    "e2e-validators-test": "node e2eValidatorsTest",
     "prepare-validator-node": "node prepareValidatorNode",
     "start-validator-node": "bash ./scripts/start-validator-node",
     "prepare-validators-dapp": "node prepareValidatorsDapp",
@@ -55,7 +59,6 @@
     "prepare-governance-dapp": "node prepareGovernanceDapp",
     "prepare-governance-dapp-more": "cd ./submodules/poa-dapps-voting && npm i --production > /dev/null 2>&1",
     "start-governance-dapp": "cd ./submodules/poa-dapps-voting && PORT=3002 BROWSER=none npm start > /dev/null 2>&1 &",
-    "e2e-validators-test": "node e2eValidatorsTest",
     "kill-processes": "bash ./scripts/kill-processes",
     "stop-test-setup": "npm run kill-processes && rm -rf ./submodules/poa-dapps-keys-generation && rm -rf ./submodules/poa-dapps-validators && rm -rf ./submodules/poa-scripts-moc/generateInitialKey/output/* && git submodule update --init --remote && git clean -f -d && git checkout nodes/reserved_peers"
   }

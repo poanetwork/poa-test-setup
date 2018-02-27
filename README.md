@@ -18,8 +18,8 @@
 - [x] runs validator node
 - [x] gets content of sokol branch of `poa-dapps-validators` repo
 - [x] launches Validators DApp is locally builded from repo
-- [ ] runs e2e tests on Validators DApp
-- [ ] gets content of sokol branch of `poa-dapps-voting` repo
+- [x] runs e2e tests on Validators DApp
+- [x] gets content of sokol branch of `poa-dapps-voting` repo
 - [ ] launches Voting DApp is locally builded from repo
 - [ ] runs e2e tests on Governance DApp
 
@@ -32,7 +32,8 @@
 There are some options to start POA Network test setup depending on your needs:
 - [Start MoC node](#start-moc-node) - launches only MoC node, generates initial key
 - [Launch DApps](#launch-dapps) - launches Ceremony, Validators, Governance DApps
-- [Launch Ceremony](#launch-ceremony) - conducts Ceremony 
+- [Launch Ceremony](#launch-ceremony) - conducts Ceremony
+- [Set validator data](#set-validators-data) - set validators personal data with Validators DApp
 - [Start MoC node + e2e Ceremony test](#start-moc-node--e2e-ceremony-test) - launches only MoC node, generates initial key, launches Ceremony Dapp and generates production keys from it
 - [Start MoC + 1 validator nodes + e2e Ceremony test](#start-moc-one-validator-nodes--e2e-ceremony-test) - launches MoC node, generates initial key, launches Ceremony Dapp and generates production keys from it, launches 1 validator node, launches Validators Dapp
 
@@ -56,8 +57,7 @@ At the successful end of POA test setup start you'll see this message `### POA t
 
 *Note*: can be started after [previous step is completed](#start-moc-node)
 
-1. `npm i`
-2. `npm run launch-dapps`
+1. `npm run launch-dapps`
 
 #### Expected results:
 - Ceremony Dapp is started on `http://localhost:3000`
@@ -68,8 +68,7 @@ At the successful end of POA test setup start you'll see this message `### POA t
 
 *Note*: can be started after [previous step is completed](#launch-dapps)
 
-1. `npm i`
-2. `npm run launch-ceremony`
+1. `npm run launch-ceremony`
 
 #### Expected results:
 - 3 initital key are generated
@@ -81,6 +80,15 @@ At the successful end of POA test setup start you'll see this message `### POA t
 - Initital keys are removed
 - Most ETH from initial keys are transfered to voting keys
 - Validator nodes are started at RPC ports `8550`, `8551`, `8552`
+
+### Set Validators' personal data
+
+*Note*: can be started after [previous step is completed](#launch-ceremony)
+
+1. `npm run set-validators-data`
+
+#### Expected results:
+- 3 validators filled with mock personal data in Validator Dapp
 
 ## Additional scenarios
 

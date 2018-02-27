@@ -118,9 +118,12 @@ class MetaMask extends page.Page{
        super.clickWithWait(popupAccount);
        this.driver.executeScript("document.getElementsByClassName('dropdown-menu-item')[2].click();");
 
-
-       super.fillWithWait(fieldPrivateKey,this.wallet.privateKey);
        this.driver.sleep(1500);
+
+       console.log("this.wallet.privateKey:", this.wallet.privateKey)
+
+       super.fillWithWait(fieldPrivateKey, this.wallet.privateKey);
+       this.driver.sleep(2500);
        super.clickWithWait(buttonImport);
        // this.driver.sleep(1500);
         //this.driver.findElement(amountEth).getText().then(console.log);

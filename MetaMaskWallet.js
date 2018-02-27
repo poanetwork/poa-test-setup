@@ -10,10 +10,6 @@ class MetaMaskWallet {
 
     static createMetaMaskWallet(fileName) {
         var c=new MetaMaskWallet();
-        //by default
-        //c.account="0xF16AB2EA0a7F7B28C267cbA3Ed211Ea5c6e27411";
-       // c.privateKey="03c06a9fab22fe0add145e337c5a8251e140f74468d72eab17ec7419ab812cd0";
-       // c.networkID=4;//1-main network by default
         c.parser(fileName);
 
         return c;
