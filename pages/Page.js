@@ -45,6 +45,7 @@ class Page {
   }
 
   fillWithWait(element,k) {
+    console.log(element, k)
     let field = this.driver.wait(webdriver.until.elementLocated(element), Twait);
     field.sendKeys(k);
   }
@@ -53,7 +54,7 @@ class Page {
     this.driver.navigate().refresh();
   }
 
-  switchToAnotherPage(){
+  switchToAnotherPage() {
     let dr=this.driver;
 
     dr.getWindowHandle().then(function (mainWindowHandle) {
@@ -70,6 +71,30 @@ class Page {
         });
       });
     });
+  }
+
+  async switchToAnotherPageByIndex(ind) {
+    let dr=this.driver;
+
+    let mainWindowHandle = await dr.getWindowHandle()
+
+    let windowHandles = await dr.getAllWindowHandles();
+
+    dr.switchTo().window(windowHandles[ind]);
+  }
+
+  async isPageAtIndex(ind) {
+    let dr=this.driver;
+
+    let mainWindowHandle = await dr.getWindowHandle()
+
+    let windowHandles = await dr.getAllWindowHandles();
+
+    if (windowHandles.length > ind) {
+      return true
+    } else {
+      return false
+    }
   }
 }
 module.exports.Page=Page;

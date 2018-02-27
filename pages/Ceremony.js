@@ -59,10 +59,6 @@ class Ceremony extends page.Page {
         let keyObject = JSON.parse(keyStoreRaw);
         return keyObject;
     }
-
-    open() {
-        this.driver.get(this.URL);
-    }
 }
 
 module.exports.Ceremony = Ceremony;
