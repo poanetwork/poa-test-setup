@@ -24,7 +24,12 @@ let args = process.argv.slice(2);
 let validator_num = args[0];
 
 let files = dir.files(constants.initialKeysFolder, {sync:true});
-let initialKeyPath = files[1];
+files = files.filter((file) => {
+    let isNotGitKeep = path.basename(file) !== path.basename(`${constants.initialKeysFolder}.gitkeep`);
+    let isNotDsStore = path.basename(file) !== path.basename(`${constants.initialKeysFolder}.DS_Store`);
+    return isNotGitKeep && isNotDsStore;
+})
+let initialKeyPath = files[0];
 
 let initialKeyContent = fs.readFileSync(initialKeyPath, "utf8");
 let initialKey

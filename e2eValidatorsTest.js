@@ -31,7 +31,7 @@ files = files.filter((file) => {
 })
 const votingKeyPath = files[validator_num - 1];
 
-let votingKeyContent = fs.readFileSync(votingKeyPath, 'utf8');
+/*let votingKeyContent = fs.readFileSync(votingKeyPath, 'utf8');
 let votingKey;
 try {
 	votingKey = JSON.parse(votingKeyContent);
@@ -39,13 +39,11 @@ try {
 	console.log(e.message);
 }
 
-//console.log(votingKey)
+console.log(votingKey)*/
 
 main()
 
 async function main() {
-	let validatorMetaData = generateValidatorMetadata();
-
 	let options = new chrome.Options();
     options.addExtensions('./MetaMask_v3.14.1.crx');
 	options.addArguments('start-maximized');
@@ -62,11 +60,7 @@ async function main() {
     metaMask.open();
     metaMask.activate();
 
-    driver.sleep(4000);
-
     metaMask.switchToAnotherPage();
-
-    driver.sleep(4000);
 
     validatorsPage.open();
 
@@ -75,6 +69,8 @@ async function main() {
     validatorsPage.clickSetMetadataTab();
 
     driver.sleep(1000);
+
+    let validatorMetaData = generateValidatorMetadata();
 
     validatorsPage.fillFirstName(validatorMetaData.first_name);
     validatorsPage.fillLastName(validatorMetaData.last_name);
@@ -95,15 +91,15 @@ async function main() {
     	//validatorsPage.switchToAnotherPageByIndex(1);
     }*/
 
-    validatorsPage.switchToAnotherPageByIndex(1);
+    //validatorsPage.switchToAnotherPageByIndex(1);
 
     driver.sleep(2000);
 
     validatorsPage.clickSetMetadataButton();
 
-    //driver.sleep(2000);
+    driver.sleep(2000);
 
-    /*metaMask.switchToAnotherPage();
+    metaMask.switchToAnotherPage();
     driver.sleep(3000);
     metaMask.refresh();
     driver.sleep(2000);
@@ -128,7 +124,7 @@ async function main() {
             driver.switchTo().window(handles[i]);
             driver.close();
         }
-    }*/
+    }
 }
 
 function generateValidatorMetadata() {
