@@ -14,11 +14,11 @@ const metaMaskWallet = require('./MetaMaskWallet.js');
 const MetaMaskWallet = metaMaskWallet.MetaMaskWallet;
 const meta = require('./pages/MetaMask.js');
 const buttonSubmit = require('./pages/MetaMask.js');
-const validators = require('./pages/Validators.js');
+const voting = require('./pages/Voting.js');
 
 const timeout = ms => new Promise(res => setTimeout(res, ms))
 
-const validatorsURL = 'http://localhost:3001'
+const votingURL = 'http://localhost:3002'
 
 let args = process.argv.slice(2);
 let validator_num = args[0];
@@ -30,16 +30,6 @@ files = files.filter((file) => {
 	return isNotGitKeep && isNotDsStore;
 })
 const votingKeyPath = files[validator_num - 1];
-
-/*let votingKeyContent = fs.readFileSync(votingKeyPath, 'utf8');
-let votingKey;
-try {
-	votingKey = JSON.parse(votingKeyContent);
-} catch(e) {
-	console.log(e.message);
-}
-
-console.log(votingKey)*/
 
 main()
 
@@ -55,47 +45,26 @@ async function main() {
 	let wallet = MetaMaskWallet.createMetaMaskWallet(votingKeyPath);
 
 	let metaMask = new meta.MetaMask(driver, wallet);
-    let validatorsPage = await new validators.Validators(driver,validatorsURL);
+    let votingPage = await new voting.Voting(driver,votingURL);
 
     metaMask.open();
     metaMask.activate();
 
     metaMask.switchToAnotherPage();
 
-    validatorsPage.open();
+    votingPage.open();
 
-    driver.sleep(4000);
+    /*driver.sleep(4000);
 
-    validatorsPage.clickSetMetadataTab();
+    votingPage.clickSetMetadataTab();
 
     driver.sleep(1000);
 
-    let validatorMetaData = generateValidatorMetadata();
-
-    validatorsPage.fillFirstName(validatorMetaData.first_name);
-    validatorsPage.fillLastName(validatorMetaData.last_name);
-    validatorsPage.fillAddress(validatorMetaData.address);
-    validatorsPage.fillState(validatorMetaData.us_state);
-    validatorsPage.fillZipCode(validatorMetaData.zip_code);
-    validatorsPage.fillLicenseID(validatorMetaData.license_id);
-    validatorsPage.fillLicenseExpiration(validatorMetaData.license_expiration);
+    let votingMetaData = generateVotingMetadata();
 
     driver.sleep(2000);
 
-    /*let isPageAtindex = await validatorsPage.isPageAtIndex(2);
-
-    if (isPageAtindex) {
-    	validatorsPage.switchToAnotherPageByIndex(1);
-    	//driver.close();
-    	driver.sleep(3000);
-    	//validatorsPage.switchToAnotherPageByIndex(1);
-    }*/
-
-    //validatorsPage.switchToAnotherPageByIndex(1);
-
-    //driver.sleep(2000);
-
-    validatorsPage.clickSetMetadataButton();
+    votingPage.clickSetMetadataButton();
 
     driver.sleep(2000);
 
@@ -115,7 +84,7 @@ async function main() {
 
     async function confirmTx(el) {
         metaMask.submitTransaction();
-        validatorsPage.switchToAnotherPage();
+        votingPage.switchToAnotherPage();
 
         driver.sleep(5000);
 
@@ -124,20 +93,11 @@ async function main() {
             driver.switchTo().window(handles[i]);
             driver.close();
         }
-    }
+    }*/
 }
 
-function generateValidatorMetadata() {
-	let license_expiration = moment(new Date(faker.date.future())).format('DD/MM/YYYY');
-	const validatorMetaData = {
-		first_name: faker.name.firstName(),
-		last_name: faker.name.lastName(),
-		address: `${faker.address.streetAddress()} ${faker.address.streetName()} ${faker.address.city()}`,
-		us_state: faker.address.state(),
-		zip_code: faker.address.zipCode().split('-')[0],
-		license_id: faker.random.alphaNumeric(10),
-		license_expiration: license_expiration
-	};
+function generateBallotMetadata() {
+	const ballotMetaData = {};
 
-	return validatorMetaData;
+	return ballotMetaData;
 }
