@@ -54,17 +54,33 @@ async function main() {
 
     votingPage.open();
 
-    /*driver.sleep(4000);
+    driver.sleep(6000);
 
-    votingPage.clickSetMetadataTab();
+    votingPage.clickNewBallot();
 
-    driver.sleep(1000);
+    driver.sleep(4000);
 
-    let votingMetaData = generateVotingMetadata();
+    votingPage.chooseKeysVotingType();
 
     driver.sleep(2000);
 
-    votingPage.clickSetMetadataButton();
+    votingPage.chooseAddKeyVotingType();
+    votingPage.chooseMiningKeyType();
+
+    let validatorMetaData = generateValidatorMetadata();
+
+    votingPage.fillFullName(validatorMetaData.full_name);
+    votingPage.fillAddress(validatorMetaData.address);
+    votingPage.fillState(validatorMetaData.us_state);
+    votingPage.fillZipCode(validatorMetaData.zip_code);
+    votingPage.fillLicenseID(validatorMetaData.license_id);
+    votingPage.fillLicenseExpiration(validatorMetaData.license_expiration);
+
+    let votingMetaData = generateBallotMetadata();
+
+    driver.sleep(2000);
+
+    /*votingPage.clickSetMetadataButton();
 
     driver.sleep(2000);
 
@@ -96,8 +112,24 @@ async function main() {
     }*/
 }
 
+function generateValidatorMetadata() {
+    let license_expiration = moment(new Date(faker.date.future())).format('DD/MM/YYYY');
+    const validatorMetaData = {
+        full_name: faker.name.findName(),
+        address: `${faker.address.streetAddress()} ${faker.address.streetName()} ${faker.address.city()}`,
+        us_state: "California",
+        zip_code: faker.address.zipCode().split('-')[0],
+        license_id: faker.random.alphaNumeric(10),
+        license_expiration: license_expiration
+    };
+
+    return validatorMetaData;
+}
+
 function generateBallotMetadata() {
-	const ballotMetaData = {};
+	const ballotMetaData = {
+
+    };
 
 	return ballotMetaData;
 }
