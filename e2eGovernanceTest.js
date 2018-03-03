@@ -2,10 +2,12 @@ const fs = require('fs');
 const utils = require("./utils/utils");
 const Constants = require("./utils/constants");
 const constants = Constants.constants;
+const { generateAddress } = require("./utils/utils");
 const dir = require('node-dir');
 const path = require('path');
 let faker = require('faker/locale/en');
 let moment = require('moment');
+const generatePassword = require('password-generator');
 const webdriver = require('selenium-webdriver'),
       chrome = require('selenium-webdriver/chrome');
 require("chromedriver");
@@ -19,6 +21,9 @@ const voting = require('./pages/Voting.js');
 const timeout = ms => new Promise(res => setTimeout(res, ms))
 
 const votingURL = 'http://localhost:3002'
+
+let validatorMetaData;
+let newMiningKey;
 
 let args = process.argv.slice(2);
 let validator_num = args[0];
@@ -54,62 +59,77 @@ async function main() {
 
     votingPage.open();
 
-    driver.sleep(6000);
+    driver.sleep(4000);
 
     votingPage.clickNewBallot();
 
-    driver.sleep(4000);
+    driver.sleep(3000);
 
     votingPage.chooseKeysVotingType();
 
-    driver.sleep(2000);
+    driver.sleep(1000);
 
     votingPage.chooseAddKeyVotingType();
     votingPage.chooseMiningKeyType();
 
-    let validatorMetaData = generateValidatorMetadata();
+    validatorMetaData = generateValidatorMetadata();
 
     votingPage.fillFullName(validatorMetaData.full_name);
     votingPage.fillAddress(validatorMetaData.address);
-    votingPage.fillState(validatorMetaData.us_state);
     votingPage.fillZipCode(validatorMetaData.zip_code);
     votingPage.fillLicenseID(validatorMetaData.license_id);
     votingPage.fillLicenseExpiration(validatorMetaData.license_expiration);
+    votingPage.fillState(validatorMetaData.us_state);
 
     let votingMetaData = generateBallotMetadata();
 
+    driver.sleep(1000);
+
+    votingPage.fillDescription(votingMetaData.description);
+    //votingPage.fillEndTime(votingMetaData.endTime);
+    votingPage.fillAffectedKey(votingMetaData.affectedKey);
+    votingPage.fillNewMiningKey();
+
     driver.sleep(2000);
 
-    /*votingPage.clickSetMetadataButton();
+    votingPage.addBallot();
 
-    driver.sleep(2000);
+    metamaskInteraction();
 
-    metaMask.switchToAnotherPage();
-    driver.sleep(3000);
-    metaMask.refresh();
-    driver.sleep(2000);
-    let el = await metaMask.isElementPresent(buttonSubmit.buttonSubmit)
-    if (el) {
-        confirmTx(el)
-    } else {
-        console.log("Something went wrong. Let's try once more...")
+    driver.sleep(1000);
+
+    votingPage.clickAlertOKButton();
+
+    driver.sleep(60000);
+
+    votingPage.vote();
+
+    driver.sleep(60000);
+
+    votingPage.finalize();
+
+    async function metamaskInteraction() {
+        driver.sleep(2000);
+
+        metaMask.switchToAnotherPage();
+        driver.sleep(3000);
+        metaMask.refresh();
         driver.sleep(2000);
         let el = await metaMask.isElementPresent(buttonSubmit.buttonSubmit)
-        confirmTx(el)
+        if (el) {
+            confirmTx(el)
+        } else {
+            console.log("Something went wrong. Let's try once more...")
+            driver.sleep(2000);
+            let el = await metaMask.isElementPresent(buttonSubmit.buttonSubmit)
+            confirmTx(el)
+        }
     }
 
     async function confirmTx(el) {
         metaMask.submitTransaction();
         votingPage.switchToAnotherPage();
-
-        driver.sleep(5000);
-
-        let handles = await driver.getAllWindowHandles();
-        for (let i = 0; i < handles.length; i++) {
-            driver.switchTo().window(handles[i]);
-            driver.close();
-        }
-    }*/
+    }
 }
 
 function generateValidatorMetadata() {
@@ -128,7 +148,14 @@ function generateValidatorMetadata() {
 
 function generateBallotMetadata() {
 	const ballotMetaData = {
-
+        description: `Add new validator ${validatorMetaData.full_name}
+address: ${validatorMetaData.address}
+us_state: ${validatorMetaData.us_state}
+zip_code: ${validatorMetaData.zip_code}
+license_id: ${validatorMetaData.license_id}
+license_expiration: ${validatorMetaData.license_expiration}`,
+        //endTime: (new Date()).toISOString(),//moment(new Date(faker.date.future())).format('DD/MM/YYYY'),//moment().add('1', 'minute').format('DD/MM/YYYY'),//.format('DD/MM/YYYY, HH:mm'),
+        affectedKey: "0x29EFc7C1d7c12b5641DF2011e17A7A8cE19cc949"
     };
 
 	return ballotMetaData;
