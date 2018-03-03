@@ -93,7 +93,7 @@ async function main() {
 
     //validatorsPage.switchToAnotherPageByIndex(1);
 
-    driver.sleep(2000);
+    //driver.sleep(2000);
 
     validatorsPage.clickSetMetadataButton();
 

@@ -65,10 +65,24 @@ function saveToFile(filename, content) {
   });
 }
 
+function generateAddress(password) {
+  return new Promise((resolve, reject) => {
+    let params = { keyBytes: 32, ivBytes: 16 };
+
+      keythereum.create(params, function (dk) {
+        let options = {};
+        keythereum.dump(password, dk.privateKey, dk.salt, dk.iv, options, function (keyObject) {
+          resolve(keyObject);
+        });
+      });
+  })
+}
+
 module.exports = {
 	getSpec,
 	getABI,
 	clearFolder,
 	removeFolderRecursive,
-  saveToFile
+  saveToFile,
+  generateAddress
 }

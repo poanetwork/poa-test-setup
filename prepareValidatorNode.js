@@ -1,7 +1,6 @@
 const Constants = require("./utils/constants");
 const constants = Constants.constants;
 const fs = require('fs');
-const keythereum = require("keythereum");
 const generatePassword = require('password-generator');
 const utils = require("./utils/utils");
 const toml = require('toml');

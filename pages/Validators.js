@@ -1,4 +1,3 @@
-const keythereum = require('keythereum');
 const page=require('./Page.js');
 const webdriver = require('selenium-webdriver'),
       chrome = require('selenium-webdriver/chrome'),
