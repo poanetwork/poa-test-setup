@@ -56,7 +56,7 @@ async function main() {
     fs.writeFileSync(`${constants.miningKeysFolder}/${newMiningKeyAddress}.key`, JSON.stringify(newMiningKey));
     let validatorKeysNodeFolder = `${constants.nodeFolder}parity_validator_4/keys/Sokol`;
     fs.writeFileSync(`${validatorKeysNodeFolder}/${newMiningKeyAddress}`, JSON.stringify(keyObject));
-    fs.writeFileSync(`${validatorKeysNodeFolder}/node.pwd`, password);
+    fs.writeFileSync(`${constants.nodeFolder}parity_validator_4/node.pwd`, password);
 
 	let options = new chrome.Options();
     options.addExtensions('./MetaMask_v3.14.1.crx');
