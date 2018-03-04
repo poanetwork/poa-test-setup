@@ -1,5 +1,5 @@
 const fs = require('fs');
-const utils = require("./utils/utils");
+const keythereum = require("keythereum");
 const Constants = require("./utils/constants");
 const constants = Constants.constants;
 const { generateAddress } = require("./utils/utils");
@@ -39,6 +39,25 @@ const votingKeyPath = files[validator_num - 1];
 main()
 
 async function main() {
+    const password = generatePassword(20, false)
+    const keyObject = await generateAddress(password)
+    
+    let newMiningKeyAddress = `0x${keyObject.address}`;
+    const privateKey = keythereum.recover(password, keyObject).toString('hex');
+    
+    let newMiningKey = {
+        address: newMiningKeyAddress,
+        password: password,
+        privateKey: privateKey,
+        keyObject: keyObject
+    };
+
+    //save new mining key to mining_keys folder
+    fs.writeFileSync(`${constants.miningKeysFolder}/${newMiningKeyAddress}.key`, JSON.stringify(newMiningKey));
+    let validatorKeysNodeFolder = `${constants.nodeFolder}parity_validator_4/keys/Sokol`;
+    fs.writeFileSync(`${validatorKeysNodeFolder}/${newMiningKeyAddress}`, JSON.stringify(keyObject));
+    fs.writeFileSync(`${constants.nodeFolder}parity_validator_4/node.pwd`, password);
+
 	let options = new chrome.Options();
     options.addExtensions('./MetaMask_v3.14.1.crx');
 	options.addArguments('start-maximized');
@@ -81,7 +100,7 @@ async function main() {
     votingPage.fillLicenseExpiration(validatorMetaData.license_expiration);
     votingPage.fillState(validatorMetaData.us_state);
 
-    let votingMetaData = generateBallotMetadata();
+    let votingMetaData = generateBallotMetadata(newMiningKeyAddress);
 
     driver.sleep(1000);
 
@@ -100,13 +119,45 @@ async function main() {
 
     votingPage.clickAlertOKButton();
 
+    driver.sleep(5000);
+
+    votingPage.clickActiveTab();
+
+    driver.sleep(1000);
+
+    votingPage.refresh();
+
     driver.sleep(60000);
 
-    votingPage.vote();
+    votingPage.refresh();
 
-    driver.sleep(60000);
+    driver.sleep(2000);
 
-    votingPage.finalize();
+    votingPage.voteOnActivePage();
+
+    metamaskInteraction();
+
+    driver.sleep(1000);
+
+    votingPage.clickAlertOKButton();
+
+    driver.sleep(1000);
+
+    votingPage.clickActiveTab();
+
+    driver.sleep(90000);
+
+    votingPage.refresh();
+
+    driver.sleep(2000);
+
+    votingPage.finalizeButtonOnActivePage();
+
+    metamaskInteraction();
+
+    driver.sleep(1000);
+
+    votingPage.clickAlertOKButton();
 
     async function metamaskInteraction() {
         driver.sleep(2000);
@@ -146,7 +197,7 @@ function generateValidatorMetadata() {
     return validatorMetaData;
 }
 
-function generateBallotMetadata() {
+function generateBallotMetadata(newMiningKey) {
 	const ballotMetaData = {
         description: `Add new validator ${validatorMetaData.full_name}
 address: ${validatorMetaData.address}
@@ -155,7 +206,7 @@ zip_code: ${validatorMetaData.zip_code}
 license_id: ${validatorMetaData.license_id}
 license_expiration: ${validatorMetaData.license_expiration}`,
         //endTime: (new Date()).toISOString(),//moment(new Date(faker.date.future())).format('DD/MM/YYYY'),//moment().add('1', 'minute').format('DD/MM/YYYY'),//.format('DD/MM/YYYY, HH:mm'),
-        affectedKey: "0x29EFc7C1d7c12b5641DF2011e17A7A8cE19cc949"
+        affectedKey: newMiningKey
     };
 
 	return ballotMetaData;

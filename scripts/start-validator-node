@@ -9,4 +9,4 @@ if ! [ -x "$(command -v parity)" ]; then
   cmd=$(sudo dpkg -i ${parityDebPath})
 fi
 
-cmd2=$(parity --config ./nodes/parity_validator_${validator_num}/node.toml > /dev/null 2>&1 &)
+cmd2=$(parity --config ./nodes/parity_validator_${validator_num}/node.toml > ./nodes/parity_validator_${validator_num}/parity.log 2>&1 &)
