@@ -62,6 +62,6 @@
     "prepare-governance-dapp-more": "cd ./submodules/poa-dapps-voting && npm i --production > /dev/null 2>&1",
     "start-governance-dapp": "cd ./submodules/poa-dapps-voting && PORT=3002 BROWSER=none npm start > /dev/null 2>&1 &",
     "kill-processes": "bash ./scripts/kill-processes",
-    "stop-test-setup": "npm run kill-processes && rm -rf ./submodules/poa-dapps-keys-generation && rm -rf ./submodules/poa-dapps-validators && rm -rf ./submodules/poa-scripts-moc/generateInitialKey/output/* && git submodule update --init --remote && git clean -f -d && git checkout nodes/reserved_peers"
+    "stop-test-setup": "npm run kill-processes && rm -rf ./submodules/poa-dapps-keys-generation && rm -rf ./submodules/poa-dapps-validators  && rm -rf ./submodules/poa-dapps-voting && rm -rf ./submodules/poa-scripts-moc/generateInitialKey/output/* && git submodule update --init --remote && git clean -f -d && git checkout nodes/reserved_peers"
   }
 }

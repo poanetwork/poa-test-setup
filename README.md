@@ -20,8 +20,8 @@
 - [x] launches Validators DApp is locally builded from repo
 - [x] runs e2e tests on Validators DApp
 - [x] gets content of sokol branch of `poa-dapps-voting` repo
-- [ ] launches Voting DApp is locally builded from repo
-- [ ] runs e2e tests on Governance DApp
+- [x] launches Voting DApp is locally builded from repo
+- [x] runs e2e tests on Governance DApp
 
 ## Requirements
 1. Linux, Mac OS

@@ -100,13 +100,39 @@ async function main() {
 
     votingPage.clickAlertOKButton();
 
+    driver.sleep(5000);
+
+    votingPage.clickActiveTab();
+
+    votingPage.refresh();
+
     driver.sleep(60000);
 
-    votingPage.vote();
+    votingPage.refresh();
 
-    driver.sleep(60000);
+    driver.sleep(1000);
 
-    votingPage.finalize();
+    votingPage.voteOnActivePage();
+
+    metamaskInteraction();
+
+    driver.sleep(1000);
+
+    votingPage.clickAlertOKButton();
+
+    driver.sleep(90000);
+
+    votingPage.refresh();
+
+    driver.sleep(1000);
+
+    votingPage.finalizeButtonOnActivePage();
+
+    metamaskInteraction();
+
+    driver.sleep(1000);
+
+    votingPage.clickAlertOKButton();
 
     async function metamaskInteraction() {
         driver.sleep(2000);
