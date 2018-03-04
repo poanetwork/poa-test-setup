@@ -1,3 +1,4 @@
+const keythereum = require("keythereum");
 const Constants = require("./constants");
 const constants = Constants.constants;
 const fetch = require('node-fetch');
