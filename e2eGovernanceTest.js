@@ -104,6 +104,8 @@ async function main() {
 
     votingPage.clickActiveTab();
 
+    driver.sleep(1000);
+
     votingPage.refresh();
 
     driver.sleep(60000);
@@ -119,6 +121,10 @@ async function main() {
     driver.sleep(1000);
 
     votingPage.clickAlertOKButton();
+
+    driver.sleep(1000);
+
+    votingPage.clickActiveTab();
 
     driver.sleep(90000);
 

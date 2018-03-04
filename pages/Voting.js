@@ -29,8 +29,8 @@ const newMiningKeyXpath = by.By.xpath("//*[@id=\"react-select-2--option-0\"]");
 const addBallotButton = by.By.xpath("//*[@id=\"root\"]/div/section/form/div[6]/button");
 const alertOKButton = by.By.xpath("/html/body/div[2]/div/div[10]/button[1]");
 const yesButton = by.By.xpath("//*[@id=\"root\"]/div/section/div[1]/div[2]/div[2]/button");
-const yesButtonOnActivePage = by.By.xpath("//*[@id=\"root\"]/div/section/div[1]/div[2]/div[2]/button");
 const finalizeButton = by.By.xpath("//*[@id=\"root\"]/div/section/div[3]/div[5]/div[1]/button");
+const yesButtonOnActivePage = by.By.xpath("//*[@id=\"root\"]/div/section/div[1]/div[2]/div[2]/button");
 const finalizeButtonOnActivePage = by.By.xpath("//*[@id=\"root\"]/div/section/div[1]/div[5]/div[1]/button");
 
 class Voting extends page.Page {

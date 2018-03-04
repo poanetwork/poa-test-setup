@@ -45,7 +45,6 @@ class Page {
   }
 
   fillWithWait(element,k) {
-    console.log(element, k)
     let field = this.driver.wait(webdriver.until.elementLocated(element), Twait);
     field.sendKeys(k);
   }

@@ -8,4 +8,4 @@ if ! [ -x "$(command -v parity)" ]; then
   cmd=$(sudo dpkg -i ${parityDebPath})
 fi
 
-cmd2=$(parity --config ./nodes/parity-moc/moc.toml)
+cmd2=$(parity --config ./nodes/parity-moc/moc.toml > ./nodes/parity-moc/parity.log 2>&1)
