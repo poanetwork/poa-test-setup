@@ -66,9 +66,13 @@ async function main() {
 
     driver.sleep(4000);
 
+    validatorsPage.refresh();
+
+    driver.sleep(3000);
+
     validatorsPage.clickSetMetadataTab();
 
-    driver.sleep(1000);
+    driver.sleep(2000);
 
     let validatorMetaData = generateValidatorMetadata();
 
