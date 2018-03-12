@@ -33,9 +33,9 @@ There are some options to start POA Network test setup depending on your needs:
 - [Start MoC node](#start-moc-node) - launches only MoC node, generates initial key
 - [Launch DApps](#launch-dapps) - launches Ceremony, Validators, Governance DApps
 - [Launch Ceremony](#launch-ceremony) - conducts Ceremony
-- [Set validator data](#set-validators-data) - set validators personal data with Validators DApp
-- [Start MoC node + e2e Ceremony test](#start-moc-node--e2e-ceremony-test) - launches only MoC node, generates initial key, launches Ceremony Dapp and generates production keys from it
-- [Start MoC + 1 validator nodes + e2e Ceremony test](#start-moc-one-validator-nodes--e2e-ceremony-test) - launches MoC node, generates initial key, launches Ceremony Dapp and generates production keys from it, launches 1 validator node, launches Validators Dapp
+- [Set validator data](#set-validators-personal-data) - set validators personal data with Validators DApp
+- [Add validator from Governance](#add-validator-from-governance) - add new validator from Governance
+- [Launch added validator node](#launch-added-validator-node) - start new validator's node
 
 ## Basic scenarios
 
@@ -57,7 +57,7 @@ At the successful end of POA test setup start you'll see this message `### POA t
 
 *Note*: can be started after [previous step is completed](#start-moc-node)
 
-1. `npm run launch-dapps`
+`npm run launch-dapps`
 
 #### Expected results:
 - Ceremony Dapp is started on `http://localhost:3000`
@@ -68,7 +68,7 @@ At the successful end of POA test setup start you'll see this message `### POA t
 
 *Note*: can be started after [previous step is completed](#launch-dapps)
 
-1. `npm run launch-ceremony`
+`npm run launch-ceremony`
 
 #### Expected results:
 - 3 initital key are generated
@@ -85,34 +85,28 @@ At the successful end of POA test setup start you'll see this message `### POA t
 
 *Note*: can be started after [previous step is completed](#launch-ceremony)
 
-1. `npm run set-validators-data`
+`npm run set-validators-data`
 
 #### Expected results:
 - 3 validators filled with mock personal data in Validator Dapp
 
-## Additional scenarios
+### Add validator from Governance
 
-### Start MoC node + e2e Ceremony test
-1. `npm i`
-2. `npm run start-test-setup-e2e-ceremony-test`
+*Note*: can be started after [previous step is completed](#set_validators_personal_data)
 
-#### Expected results:
-- All expected results from [Start MoC node script](#start-moc-node)
-- e2e test of Ceremony DApp was executed
-- Mining address, password and private key is copied to `./keys/mining_keys` folder
-- Payout address, password and private key is copied to `./keys/payout_keys` folder
-- Voting address, password and private key is copied to `./keys/voting_keys` folder
-
-If you have already started test POA setup before with [Start MoC node script](#start-moc-node)  you can run e2e ceremony test with `npm run e2e-ceremony-test` 
-
-### Start MoC, one validator nodes + e2e Ceremony test
-1. `npm i`
-2. `npm run start-moc-validator-setup`
+`npm run add-validator`
 
 #### Expected results:
-- All expected results from [Start MoC node + e2e Ceremony test](#start-moc-node--e2e-ceremony-test)
-- RPC of Parity node with unlocked validator account will be on `http://localhost:8554`
-- Validators Dapp is started on `http://localhost:3001`
+- New validator is added to validators' set through Governance DApp
+
+### Launch added validator node
+
+*Note*: can be started after [previous step is completed](#add-validator-from-governance)
+
+`npm run start-new-validator-node`
+
+#### Expected results:
+- New validator node is started at RPC port `8553`
 
 ### Finish test POA setup
 `npm run stop-test-setup`
