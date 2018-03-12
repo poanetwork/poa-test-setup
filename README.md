@@ -41,7 +41,7 @@ There are some options to start POA Network test setup depending on your needs:
 
 ### Start MoC node
 1. `npm i`
-2. `npm run start-test-setup`
+2. `npm run start-moc-setup`
 
 At the successful end of POA test setup start you'll see this message `### POA test setup is configured ###`
 
