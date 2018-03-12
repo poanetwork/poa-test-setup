@@ -29,6 +29,8 @@
 3. [Solidity flattener](https://github.com/BlockCatIO/solidity-flattener)
 4. Parity 1.9.2+
 
+## Basic scenarios
+
 There are some options to start POA Network test setup depending on your needs:
 - [Start MoC node](#start-moc-node) - launches only MoC node, generates initial key
 - [Launch DApps](#launch-dapps) - launches Ceremony, Validators, Governance DApps
@@ -36,8 +38,6 @@ There are some options to start POA Network test setup depending on your needs:
 - [Set validator data](#set-validators-personal-data) - set validators personal data with Validators DApp
 - [Add validator from Governance](#add-validator-from-governance) - add new validator from Governance
 - [Launch added validator node](#launch-added-validator-node) - start new validator's node
-
-## Basic scenarios
 
 ### Start MoC node
 1. `npm i`
