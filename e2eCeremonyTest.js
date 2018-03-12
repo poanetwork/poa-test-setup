@@ -41,7 +41,6 @@ try {
 } catch(e) {
     console.log(e.message);
 }
-//initialKey = `0x${initialKey}`;
 
 main()
 
@@ -67,6 +66,10 @@ async function main() {
     ceremonyPage.open();
     
     driver.sleep(4000);
+
+    ceremonyPage.refresh();
+
+    driver.sleep(1000);
 
     ceremonyPage.clickButtonGenerateKeys();
 
