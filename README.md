@@ -33,9 +33,9 @@ There are some options to start POA Network test setup depending on your needs:
 - [Start MoC node](#start-moc-node) - launches only MoC node, generates initial key
 - [Launch DApps](#launch-dapps) - launches Ceremony, Validators, Governance DApps
 - [Launch Ceremony](#launch-ceremony) - conducts Ceremony
-- [Set validator data](#set-validators-data) - set validators personal data with Validators DApp
-- [Add validator from Governance](#add_validator_from_governance) - add new validator from Governance
-- [Launch added validator node](#launch_added_validator_node) - start new validator's node
+- [Set validator data](#set-validators-personal-data) - set validators personal data with Validators DApp
+- [Add validator from Governance](#add-validator-from-governance) - add new validator from Governance
+- [Launch added validator node](#launch-added-validator-node) - start new validator's node
 
 ## Basic scenarios
 
@@ -101,7 +101,7 @@ At the successful end of POA test setup start you'll see this message `### POA t
 
 ### Launch added validator node
 
-*Note*: can be started after [previous step is completed](#add_validator_from_governance)
+*Note*: can be started after [previous step is completed](#add-validator-from-governance)
 
 `npm run start-new-validator-node`
 
