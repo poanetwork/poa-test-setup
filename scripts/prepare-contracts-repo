@@ -22,11 +22,11 @@ directory=./submodules/poa-network-consensus-contracts
 # 	fi
 # fi
 
-cmd=$(cd ${flattener_directory} && npm i && npm start ${directory_contracts}/PoaNetworkConsensus.sol ${directory_flat})
-cmd2=$(cd ${flattener_directory} && npm i && npm start ${directory_contracts}/KeysManager.sol ${directory_flat})
-cmd3=$(cd ${flattener_directory} && npm i && npm start ${directory_contracts}/VotingToChangeKeys.sol ${directory_flat})
-cmd4=$(cd ${flattener_directory} && npm i && npm start ${directory_contracts}/VotingToChangeMinThreshold.sol ${directory_flat})
-cmd5=$(cd ${flattener_directory} && npm i && npm start ${directory_contracts}/ValidatorMetadata.sol ${directory_flat})
-cmd6=$(cd ${flattener_directory} && npm i && npm start ${directory_contracts}/ProxyStorage.sol ${directory_flat})
-cmd7=$(cd ${flattener_directory} && npm i && npm start ${directory_contracts}/VotingToChangeProxyAddress.sol ${directory_flat})
+cmd1=$(cd ${flattener_directory} && npm i && npm start ${directory_contracts}/PoaNetworkConsensus.sol ${directory_flat})
+cmd2=$(cd ${flattener_directory} && npm start ${directory_contracts}/KeysManager.sol ${directory_flat})
+cmd3=$(cd ${flattener_directory} && npm start ${directory_contracts}/VotingToChangeKeys.sol ${directory_flat})
+cmd4=$(cd ${flattener_directory} && npm start ${directory_contracts}/VotingToChangeMinThreshold.sol ${directory_flat})
+cmd5=$(cd ${flattener_directory} && npm start ${directory_contracts}/ValidatorMetadata.sol ${directory_flat})
+cmd6=$(cd ${flattener_directory} && npm start ${directory_contracts}/ProxyStorage.sol ${directory_flat})
+cmd7=$(cd ${flattener_directory} && npm start ${directory_contracts}/VotingToChangeProxyAddress.sol ${directory_flat})
 cmd8=$(cd ${directory} && npm i && ./node_modules/.bin/truffle compile)
