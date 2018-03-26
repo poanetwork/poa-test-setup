@@ -26,7 +26,7 @@
     "set-validators-data": "npm run e2e-validators-test 1 && npm run e2e-validators-test 2 && npm run e2e-validators-test 3",
     "add-validator": "npm run e2e-voting-test 1",
     "start-new-validator-node": "node prepareValidatorNode 4 && npm run start-validator-node 4",
-    "launch-ceremony-light": "npm run launch-ceremony-2",
+    "launch-ceremony-light": "npm run launch-ceremony-1",
     "launch-ceremony-dapp": "npm run prepare-ceremony-dapp && npm run prepare-ceremony-dapp-more && npm run start-ceremony",
     "launch-validators-dapp": "npm run prepare-validators-dapp && npm run prepare-validators-dapp-more && npm run start-validators-dapp",
     "launch-governance-dapp": "npm run prepare-governance-dapp && npm run prepare-governance-dapp-more && npm run start-governance-dapp",

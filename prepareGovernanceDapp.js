@@ -12,19 +12,19 @@ function main() {
 	let moc = JSON.parse(fs.readFileSync(`${constants.mocKeysFolder}moc.key`, 'utf8'));
 
 	const addition = `
-		const local = { 
-			"VOTING_TO_CHANGE_KEYS_ADDRESS": "${addresses.VOTING_TO_CHANGE_KEYS_ADDRESS}",
-		    "VOTING_TO_CHANGE_MIN_THRESHOLD_ADDRESS": "${addresses.VOTING_TO_CHANGE_MIN_THRESHOLD_ADDRESS}",
-		    "VOTING_TO_CHANGE_PROXY_ADDRESS": "${addresses.VOTING_TO_CHANGE_PROXY_ADDRESS}",
-		    "BALLOTS_STORAGE_ADDRESS": "${addresses.BALLOTS_STORAGE_ADDRESS}",
-		    "METADATA_ADDRESS": "${addresses.METADATA_ADDRESS}",
-		    "POA_ADDRESS": "${constants.poaNetworkConsensusContractAddress}",
-		};
-	`
+const local = {
+    "VOTING_TO_CHANGE_KEYS_ADDRESS": "${addresses.VOTING_TO_CHANGE_KEYS_ADDRESS}",
+    "VOTING_TO_CHANGE_MIN_THRESHOLD_ADDRESS": "${addresses.VOTING_TO_CHANGE_MIN_THRESHOLD_ADDRESS}",
+    "VOTING_TO_CHANGE_PROXY_ADDRESS": "${addresses.VOTING_TO_CHANGE_PROXY_ADDRESS}",
+    "BALLOTS_STORAGE_ADDRESS": "${addresses.BALLOTS_STORAGE_ADDRESS}",
+    "METADATA_ADDRESS": "${addresses.METADATA_ADDRESS}",
+    "POA_ADDRESS": "${constants.poaNetworkConsensusContractAddress}",
+};
+`
 
 	let dappAddresses = `${constants.pathToGovernanceDAppRepo}/src/contracts/addresses.js`;
 	let addressesFromDapp = fs.readFileSync(dappAddresses, 'utf8');
-	let lastImport = `import swal from 'sweetalert2';`;
+	let lastImport = `import { addressesURL, wrongRepoAlert } from "./helpers";`;
 	addressesFromDapp = addressesFromDapp.replace(lastImport, lastImport + addition)
 	addressesFromDapp = addressesFromDapp.replace('SOKOL_ADDRESSES = contracts;', 'SOKOL_ADDRESSES = local;')
 
