@@ -25,9 +25,7 @@
 
 ## Requirements
 1. Linux, Mac OS
-2. Python 3.5+
-3. [Solidity flattener](https://github.com/BlockCatIO/solidity-flattener)
-4. Parity 1.9.2+
+2. Parity 1.9.2+
 
 ## Basic scenarios
 

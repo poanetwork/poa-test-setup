@@ -5,9 +5,9 @@ const webdriver = require('selenium-webdriver'),
       by = require('selenium-webdriver/lib/by');
 
 const newBallotButton = by.By.xpath("//*[@id=\"root\"]/div/header/div/a[2]");
-const keysBallotType = by.By.xpath("//*[@id=\"root\"]/div/section/form/div[1]/div[1]/div/label");
-const addKeyType = by.By.xpath("//*[@id=\"root\"]/div/section/form/div[2]/div[1]/div[1]/label");
-const miningKeyType = by.By.xpath("//*[@id=\"root\"]/div/section/form/div[2]/div[2]/div[1]/label");
+const keysBallotType = by.By.xpath("//*[@id=\"root\"]/div/section/form/div[1]/div[1]/div[1]");
+const addKeyType = by.By.xpath("//*[@id=\"root\"]/div/section/form/div[2]/div[3]/div[1]/div[1]/label");
+const miningKeyType = by.By.xpath("//*[@id=\"root\"]/div/section/form/div[2]/div[3]/div[2]/div[1]/label");
 const activeTab = by.By.xpath("//*[@id=\"root\"]/div/div/div/div/a[2]")
 
 //validator data
@@ -20,13 +20,13 @@ const licenseIdInput = by.By.xpath("//*[@id=\"license-id\"]");
 const licenseExpirationInput = by.By.xpath("//*[@id=\"license-expiration\"]");
 
 //voting data
-const descriptionInput = by.By.xpath("//*[@id=\"root\"]/div/section/form/div[5]/div/textarea");
+const descriptionInput = by.By.xpath("//*[@id=\"root\"]/div/section/form/div[2]/div[1]/div/textarea");
 const endTimeInput = by.By.xpath("//*[@id=\"datetime-local\"]");
 const affectedKeyInput = by.By.xpath("//*[@id=\"key\"]");
-const miningKeyInput = by.By.xpath("//*[@id=\"root\"]/div/section/form/div[4]/div/div[2]/div/div/div");
+const miningKeyInput = by.By.xpath("//*[@id=\"root\"]/div/section/form/div[2]/div[5]/div/div[2]/div/div");
 const newMiningKeyXpath = by.By.xpath("//*[@id=\"react-select-2--option-0\"]");
 
-const addBallotButton = by.By.xpath("//*[@id=\"root\"]/div/section/form/div[6]/button");
+const addBallotButton = by.By.xpath("//*[@id=\"root\"]/div/section/form/div[2]/button");
 const alertOKButton = by.By.xpath("/html/body/div[2]/div/div[10]/button[1]");
 const yesButton = by.By.xpath("//*[@id=\"root\"]/div/section/div[1]/div[2]/div[2]/button");
 const finalizeButton = by.By.xpath("//*[@id=\"root\"]/div/section/div[3]/div[5]/div[1]/button");
