@@ -25,7 +25,7 @@
     "set-validators-data-light": "npm run e2e-validators-test 1",
     "launch-ceremony-dapp": "npm run prepare-ceremony-dapp && npm run prepare-ceremony-dapp-more && npm run start-ceremony",
     "launch-ceremony-1": "npm run generate-initial-key && npm run get-private-initial-keys && npm run e2e-ceremony-test 1 && npm run prepare-validator-node 1 && npm run start-validator-node 1",
-    "get-main-submodules": "git submodule update --init --remote submodules/poa-network-consensus-contracts && git submodule update --init --remote submodules/solidity-flattener && git submodule update --init --remote submodules/poa-scripts-moc && git submodule update --init --remote submodules/poa-chain-spec",
+    "get-main-submodules": "git submodule update --init --remote",
     "prepare-contracts-repo": "bash ./scripts/prepare-contracts-repo",
     "prepare-moc-node": "node prepareMoCNode",
     "start-moc-node": "bash ./scripts/start-moc-node > /dev/null 2>&1 &",
