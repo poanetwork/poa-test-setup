@@ -28,7 +28,7 @@
     "get-main-submodules": "git submodule update --init --remote",
     "prepare-contracts-repo": "bash ./scripts/prepare-contracts-repo",
     "prepare-moc-node": "node prepareMoCNode",
-    "start-moc-node": "bash ./scripts/start-moc-node > /dev/null 2>&1 &",
+    "start-moc-node": "bash ./scripts/start-moc-node &",
     "deploy-secondary-contracts": "bash ./scripts/deploy-secondary-contracts",
     "prepare-scrips-moc-repo": "node prepareMoCScripts",
     "prepare-ceremony-dapp": "node prepareCeremonyDapp",
