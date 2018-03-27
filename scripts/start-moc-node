@@ -1,11 +1,12 @@
 #!/bin/bash
 
+set -x
 set -u
 set -e
 
-parityDebPath=./parity_1.9.2_amd64.deb
-if ! [ -x "$(command -v parity)" ]; then
-  cmd=$(sudo dpkg -i ${parityDebPath})
-fi
+# parityDebPath=./parity_1.9.2_amd64.deb
+# if ! [ -x "$(command -v parity)" ]; then
+#   cmd=$(sudo dpkg -i ${parityDebPath})
+# fi
 
-cmd2=$(parity --config ./nodes/parity-moc/moc.toml > ./nodes/parity-moc/parity.log 2>&1)
+cmd2=$(parity --config ./nodes/parity-moc/moc.toml > ./nodes/parity-moc/parity.log)
