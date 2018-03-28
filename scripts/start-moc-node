@@ -9,4 +9,5 @@ set -e
 #   cmd=$(sudo dpkg -i ${parityDebPath})
 # fi
 
-cmd2=$(parity --config ./nodes/parity-moc/moc.toml > ./nodes/parity-moc/parity.log)
+cmd2=$(parity -v)
+cmd3=$(parity --config ./nodes/parity-moc/moc.toml > ./nodes/parity-moc/parity.log)
