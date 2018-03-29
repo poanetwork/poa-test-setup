@@ -66,6 +66,17 @@ At the successful end of POA test setup start you'll see this message `### POA t
 
 *Note*: can be started after [previous step is completed](#launch-dapps)
 
+Ubuntu users should first install Google Chrome, X virtual framebuffer and start it:
+```
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+sudo apt-get update
+sudo apt-get -y install google-chrome-stable xvfb
+
+export DISPLAY=:99.0
+sudo start-stop-daemon --start --quiet --pidfile /var/run/xvfb.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 1024x768x24 -ac +extension GLX +render -noreset
+```
+
 `npm run launch-ceremony`
 
 #### Expected results:
@@ -108,3 +119,6 @@ At the successful end of POA test setup start you'll see this message `### POA t
 
 ### Finish test POA setup
 `npm run stop-test-setup`
+
+Ubuntu users also have to stop virtual framebuffer:<br />
+`sudo start-stop-daemon --stop --quiet --pidfile /var/run/xvfb.pid --remove-pidfile`
