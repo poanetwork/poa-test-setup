@@ -26,6 +26,7 @@
 ## Requirements
 1. Linux, Mac OS
 2. Parity 1.9.2+
+3. Google Chrome
 
 ## Basic scenarios
 
@@ -66,13 +67,9 @@ At the successful end of POA test setup start you'll see this message `### POA t
 
 *Note*: can be started after [previous step is completed](#launch-dapps)
 
-Ubuntu users should first install Google Chrome, X virtual framebuffer and start it:
+For Ubuntu users: you should first install and use *X virtual framebuffer* if you want to move all graphical operations to the virtual memory without showing any screen output.
 ```
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-sudo apt-get update
-sudo apt-get -y install google-chrome-stable xvfb
-
+sudo apt-get -y install xvfb
 export DISPLAY=:99.0
 sudo start-stop-daemon --start --quiet --pidfile /var/run/xvfb.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 1024x768x24 -ac +extension GLX +render -noreset
 ```
@@ -120,5 +117,5 @@ sudo start-stop-daemon --start --quiet --pidfile /var/run/xvfb.pid --make-pidfil
 ### Finish test POA setup
 `npm run stop-test-setup`
 
-Ubuntu users also have to stop virtual framebuffer:<br />
+For Ubuntu users: you should also stop virtual framebuffer if you started it before.<br />
 `sudo start-stop-daemon --stop --quiet --pidfile /var/run/xvfb.pid --remove-pidfile`
