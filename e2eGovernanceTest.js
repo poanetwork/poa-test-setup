@@ -1,4 +1,5 @@
 const fs = require('fs');
+const utils = require("./utils/utils");
 const keythereum = require("keythereum");
 const Constants = require("./utils/constants");
 const constants = Constants.constants;
@@ -30,9 +31,9 @@ let validator_num = args[0];
 
 let files = dir.files(constants.votingKeysFolder, {sync:true});
 files = files.filter((file) => {
-	let isNotGitKeep = path.basename(file) !== path.basename(`${constants.votingKeysFolder}.gitkeep`);
-	let isNotDsStore = path.basename(file) !== path.basename(`${constants.votingKeysFolder}.DS_Store`);
-	return isNotGitKeep && isNotDsStore;
+    let isNotGitKeep = path.basename(file) !== path.basename(`${constants.votingKeysFolder}.gitkeep`);
+    let isNotDsStore = path.basename(file) !== path.basename(`${constants.votingKeysFolder}.DS_Store`);
+    return isNotGitKeep && isNotDsStore;
 })
 const votingKeyPath = files[validator_num - 1];
 
@@ -58,17 +59,17 @@ async function main() {
     fs.writeFileSync(`${validatorKeysNodeFolder}/${newMiningKeyAddress}`, JSON.stringify(keyObject));
     fs.writeFileSync(`${constants.nodeFolder}parity_validator_4/node.pwd`, password);
 
-	let options = new chrome.Options();
+    let options = new chrome.Options();
     options.addExtensions('./MetaMask_v3.14.1.crx');
-	options.addArguments('start-maximized');
+    options.addArguments('start-maximized');
     options.addArguments('disable-popup-blocking');
-	let driver = new webdriver.Builder()
-	.withCapabilities(options.toCapabilities())
-	.build();
+    let driver = new webdriver.Builder()
+    .withCapabilities(options.toCapabilities())
+    .build();
 
-	let wallet = MetaMaskWallet.createMetaMaskWallet(votingKeyPath);
+    let wallet = MetaMaskWallet.createMetaMaskWallet(votingKeyPath);
 
-	let metaMask = new meta.MetaMask(driver, wallet);
+    let metaMask = new meta.MetaMask(driver, wallet);
     let votingPage = await new voting.Voting(driver,votingURL);
 
     metaMask.open();
@@ -184,7 +185,13 @@ async function main() {
 }
 
 function generateValidatorMetadata() {
-    let license_expiration = moment(new Date(faker.date.future())).format('DD/MM/YYYY');
+    let currentYear = (new Date()).getFullYear();
+
+    let license_expiration =
+        utils.leftPad(utils.randomIntInc(1, 12), 2) + '/' +
+        utils.leftPad(utils.randomIntInc(1, 12), 2) + '/' +
+        utils.randomIntInc(currentYear + 1, currentYear + 5);
+
     const validatorMetaData = {
         full_name: faker.name.findName(),
         address: `${faker.address.streetAddress()} ${faker.address.streetName()} ${faker.address.city()}`,

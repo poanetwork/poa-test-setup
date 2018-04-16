@@ -25,9 +25,9 @@ let validator_num = args[0];
 
 let files = dir.files(constants.votingKeysFolder, {sync:true});
 files = files.filter((file) => {
-	let isNotGitKeep = path.basename(file) !== path.basename(`${constants.votingKeysFolder}.gitkeep`);
-	let isNotDsStore = path.basename(file) !== path.basename(`${constants.votingKeysFolder}.DS_Store`);
-	return isNotGitKeep && isNotDsStore;
+    let isNotGitKeep = path.basename(file) !== path.basename(`${constants.votingKeysFolder}.gitkeep`);
+    let isNotDsStore = path.basename(file) !== path.basename(`${constants.votingKeysFolder}.DS_Store`);
+    return isNotGitKeep && isNotDsStore;
 })
 const votingKeyPath = files[validator_num - 1];
 
@@ -44,17 +44,17 @@ console.log(votingKey)*/
 main()
 
 async function main() {
-	let options = new chrome.Options();
+    let options = new chrome.Options();
     options.addExtensions('./MetaMask_v3.14.1.crx');
-	options.addArguments('start-maximized');
+    options.addArguments('start-maximized');
     options.addArguments('disable-popup-blocking');
-	let driver = new webdriver.Builder()
-	.withCapabilities(options.toCapabilities())
-	.build();
+    let driver = new webdriver.Builder()
+    .withCapabilities(options.toCapabilities())
+    .build();
 
-	let wallet = MetaMaskWallet.createMetaMaskWallet(votingKeyPath);
+    let wallet = MetaMaskWallet.createMetaMaskWallet(votingKeyPath);
 
-	let metaMask = new meta.MetaMask(driver, wallet);
+    let metaMask = new meta.MetaMask(driver, wallet);
     let validatorsPage = await new validators.Validators(driver,validatorsURL);
 
     metaMask.open();
@@ -132,16 +132,22 @@ async function main() {
 }
 
 function generateValidatorMetadata() {
-	let license_expiration = moment(new Date(faker.date.future())).format('DD/MM/YYYY');
-	const validatorMetaData = {
-		first_name: faker.name.firstName(),
-		last_name: faker.name.lastName(),
-		address: `${faker.address.streetAddress()} ${faker.address.streetName()} ${faker.address.city()}`,
-		us_state: faker.address.state(),
-		zip_code: faker.address.zipCode().split('-')[0],
-		license_id: faker.random.alphaNumeric(10),
-		license_expiration: license_expiration
-	};
+    let currentYear = (new Date()).getFullYear();
 
-	return validatorMetaData;
+    let license_expiration =
+        utils.leftPad(utils.randomIntInc(1, 12), 2) + '/' +
+        utils.leftPad(utils.randomIntInc(1, 12), 2) + '/' +
+        utils.randomIntInc(currentYear + 1, currentYear + 5);
+
+    const validatorMetaData = {
+        first_name: faker.name.firstName(),
+        last_name: faker.name.lastName(),
+        address: `${faker.address.streetAddress()} ${faker.address.streetName()} ${faker.address.city()}`,
+        us_state: faker.address.state(),
+        zip_code: faker.address.zipCode().split('-')[0],
+        license_id: faker.random.alphaNumeric(10),
+        license_expiration: license_expiration
+    };
+
+    return validatorMetaData;
 }
