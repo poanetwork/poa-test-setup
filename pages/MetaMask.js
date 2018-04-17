@@ -110,7 +110,7 @@ class MetaMask extends page.Page{
         super.fillWithWait(fieldNewPass,pass);
         super.fillWithWait(fieldConfirmPass,pass);
         super.clickWithWait(buttonCreate);
-        this.driver.sleep(1500);
+        this.driver.sleep(4000);
        // this.driver.findElement(fieldSecretWords).getText().then(console.log);
        super.clickWithWait(buttonIveCopied);
        this.chooseProvider();

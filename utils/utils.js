@@ -79,11 +79,30 @@ function generateAddress(password) {
   })
 }
 
+function randomIntInc(low, high) {
+  return Math.floor(Math.random() * (high - low + 1) + low);
+}
+
+function leftPad(str, length) {
+  str = str == null ? '' : String(str);
+  length = ~~length;
+  pad = '';
+  padLength = length - str.length;
+
+  while(padLength--) {
+    pad += '0';
+  }
+
+  return pad + str;
+}
+
 module.exports = {
 	getSpec,
 	getABI,
 	clearFolder,
 	removeFolderRecursive,
   saveToFile,
-  generateAddress
+  generateAddress,
+  randomIntInc,
+  leftPad
 }
