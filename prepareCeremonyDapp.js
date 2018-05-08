@@ -26,6 +26,19 @@ function main() {
 	addressesFromDapp = addressesFromDapp.replace('resolve({addresses: json', 'resolve({addresses: local')
 
 	fs.writeFileSync(`${constants.pathToCeremonyDAppRepo}/src/addresses.js`, addressesFromDapp);
+	
+	// Hardcode ABIs into helpers.js
+	const pathToKeysManagerJSON = `${constants.contractsFolder}/KeysManager.json`;
+	const keysManagerABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToKeysManagerJSON)).abi).replace(/,/g, ', ');
+	
+	const dappHelpers = `${constants.pathToCeremonyDAppRepo}/src/helpers.js`;
+	let dappHelpersContent = fs.readFileSync(dappHelpers, 'utf8');
+	const abiAddition = `
+    if (contract == 'KeysManager') return ${keysManagerABI};`;
+	
+	const lastGetABI = `function getABI(branch, contract) {`;
+	dappHelpersContent = dappHelpersContent.replace(lastGetABI, lastGetABI + abiAddition);
+	fs.writeFileSync(dappHelpers, dappHelpersContent);
 
 	console.log("Ceremony Repo is prepared");
 }
