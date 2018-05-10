@@ -27,6 +27,27 @@ function main() {
 	addressesFromDapp = addressesFromDapp.replace('resolve({addresses: json', 'resolve({addresses: local')
 
 	fs.writeFileSync(dappAddresses, addressesFromDapp);
+	
+	// Hardcode ABIs into helpers.js
+	const pathToKeysManagerJSON = `${constants.contractsFolder}/KeysManager.json`;
+	const keysManagerABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToKeysManagerJSON)).abi).replace(/,/g, ', ');
+	
+	const pathToPoaNetworkConsensusJSON = `${constants.contractsFolder}/PoaNetworkConsensus.json`;
+	const poaNetworkConsensusABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToPoaNetworkConsensusJSON)).abi).replace(/,/g, ', ');
+	
+	const pathToValidatorMetadataJSON = `${constants.contractsFolder}/ValidatorMetadata.json`;
+	const validatorMetadataABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToValidatorMetadataJSON)).abi).replace(/,/g, ', ');
+	
+	const dappHelpers = `${constants.pathToValidatorsDAppRepo}/src/contracts/helpers.js`;
+	let dappHelpersContent = fs.readFileSync(dappHelpers, 'utf8');
+	const abiAddition = `
+    if (contract == 'KeysManager') return ${keysManagerABI};
+    else if (contract == 'PoaNetworkConsensus') return ${poaNetworkConsensusABI};
+    else if (contract == 'ValidatorMetadata') return ${validatorMetadataABI};`;
+	
+	const lastGetABI = `function getABI(branch, contract) {`;
+	dappHelpersContent = dappHelpersContent.replace(lastGetABI, lastGetABI + abiAddition);
+	fs.writeFileSync(dappHelpers, dappHelpersContent);
 
 	console.log("Validators Repo is prepared");
 }
