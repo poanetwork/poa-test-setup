@@ -93,6 +93,7 @@ async function main() {
 	const masterNodeTomlContent = fs.readFileSync(masterNodeExampleTomlPath, "utf8");
 	const masterNodeToml = toml.parse(masterNodeTomlContent);
 
+	masterNodeToml.rpc.interface = process.env.INTERFACE;
 	masterNodeToml.account.unlock = [moc];
 	masterNodeToml.mining.engine_signer = moc;
 	const newToml = tomlJS.dump(masterNodeToml);
