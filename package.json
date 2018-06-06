@@ -16,7 +16,7 @@
     "selenium-webdriver": "^3.6.0",
     "toml": "^2.3.3",
     "toml-js": "0.0.8",
-    "web3": "^1.0.0-beta.29"
+    "web3": "1.0.0-beta.34"
   },
   "scripts": {
     "start-moc-setup": "npm run get-main-submodules && npm run prepare-contracts-repo && npm run prepare-moc-node && npm run start-moc-node && npm run deploy-secondary-contracts && npm run prepare-scrips-moc-repo && npm run test-setup-is-started",
