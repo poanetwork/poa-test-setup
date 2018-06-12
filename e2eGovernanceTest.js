@@ -108,7 +108,7 @@ async function main() {
     votingPage.fillDescription(votingMetaData.description);
     //votingPage.fillEndTime(votingMetaData.endTime);
     votingPage.fillAffectedKey(votingMetaData.affectedKey);
-    votingPage.fillNewMiningKey();
+    //votingPage.fillNewMiningKey();
 
     driver.sleep(2000);
 
@@ -159,6 +159,14 @@ async function main() {
     driver.sleep(1000);
 
     votingPage.clickAlertOKButton();
+
+    driver.sleep(5000);
+
+    let handles = await driver.getAllWindowHandles();
+    for (let i = 0; i < handles.length; i++) {
+        driver.switchTo().window(handles[i]);
+        driver.close();
+    }
 
     async function metamaskInteraction() {
         driver.sleep(2000);
