@@ -18,6 +18,7 @@ const local = {
     "VOTING_TO_CHANGE_PROXY_ADDRESS": "${addresses.VOTING_TO_CHANGE_PROXY_ADDRESS}",
     "BALLOTS_STORAGE_ADDRESS": "${addresses.BALLOTS_STORAGE_ADDRESS}",
     "METADATA_ADDRESS": "${addresses.METADATA_ADDRESS}",
+    "PROXY_ADDRESS": "${addresses.PROXY_ADDRESS}",
     "POA_ADDRESS": "${constants.poaNetworkConsensusContractAddress}",
 };
 `
@@ -39,6 +40,9 @@ const local = {
 	
 	const pathToBallotsStorageJSON = `${constants.contractsFolder}/BallotsStorage.json`;
 	const ballotsStorageABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToBallotsStorageJSON)).abi).replace(/,/g, ', ');
+
+	const pathToProxyStorageJSON = `${constants.contractsFolder}/ProxyStorage.json`;
+	const proxyStorageABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToProxyStorageJSON)).abi).replace(/,/g, ', ');
 	
 	const pathToValidatorMetadataJSON = `${constants.contractsFolder}/ValidatorMetadata.json`;
 	const validatorMetadataABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToValidatorMetadataJSON)).abi).replace(/,/g, ', ');
@@ -58,6 +62,7 @@ const local = {
     if (contract == 'KeysManager') return ${keysManagerABI};
     else if (contract == 'PoaNetworkConsensus') return ${poaNetworkConsensusABI};
     else if (contract == 'BallotStorage') return ${ballotsStorageABI};
+    else if (contract == 'ProxyStorage') return ${proxyStorageABI};
     else if (contract == 'ValidatorMetadata') return ${validatorMetadataABI};
     else if (contract == 'VotingToChangeKeys') return ${votingToChangeKeysABI};
     else if (contract == 'VotingToChangeMinThreshold') return ${votingToChangeMinThresholdABI};
