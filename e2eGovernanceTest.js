@@ -160,7 +160,7 @@ async function main() {
 
     votingPage.clickAlertOKButton();
 
-    driver.sleep(5000);
+    driver.sleep(15000);
 
     let handles = await driver.getAllWindowHandles();
     for (let i = 0; i < handles.length; i++) {
