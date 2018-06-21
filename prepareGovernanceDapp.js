@@ -72,5 +72,13 @@ const local = {
 	dappHelpersContent = dappHelpersContent.replace(lastGetABI, lastGetABI + abiAddition);
 	fs.writeFileSync(dappHelpers, dappHelpersContent);
 
+	// Change some constants
+	const dappConstants = `${constants.pathToGovernanceDAppRepo}/src/constants.js`;
+	let dappConstantsContent = fs.readFileSync(dappConstants, 'utf8');
+	dappConstantsContent = dappConstantsContent.replace('constants.minBallotDurationInDays = 2;', 'constants.minBallotDurationInDays = 0;');
+	dappConstantsContent = dappConstantsContent.replace('constants.startTimeOffsetInMinutes = 5;', 'constants.startTimeOffsetInMinutes = 1;');
+	dappConstantsContent = dappConstantsContent.replace('constants.endTimeDefaultInMinutes = 2890;', 'constants.endTimeDefaultInMinutes = 3;');
+	fs.writeFileSync(dappConstants, dappConstantsContent);
+
 	console.log("Governance Repo is prepared");
 }
