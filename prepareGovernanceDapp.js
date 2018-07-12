@@ -25,9 +25,9 @@ const local = {
 
 	let dappAddresses = `${constants.pathToGovernanceDAppRepo}/src/contracts/addresses.js`;
 	let addressesFromDapp = fs.readFileSync(dappAddresses, 'utf8');
-	let lastImport = `import { addressesURL, wrongRepoAlert } from "./helpers";`;
+	let lastImport = `import { addressesURL, wrongRepoAlert } from './helpers'`;
 	addressesFromDapp = addressesFromDapp.replace(lastImport, lastImport + addition)
-	addressesFromDapp = addressesFromDapp.replace('SOKOL_ADDRESSES = contracts;', 'SOKOL_ADDRESSES = local;')
+	addressesFromDapp = addressesFromDapp.replace('SOKOL_ADDRESSES = contracts', 'SOKOL_ADDRESSES = local')
 
 	fs.writeFileSync(dappAddresses, addressesFromDapp);
 	
@@ -75,9 +75,9 @@ const local = {
 	// Change some constants
 	const dappConstants = `${constants.pathToGovernanceDAppRepo}/src/constants.js`;
 	let dappConstantsContent = fs.readFileSync(dappConstants, 'utf8');
-	dappConstantsContent = dappConstantsContent.replace('constants.minBallotDurationInDays = 2;', 'constants.minBallotDurationInDays = 0;');
-	dappConstantsContent = dappConstantsContent.replace('constants.startTimeOffsetInMinutes = 5;', 'constants.startTimeOffsetInMinutes = 1;');
-	dappConstantsContent = dappConstantsContent.replace('constants.endTimeDefaultInMinutes = 2890;', 'constants.endTimeDefaultInMinutes = 3;');
+	dappConstantsContent = dappConstantsContent.replace('constants.minBallotDurationInDays = 2', 'constants.minBallotDurationInDays = 0');
+	dappConstantsContent = dappConstantsContent.replace('constants.startTimeOffsetInMinutes = 5', 'constants.startTimeOffsetInMinutes = 1');
+	dappConstantsContent = dappConstantsContent.replace('constants.endTimeDefaultInMinutes = 2890', 'constants.endTimeDefaultInMinutes = 3');
 	fs.writeFileSync(dappConstants, dappConstantsContent);
 
 	console.log("Governance Repo is prepared");
