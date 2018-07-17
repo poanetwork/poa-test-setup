@@ -60,10 +60,10 @@
     "prepare-validator-node": "node prepareValidatorNode",
     "start-validator-node": "bash ./scripts/start-validator-node",
     "prepare-validators-dapp": "node prepareValidatorsDapp",
-    "prepare-validators-dapp-more": "cd ./submodules/poa-dapps-validators && npm i --production > /dev/null 2>&1",
+    "prepare-validators-dapp-more": "cd ./submodules/poa-dapps-validators && npm i --production > /dev/null 2>&1 && npm run lint -- --fix",
     "start-validators-dapp": "cd ./submodules/poa-dapps-validators && PORT=3001 BROWSER=none npm start > /dev/null 2>&1 &",
     "prepare-governance-dapp": "node prepareGovernanceDapp",
-    "prepare-governance-dapp-more": "cd ./submodules/poa-dapps-voting && npm i > /dev/null 2>&1",
+    "prepare-governance-dapp-more": "cd ./submodules/poa-dapps-voting && npm i > /dev/null 2>&1 && npm run lint -- --fix",
     "start-governance-dapp": "cd ./submodules/poa-dapps-voting && PORT=3002 BROWSER=none npm start > /dev/null 2>&1 &",
     "kill-processes": "bash ./scripts/kill-processes",
     "stop-test-setup": "npm run kill-processes && rm -rf ./submodules/poa-dapps-keys-generation && rm -rf ./submodules/poa-dapps-validators  && rm -rf ./submodules/poa-dapps-voting && rm -rf ./submodules/poa-scripts-moc/generateInitialKey/output/* && git submodule update --init --remote && git clean -f -d && git checkout nodes/reserved_peers"

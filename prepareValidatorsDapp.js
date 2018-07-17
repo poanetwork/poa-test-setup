@@ -24,7 +24,7 @@ function main() {
 	let addressesFromDapp = fs.readFileSync(dappAddresses, 'utf8');
 	let lastImport = `import messages from '../messages'`;
 	addressesFromDapp = addressesFromDapp.replace(lastImport, lastImport + addition)
-	addressesFromDapp = addressesFromDapp.replace('resolve({addresses: json', 'resolve({addresses: local')
+	addressesFromDapp = addressesFromDapp.replace('resolve({ addresses: json', 'resolve({ addresses: local')
 
 	fs.writeFileSync(dappAddresses, addressesFromDapp);
 	
