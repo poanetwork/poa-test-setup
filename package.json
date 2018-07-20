@@ -38,10 +38,10 @@
     "start-test-setup": "npm run get-all-submodules && npm run prepare-contracts-repo && npm run prepare-moc-node && npm run start-moc-node && npm run deploy-secondary-contracts && npm run prepare-scrips-moc-repo && npm run prepare-ceremony-dapp && npm run prepare-ceremony-dapp-more && npm run generate-initial-keys && npm run get-private-initial-keys && npm run start-ceremony && npm run test-setup-is-started",
     "start-test-setup-e2e-ceremony-test": "npm run start-test-setup && npm run e2e-ceremony-test",
     "start-moc-validator-setup": "npm run start-test-setup-e2e-ceremony-test && npm run prepare-validator-node 1 && npm run start-validator-node 1 > /dev/null 2>&1 & && npm run prepare-validators-dapp && npm run prepare-validators-dapp-more && npm run start-validators-dapp",
-    "get-main-submodules": "git submodule update --init --remote submodules/poa-network-consensus-contracts && git submodule update --init --remote submodules/solidity-flattener && git submodule update --init --remote submodules/poa-scripts-moc && git submodule update --init --remote submodules/poa-chain-spec",
-    "get-dapps-submodules": "git submodule update --init --remote submodules/poa-dapps-validators && git submodule update --init --remote submodules/poa-dapps-voting && git submodule update --init --remote submodules/poa-dapps-keys-generation",
-    "get-dapps-submodules-ceremony": "git submodule update --init --remote submodules/poa-dapps-keys-generation",
-    "get-all-submodules": "git submodule update --init --remote",
+    "get-main-submodules": "git submodule update --init submodules/poa-network-consensus-contracts && git submodule update --init submodules/solidity-flattener && git submodule update --init submodules/poa-scripts-moc && git submodule update --init submodules/poa-chain-spec",
+    "get-dapps-submodules": "git submodule update --init submodules/poa-dapps-validators && git submodule update --init submodules/poa-dapps-voting && git submodule update --init submodules/poa-dapps-keys-generation",
+    "get-dapps-submodules-ceremony": "git submodule update --init submodules/poa-dapps-keys-generation",
+    "get-all-submodules": "git submodule update --init",
     "prepare-contracts-repo": "bash ./scripts/prepare-contracts-repo",
     "prepare-moc-node": "node prepareMoCNode",
     "start-moc-node": "bash ./scripts/start-moc-node > /dev/null 2>&1 &",
@@ -66,6 +66,6 @@
     "prepare-governance-dapp-more": "cd ./submodules/poa-dapps-voting && npm i > /dev/null 2>&1 && npm run lint -- --fix",
     "start-governance-dapp": "cd ./submodules/poa-dapps-voting && PORT=3002 BROWSER=none npm start > /dev/null 2>&1 &",
     "kill-processes": "bash ./scripts/kill-processes",
-    "stop-test-setup": "npm run kill-processes && rm -rf ./submodules/poa-dapps-keys-generation && rm -rf ./submodules/poa-dapps-validators  && rm -rf ./submodules/poa-dapps-voting && rm -rf ./submodules/poa-scripts-moc/generateInitialKey/output/* && git submodule update --init --remote && git clean -f -d && git checkout nodes/reserved_peers"
+    "stop-test-setup": "npm run kill-processes && rm -rf ./submodules/poa-dapps-keys-generation && rm -rf ./submodules/poa-dapps-validators  && rm -rf ./submodules/poa-dapps-voting && rm -rf ./submodules/poa-scripts-moc/generateInitialKey/output/* && git submodule update --init && git clean -f -d && git checkout nodes/reserved_peers"
   }
 }
