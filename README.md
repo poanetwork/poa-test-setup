@@ -74,27 +74,27 @@ export DISPLAY=:99.0
 sudo start-stop-daemon --start --quiet --pidfile /var/run/xvfb.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 1024x768x24 -ac +extension GLX +render -noreset
 ```
 
-`npm run launch-ceremony`
+`npm run launch-ceremony-light`
 
 #### Expected results:
-- 3 initital key are generated
-- Initial key passwords, private keys are generated to `.keys/initial_keys` folder
+- 1 initital key is generated
+- Initial key password, private key is generated to `.keys/initial_keys` folder
 - e2e test of Ceremony DApp is executed
-- Mining addresses, passwords and private keys are copied to `./keys/mining_keys` folder
-- Payout addresses, passwords and private keys are copied to `./keys/payout_keys` folder
-- Voting addresses, passwords and private keys are copied to `./keys/voting_keys` folder
-- Initital keys are removed
-- Most ETH from initial keys are transfered to voting keys
-- Validator nodes are started at RPC ports `8550`, `8551`, `8552`
+- Mining address, password and private key is copied to `./keys/mining_keys` folder
+- Payout address, password and private key is copied to `./keys/payout_keys` folder
+- Voting address, password and private key is copied to `./keys/voting_keys` folder
+- Initital key is removed
+- Most ETH from initial key is transfered to voting keys
+- Validator node is started at RPC ports `8550`
 
 ### Set Validators' personal data
 
 *Note*: can be started after [previous step is completed](#launch-ceremony)
 
-`npm run set-validators-data`
+`npm run set-validators-data-light`
 
 #### Expected results:
-- 3 validators filled with mock personal data in Validator Dapp
+- 1 validator filled the form with mock personal data in Validator Dapp
 
 ### Add validator from Governance
 
