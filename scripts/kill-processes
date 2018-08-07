@@ -32,7 +32,7 @@ node_rpc_port=8550
 while true; do
 	res=$(kill_process $node_rpc_port)
 	echo $res
-	if [ "$res" -eq "0" ];
+	if [ "$node_rpc_port" -eq "8553" ];
 	then
 		break;
 	else
