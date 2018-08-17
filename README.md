@@ -1,7 +1,7 @@
 # POA Network test setup
 
 ## How it works:
-- [x] gets content of master branch of `poa-network-consensus-contracts` repo
+- [x] gets content of `master` branch of `poa-network-consensus-contracts` repo
 - [x] compiles all POA Network contracts
 - [x] gets binary code of POA Network Consensus contract
 - [x] gets spec.json from `sokol` branch of `chain-spec` repo
@@ -9,18 +9,18 @@
 - [x] updates spec.json with new MoC and binary code of POA Network Consensus contracts
 - [x] starts MoC Parity node
 - [x] deploys secondary POA Network contracts
-- [x] gets content of master branch of `poa-scripts-moc` repo
-- [x] generates 1 initial key with password and copy it to `./keys/initial_keys` folder
-- [x] gets content of sokol branch of `poa-dapps-keys-generation` repo
-- [x] launches Ceremony DApp is locally builded from repo
+- [x] gets content of `master` branch of `poa-scripts-moc` repo
+- [x] generates one initial key with password and copies it to `./keys/initial_keys` folder
+- [x] gets content of `core` branch of `poa-dapps-keys-generation` repo
+- [x] launches Ceremony DApp locally built from the repo
 - [x] runs e2e tests on Ceremony DApp
 - [x] saves generated production keys with Ceremony DApp to `./keys` folder
 - [x] runs validator node
-- [x] gets content of sokol branch of `poa-dapps-validators` repo
-- [x] launches Validators DApp is locally builded from repo
+- [x] gets content of `core` branch of `poa-dapps-validators` repo
+- [x] launches Validators DApp locally built from the repo
 - [x] runs e2e tests on Validators DApp
-- [x] gets content of sokol branch of `poa-dapps-voting` repo
-- [x] launches Voting DApp is locally builded from repo
+- [x] gets content of `core` branch of `poa-dapps-voting` repo
+- [x] launches Voting DApp locally built from the repo
 - [x] runs e2e tests on Governance DApp
 
 ## Requirements
@@ -42,30 +42,40 @@ There are some options to start POA Network test setup depending on your needs:
 1. `npm i`
 2. `npm run start-moc-setup`
 
-At the successful end of POA test setup start you'll see this message `### POA test setup is configured ###`
+At the successful end of POA test setup start you'll see this message: `### POA test setup is configured ###`
 
 #### Expected results:
 - RPC of Parity node with unlocked MoC account will be on `http://localhost:8545`
 - Spec of the network is generated to `./spec` folder
-- MoC keystore file, password, private key is generated to `./keys/moc` folder
+- MoC keystore file, password, private key are generated to `./keys/moc` folder
 - Parity config of MoC node is generated to `./nodes/parity-moc/moc.toml` file
 - Addresses of governance smart contracts are generated to `./submodules/poa-network-consensus-contracts/contracts.json`
 - ABI of smart contracts are generated to `./submodules/poa-network-consensus-contracts/build/contracts`
 
 ### Launch DApps
 
-*Note*: can be started after [previous step is completed](#start-moc-node)
+*Note*: can be started after [the previous step is completed](#start-moc-node)
 
 `npm run launch-dapps`
 
+For Ubuntu users: if you encounter any errors during DApps launching, try to increase `max_user_watches` limit and repeat steps:
+
+```bash
+$ npm run stop-test-setup
+$ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf
+$ sudo sysctl -p
+$ npm run start-moc-setup
+$ npm run launch-dapps
+```
+
 #### Expected results:
-- Ceremony Dapp is started on `http://localhost:3000`
-- Validators Dapp is started on `http://localhost:3001`
-- Governance Dapp is started on `http://localhost:3002`
+- Ceremony DApp is started on `http://localhost:3000`
+- Validators DApp is started on `http://localhost:3001`
+- Governance DApp is started on `http://localhost:3002`
 
 ### Launch Ceremony
 
-*Note*: can be started after [previous step is completed](#launch-dapps)
+*Note*: can be started after [the previous step is completed](#launch-dapps)
 
 For Ubuntu users: you should first install and use *X virtual framebuffer* if you want to move all graphical operations to the virtual memory without showing any screen output.
 ```
@@ -77,28 +87,28 @@ sudo start-stop-daemon --start --quiet --pidfile /var/run/xvfb.pid --make-pidfil
 `npm run launch-ceremony-light`
 
 #### Expected results:
-- 1 initital key is generated
-- Initial key password, private key is generated to `.keys/initial_keys` folder
+- one initial key is generated
+- initial key password, private key are generated to `.keys/initial_keys` folder
 - e2e test of Ceremony DApp is executed
-- Mining address, password and private key is copied to `./keys/mining_keys` folder
-- Payout address, password and private key is copied to `./keys/payout_keys` folder
-- Voting address, password and private key is copied to `./keys/voting_keys` folder
-- Initital key is removed
-- Most ETH from initial key is transfered to voting keys
-- Validator node is started at RPC ports `8550`
+- mining address, password, and private key are copied to `./keys/mining_keys` folder
+- payout address, password, and private key are copied to `./keys/payout_keys` folder
+- voting address, password, and private key are copied to `./keys/voting_keys` folder
+- initial key is removed
+- most ETH from initial key is transferred to voting keys
+- validator node is started at RPC port `8550`
 
-### Set Validators' personal data
+### Set Validator's personal data
 
-*Note*: can be started after [previous step is completed](#launch-ceremony)
+*Note*: can be started after [the previous step is completed](#launch-ceremony)
 
 `npm run set-validators-data-light`
 
 #### Expected results:
-- 1 validator filled the form with mock personal data in Validator Dapp
+- one validator filled the form with mock personal data in Validator DApp
 
 ### Add validator from Governance
 
-*Note*: can be started after [previous step is completed](#set_validators_personal_data)
+*Note*: can be started after [the previous step is completed](#set_validators_personal_data)
 
 `npm run add-validator`
 
@@ -107,7 +117,7 @@ sudo start-stop-daemon --start --quiet --pidfile /var/run/xvfb.pid --make-pidfil
 
 ### Launch added validator node
 
-*Note*: can be started after [previous step is completed](#add-validator-from-governance)
+*Note*: can be started after [the previous step is completed](#add-validator-from-governance)
 
 `npm run start-new-validator-node`
 
