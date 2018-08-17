@@ -5,9 +5,9 @@ const webdriver = require('selenium-webdriver'),
       by = require('selenium-webdriver/lib/by');
 
 const newBallotButton = by.By.xpath("//*[@id=\"root\"]/section/header/div/div[1]/a[4]");
-const keysBallotType = by.By.xpath("//*[@id=\"root\"]/section/div/section/form/div[1]/div[1]/div[1]");                                    
-const addKeyType = by.By.xpath("//*[@id=\"root\"]/section/div/section/form/div[2]/div[3]/div[1]/div[1]/label");                                
-const miningKeyType = by.By.xpath("//*[@id=\"root\"]/section/div/section/form/div[2]/div[3]/div[2]/div[1]/label");
+const keysBallotType = by.By.xpath("//*[@id=\"root\"]/section/div/section/form/div[1]/div[1]/div[1]");
+const addKeyType = by.By.xpath("//*[@id=\"root\"]/section/div/section/form/div[2]/div[2]/div[1]/div[1]/div/label");
+const miningKeyType = by.By.xpath("//*[@id=\"root\"]/section/div/section/form/div[2]/div[2]/div[2]/div[1]/div/label");
 const activeTab = by.By.xpath("//*[@id=\"root\"]/section/header/div/div[1]/a[2]")
 
 //validator data
@@ -28,10 +28,10 @@ const newMiningKeyXpath = by.By.xpath("//*[@id=\"react-select-2--option-0\"]");
 
 const addBallotButton = by.By.xpath("//*[@id=\"root\"]/section/div/section/form/div[2]/button");
 const alertOKButton = by.By.xpath("/html/body/div[2]/div/div[10]/button[1]");
-const yesButton = by.By.xpath("//*[@id=\"root\"]/section/div/section/div/div[2]/div[2]/button");
-const finalizeButton = by.By.xpath("//*[@id=\"root\"]/section/div/section/div/div[5]/div[1]/button");                                    
-const yesButtonOnActivePage = by.By.xpath("//*[@id=\"root\"]/section/div/section/div/div[2]/div[2]/button");
-const finalizeButtonOnActivePage = by.By.xpath("//*[@id=\"root\"]/section/div/section/div/div[5]/div[1]/button");
+const yesButton = by.By.xpath("//*[@id=\"root\"]/section/div[2]/section/div[1]/div[2]/div[2]/button");
+const finalizeButton = by.By.xpath("//*[@id=\"root\"]/section/div[2]/section/div[1]/div[4]/div[1]/button");
+const yesButtonOnActivePage = by.By.xpath("//*[@id=\"root\"]/section/div[2]/section/div[1]/div[2]/div[2]/button");
+const finalizeButtonOnActivePage = by.By.xpath("//*[@id=\"root\"]/section/div[2]/section/div[1]/div[4]/div[1]/button");
 
 class Voting extends page.Page {
   constructor(driver,URL){
