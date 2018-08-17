@@ -116,7 +116,7 @@ async function main() {
 
     metamaskInteraction();
 
-    driver.sleep(1000);
+    driver.sleep(2000);
 
     votingPage.clickAlertOKButton();
 
@@ -138,7 +138,7 @@ async function main() {
 
     metamaskInteraction();
 
-    driver.sleep(1000);
+    driver.sleep(2000);
 
     votingPage.clickAlertOKButton();
 
@@ -156,7 +156,7 @@ async function main() {
 
     metamaskInteraction();
 
-    driver.sleep(1000);
+    driver.sleep(2000);
 
     votingPage.clickAlertOKButton();
 
