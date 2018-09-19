@@ -16,11 +16,13 @@ const local = {
     "VOTING_TO_CHANGE_KEYS_ADDRESS": "${addresses.VOTING_TO_CHANGE_KEYS_ADDRESS}",
     "VOTING_TO_CHANGE_MIN_THRESHOLD_ADDRESS": "${addresses.VOTING_TO_CHANGE_MIN_THRESHOLD_ADDRESS}",
     "VOTING_TO_CHANGE_PROXY_ADDRESS": "${addresses.VOTING_TO_CHANGE_PROXY_ADDRESS}",
+    "VOTING_TO_MANAGE_EMISSION_FUNDS_ADDRESS": "${addresses.VOTING_TO_MANAGE_EMISSION_FUNDS_ADDRESS}",
     "BALLOTS_STORAGE_ADDRESS": "${addresses.BALLOTS_STORAGE_ADDRESS}",
     "KEYS_MANAGER_ADDRESS": "${addresses.KEYS_MANAGER_ADDRESS}",
     "METADATA_ADDRESS": "${addresses.METADATA_ADDRESS}",
     "PROXY_ADDRESS": "${addresses.PROXY_ADDRESS}",
     "POA_ADDRESS": "${constants.poaNetworkConsensusContractAddress}",
+    "EMISSION_FUNDS_ADDRESS": "${addresses.EMISSION_FUNDS_ADDRESS}",
 };
 `
 
@@ -42,6 +44,9 @@ const local = {
 	const pathToBallotsStorageJSON = `${constants.contractsFolder}/BallotsStorage.json`;
 	const ballotsStorageABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToBallotsStorageJSON)).abi).replace(/,/g, ', ');
 
+	const pathToEmissionFundsJSON = `${constants.contractsFolder}/EmissionFunds.json`;
+	const emissionFundsABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToEmissionFundsJSON)).abi).replace(/,/g, ', ');
+
 	const pathToProxyStorageJSON = `${constants.contractsFolder}/ProxyStorage.json`;
 	const proxyStorageABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToProxyStorageJSON)).abi).replace(/,/g, ', ');
 	
@@ -56,18 +61,23 @@ const local = {
 	
 	const pathToVotingToChangeProxyAddressJSON = `${constants.contractsFolder}/VotingToChangeProxyAddress.json`;
 	const votingToChangeProxyAddressABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToVotingToChangeProxyAddressJSON)).abi).replace(/,/g, ', ');
-	
+
+	const pathToVotingToManageEmissionFundsJSON = `${constants.contractsFolder}/VotingToManageEmissionFunds.json`;
+	const votingToManageEmissionFundsABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToVotingToManageEmissionFundsJSON)).abi).replace(/,/g, ', ');
+
 	const dappHelpers = `${constants.pathToGovernanceDAppRepo}/src/contracts/helpers.js`;
 	let dappHelpersContent = fs.readFileSync(dappHelpers, 'utf8');
 	const abiAddition = `
     if (contract == 'KeysManager') return ${keysManagerABI};
     else if (contract == 'PoaNetworkConsensus') return ${poaNetworkConsensusABI};
     else if (contract == 'BallotStorage') return ${ballotsStorageABI};
+    else if (contract == 'EmissionFunds') return ${emissionFundsABI};
     else if (contract == 'ProxyStorage') return ${proxyStorageABI};
     else if (contract == 'ValidatorMetadata') return ${validatorMetadataABI};
     else if (contract == 'VotingToChangeKeys') return ${votingToChangeKeysABI};
     else if (contract == 'VotingToChangeMinThreshold') return ${votingToChangeMinThresholdABI};
-    else if (contract == 'VotingToChangeProxyAddress') return ${votingToChangeProxyAddressABI};`;
+    else if (contract == 'VotingToChangeProxyAddress') return ${votingToChangeProxyAddressABI};
+    else if (contract == 'VotingToManageEmissionFunds') return ${votingToManageEmissionFundsABI};`;
 	
 	const lastGetABI = `function getABI(branch, contract) {`;
 	dappHelpersContent = dappHelpersContent.replace(lastGetABI, lastGetABI + abiAddition);
