@@ -45,7 +45,10 @@ const local = {
 	const ballotsStorageABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToBallotsStorageJSON)).abi).replace(/,/g, ', ');
 
 	const pathToEmissionFundsJSON = `${constants.contractsFolder}/EmissionFunds.json`;
-	const emissionFundsABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToEmissionFundsJSON)).abi).replace(/,/g, ', ');
+	let emissionFundsABI = '[]'
+	try {
+		emissionFundsABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToEmissionFundsJSON)).abi).replace(/,/g, ', ');
+	} catch (e) {}
 
 	const pathToProxyStorageJSON = `${constants.contractsFolder}/ProxyStorage.json`;
 	const proxyStorageABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToProxyStorageJSON)).abi).replace(/,/g, ', ');
@@ -63,7 +66,10 @@ const local = {
 	const votingToChangeProxyAddressABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToVotingToChangeProxyAddressJSON)).abi).replace(/,/g, ', ');
 
 	const pathToVotingToManageEmissionFundsJSON = `${constants.contractsFolder}/VotingToManageEmissionFunds.json`;
-	const votingToManageEmissionFundsABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToVotingToManageEmissionFundsJSON)).abi).replace(/,/g, ', ');
+	let votingToManageEmissionFundsABI = '[]'
+	try {
+		votingToManageEmissionFundsABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToVotingToManageEmissionFundsJSON)).abi).replace(/,/g, ', ');
+	} catch (e) {}
 
 	const dappHelpers = `${constants.pathToGovernanceDAppRepo}/src/contracts/helpers.js`;
 	let dappHelpersContent = fs.readFileSync(dappHelpers, 'utf8');
