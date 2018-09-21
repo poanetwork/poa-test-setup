@@ -22,3 +22,7 @@
 	path = submodules/poa-dapps-voting
 	url = https://github.com/poanetwork/poa-dapps-voting
 	branch = core
+[submodule "submodules/poa-network-consensus-contracts"]
+	path = submodules/poa-network-consensus-contracts
+	url = https://github.com/poanetwork/poa-network-consensus-contracts
+	branch = master
