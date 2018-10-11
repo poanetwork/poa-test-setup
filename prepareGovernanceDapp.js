@@ -30,7 +30,7 @@ const local = {
 	let addressesFromDapp = fs.readFileSync(dappAddresses, 'utf8');
 	let lastImport = `import { addressesURL, wrongRepoAlert } from './helpers'`;
 	addressesFromDapp = addressesFromDapp.replace(lastImport, lastImport + addition)
-	addressesFromDapp = addressesFromDapp.replace('SOKOL_ADDRESSES = contracts', 'SOKOL_ADDRESSES = local')
+	addressesFromDapp = addressesFromDapp.replace('ADDRESSES = contracts', 'ADDRESSES = local')
 
 	fs.writeFileSync(dappAddresses, addressesFromDapp);
 	
@@ -45,10 +45,7 @@ const local = {
 	const ballotsStorageABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToBallotsStorageJSON)).abi).replace(/,/g, ', ');
 
 	const pathToEmissionFundsJSON = `${constants.contractsFolder}/EmissionFunds.json`;
-	let emissionFundsABI = '[]'
-	try {
-		emissionFundsABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToEmissionFundsJSON)).abi).replace(/,/g, ', ');
-	} catch (e) {}
+	const emissionFundsABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToEmissionFundsJSON)).abi).replace(/,/g, ', ');
 
 	const pathToProxyStorageJSON = `${constants.contractsFolder}/ProxyStorage.json`;
 	const proxyStorageABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToProxyStorageJSON)).abi).replace(/,/g, ', ');
@@ -66,10 +63,7 @@ const local = {
 	const votingToChangeProxyAddressABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToVotingToChangeProxyAddressJSON)).abi).replace(/,/g, ', ');
 
 	const pathToVotingToManageEmissionFundsJSON = `${constants.contractsFolder}/VotingToManageEmissionFunds.json`;
-	let votingToManageEmissionFundsABI = '[]'
-	try {
-		votingToManageEmissionFundsABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToVotingToManageEmissionFundsJSON)).abi).replace(/,/g, ', ');
-	} catch (e) {}
+	const votingToManageEmissionFundsABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToVotingToManageEmissionFundsJSON)).abi).replace(/,/g, ', ');
 
 	const dappHelpers = `${constants.pathToGovernanceDAppRepo}/src/contracts/helpers.js`;
 	let dappHelpersContent = fs.readFileSync(dappHelpers, 'utf8');
