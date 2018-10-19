@@ -48,7 +48,7 @@
     "deploy-secondary-contracts": "bash ./scripts/deploy-secondary-contracts",
     "prepare-scrips-moc-repo": "node prepareMoCScripts",
     "prepare-ceremony-dapp": "node prepareCeremonyDapp",
-    "prepare-ceremony-dapp-more": "cd ./submodules/poa-dapps-keys-generation && npm i --production > /dev/null 2>&1",
+    "prepare-ceremony-dapp-more": "cd ./submodules/poa-dapps-keys-generation && npm i --production > /dev/null 2>&1 && npm run lint -- --fix",
     "generate-initial-key": "bash ./scripts/generate-initial-key",
     "generate-initial-keys": "bash ./scripts/generate-initial-keys",
     "get-private-initial-keys": "node getPrivateInitialKeys",

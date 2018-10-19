@@ -30,7 +30,7 @@ const local = {
 	let addressesFromDapp = fs.readFileSync(dappAddresses, 'utf8');
 	let lastImport = `import { addressesURL, wrongRepoAlert } from './helpers'`;
 	addressesFromDapp = addressesFromDapp.replace(lastImport, lastImport + addition)
-	addressesFromDapp = addressesFromDapp.replace('SOKOL_ADDRESSES = contracts', 'SOKOL_ADDRESSES = local')
+	addressesFromDapp = addressesFromDapp.replace('ADDRESSES = contracts', 'ADDRESSES = local')
 
 	fs.writeFileSync(dappAddresses, addressesFromDapp);
 	
