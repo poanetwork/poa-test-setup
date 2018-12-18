@@ -41,13 +41,21 @@ function main() {
 	const dappHelpers = `${constants.pathToValidatorsDAppRepo}/src/contracts/helpers.js`;
 	let dappHelpersContent = fs.readFileSync(dappHelpers, 'utf8');
 	const abiAddition = `
-    if (contract == 'KeysManager') return ${keysManagerABI};
-    else if (contract == 'PoaNetworkConsensus') return ${poaNetworkConsensusABI};
-    else if (contract == 'ValidatorMetadata') return ${validatorMetadataABI};`;
+    if (contract === 'KeysManager') return ${keysManagerABI};
+    else if (contract === 'PoaNetworkConsensus') return ${poaNetworkConsensusABI};
+    else if (contract === 'ValidatorMetadata') return ${validatorMetadataABI};`;
 	
 	const lastGetABI = `function getABI(branch, contract) {`;
 	dappHelpersContent = dappHelpersContent.replace(lastGetABI, lastGetABI + abiAddition);
 	fs.writeFileSync(dappHelpers, dappHelpersContent);
+
+	// Fix Metadata.contract.js for using new ValidatorMetadata contract
+	// in local Sokol Network (instead of live xDai Network)
+	const metadataContractPath = `${constants.pathToValidatorsDAppRepo}/src/contracts/Metadata.contract.js`;
+	let metadataContractText = fs.readFileSync(metadataContractPath, 'utf8');
+	const replacePattern = (net) => `if (this.netId === helpersGlobal.netIdByName('${net}')) {`;
+	metadataContractText = metadataContractText.replace(replacePattern('dai'), replacePattern('sokol'));
+	fs.writeFileSync(metadataContractPath, metadataContractText);
 
 	console.log("Validators Repo is prepared");
 }
