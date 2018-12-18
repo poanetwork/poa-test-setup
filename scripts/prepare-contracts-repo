@@ -3,30 +3,17 @@
 set -u
 set -e
 
-flattener_directory=./submodules/solidity-flattener
-directory_contracts=../poa-network-consensus-contracts/contracts
-directory_flat=../poa-network-consensus-contracts/flat
+flattener=./node_modules/.bin/poa-solidity-flattener
+directory_contracts=contracts
+directory_flat=./flat
 directory=./submodules/poa-network-consensus-contracts
-# build_dir=${directory}/build
 
-# if [  -d ${directory} ]; then
-# 	if [ ! -d ${build_dir} ]; then
-# 		if ! [ -x "$(command -v pip3)" ]; then
-# 		  	cmd1=$(sudo apt-get update)
-# 			cmd2$(sudo apt-get install python3)
-# 		fi
-# 		if ! [ -x "$(command -v solidity_flattener)" ]; then
-# 			cmd3=$(pip3 install solidity-flattener)
-# 		fi
-# 		cmd4=$(cd ${directory} && npm i && bash ./make_flat.sh && ./node_modules/.bin/truffle compile)
-# 	fi
-# fi
-
-cmd1=$(cd ${flattener_directory} && npm i && npm start ${directory_contracts}/PoaNetworkConsensus.sol ${directory_flat})
-cmd2=$(cd ${flattener_directory} && npm start ${directory_contracts}/KeysManager.sol ${directory_flat})
-cmd3=$(cd ${flattener_directory} && npm start ${directory_contracts}/VotingToChangeKeys.sol ${directory_flat})
-cmd4=$(cd ${flattener_directory} && npm start ${directory_contracts}/VotingToChangeMinThreshold.sol ${directory_flat})
-cmd5=$(cd ${flattener_directory} && npm start ${directory_contracts}/ValidatorMetadata.sol ${directory_flat})
-cmd6=$(cd ${flattener_directory} && npm start ${directory_contracts}/ProxyStorage.sol ${directory_flat})
-cmd7=$(cd ${flattener_directory} && npm start ${directory_contracts}/VotingToChangeProxyAddress.sol ${directory_flat})
-cmd8=$(cd ${directory} && npm i && ./node_modules/.bin/truffle compile)
+cmd0=$(cd ${directory} && npm i)
+cmd1=$(cd ${directory} && ${flattener} ${directory_contracts}/PoaNetworkConsensus.sol ${directory_flat})
+cmd2=$(cd ${directory} && ${flattener} ${directory_contracts}/KeysManager.sol ${directory_flat})
+cmd3=$(cd ${directory} && ${flattener} ${directory_contracts}/VotingToChangeKeys.sol ${directory_flat})
+cmd4=$(cd ${directory} && ${flattener} ${directory_contracts}/VotingToChangeMinThreshold.sol ${directory_flat})
+cmd5=$(cd ${directory} && ${flattener} ${directory_contracts}/ValidatorMetadata.sol ${directory_flat})
+cmd6=$(cd ${directory} && ${flattener} ${directory_contracts}/ProxyStorage.sol ${directory_flat})
+cmd7=$(cd ${directory} && ${flattener} ${directory_contracts}/VotingToChangeProxyAddress.sol ${directory_flat})
+cmd8=$(cd ${directory} && ./node_modules/.bin/truffle compile)
