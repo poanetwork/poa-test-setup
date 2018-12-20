@@ -15,7 +15,7 @@
     "path": "^0.12.7",
     "poa-dapps-keys-generation": "github:poanetwork/poa-dapps-keys-generation#84aa1c5a523cafbd1cfb1801b8012bc9222bb410",
     "poa-dapps-validators": "github:poanetwork/poa-dapps-validators#36df0084fb361e81430552ff1b1953b9365482ea",
-    "poa-dapps-voting": "github:poanetwork/poa-dapps-voting#1c8b5d2e2085622079bbfbe6b18470a0754a0779",
+    "poa-dapps-voting": "github:poanetwork/poa-dapps-voting#de826c19fa7bc0d79906392f8fd2ca58e99ebe69",
     "selenium-webdriver": "3.6.0",
     "toml": "^2.3.3",
     "toml-js": "0.0.8",
