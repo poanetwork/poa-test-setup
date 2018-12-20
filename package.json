@@ -13,7 +13,7 @@
     "node-fetch": "^2.0.0",
     "password-generator": "^2.2.0",
     "path": "^0.12.7",
-    "poa-dapps-keys-generation": "github:poanetwork/poa-dapps-keys-generation#core",
+    "poa-dapps-keys-generation": "github:poanetwork/poa-dapps-keys-generation#84aa1c5a523cafbd1cfb1801b8012bc9222bb410",
     "poa-dapps-validators": "github:poanetwork/poa-dapps-validators#core",
     "poa-dapps-voting": "github:poanetwork/poa-dapps-voting#core",
     "selenium-webdriver": "3.6.0",
