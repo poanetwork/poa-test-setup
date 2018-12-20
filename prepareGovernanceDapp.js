@@ -68,16 +68,16 @@ const local = {
 	const dappHelpers = `${constants.pathToGovernanceDAppRepo}/src/contracts/helpers.js`;
 	let dappHelpersContent = fs.readFileSync(dappHelpers, 'utf8');
 	const abiAddition = `
-    if (contract == 'KeysManager') return ${keysManagerABI};
-    else if (contract == 'PoaNetworkConsensus') return ${poaNetworkConsensusABI};
-    else if (contract == 'BallotStorage') return ${ballotsStorageABI};
-    else if (contract == 'EmissionFunds') return ${emissionFundsABI};
-    else if (contract == 'ProxyStorage') return ${proxyStorageABI};
-    else if (contract == 'ValidatorMetadata') return ${validatorMetadataABI};
-    else if (contract == 'VotingToChangeKeys') return ${votingToChangeKeysABI};
-    else if (contract == 'VotingToChangeMinThreshold') return ${votingToChangeMinThresholdABI};
-    else if (contract == 'VotingToChangeProxyAddress') return ${votingToChangeProxyAddressABI};
-    else if (contract == 'VotingToManageEmissionFunds') return ${votingToManageEmissionFundsABI};`;
+    if (contract === 'KeysManager') return ${keysManagerABI};
+    else if (contract === 'PoaNetworkConsensus') return ${poaNetworkConsensusABI};
+    else if (contract === 'BallotStorage') return ${ballotsStorageABI};
+    else if (contract === 'EmissionFunds') return ${emissionFundsABI};
+    else if (contract === 'ProxyStorage') return ${proxyStorageABI};
+    else if (contract === 'ValidatorMetadata') return ${validatorMetadataABI};
+    else if (contract === 'VotingToChangeKeys') return ${votingToChangeKeysABI};
+    else if (contract === 'VotingToChangeMinThreshold') return ${votingToChangeMinThresholdABI};
+    else if (contract === 'VotingToChangeProxyAddress') return ${votingToChangeProxyAddressABI};
+    else if (contract === 'VotingToManageEmissionFunds') return ${votingToManageEmissionFundsABI};`;
 	
 	const lastGetABI = `function getABI(branch, contract) {`;
 	dappHelpersContent = dappHelpersContent.replace(lastGetABI, lastGetABI + abiAddition);
