@@ -11,7 +11,7 @@ function main() {
 
 	const addition = `\nconst local = { "KEYS_MANAGER_ADDRESS": "${addresses.KEYS_MANAGER_ADDRESS}" }`
 
-	let addressesFromDapp = fs.readFileSync(`${constants.pathToCeremonyDAppRepo}/src/addresses.js`, 'utf8');
+	let addressesFromDapp = fs.readFileSync(`${constants.pathToCeremonyDAppRepo}/src/utils/addresses.js`, 'utf8');
 	
 	let lastImport = `import helpers from './helpers'`;
 	let lines = addressesFromDapp.split('\n');
@@ -25,16 +25,16 @@ function main() {
 	addressesFromDapp = lines.join(`\n`);
 	addressesFromDapp = addressesFromDapp.replace('resolve({ addresses: json', 'resolve({ addresses: local')
 
-	fs.writeFileSync(`${constants.pathToCeremonyDAppRepo}/src/addresses.js`, addressesFromDapp);
+	fs.writeFileSync(`${constants.pathToCeremonyDAppRepo}/src/utils/addresses.js`, addressesFromDapp);
 	
 	// Hardcode ABIs into helpers.js
 	const pathToKeysManagerJSON = `${constants.contractsFolder}/KeysManager.json`;
 	const keysManagerABI = JSON.stringify(JSON.parse(fs.readFileSync(pathToKeysManagerJSON)).abi).replace(/,/g, ', ');
 	
-	const dappHelpers = `${constants.pathToCeremonyDAppRepo}/src/helpers.js`;
+	const dappHelpers = `${constants.pathToCeremonyDAppRepo}/src/utils/helpers.js`;
 	let dappHelpersContent = fs.readFileSync(dappHelpers, 'utf8');
 	const abiAddition = `
-    if (contract == 'KeysManager') return ${keysManagerABI};`;
+    if (contract === 'KeysManager') return ${keysManagerABI};`;
 	
 	const lastGetABI = `function getABI(branch, contract) {`;
 	dappHelpersContent = dappHelpersContent.replace(lastGetABI, lastGetABI + abiAddition);
