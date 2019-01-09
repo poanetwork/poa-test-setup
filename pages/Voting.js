@@ -4,11 +4,11 @@ const webdriver = require('selenium-webdriver'),
       firefox = require('selenium-webdriver/firefox'),
       by = require('selenium-webdriver/lib/by');
 
-const newBallotButton = by.By.xpath("//*[@id=\"root\"]/section/header/div/div[1]/a[4]");
-const keysBallotType = by.By.xpath("//*[@id=\"root\"]/section/div/section/form/div[1]/div[1]/div[1]");
-const addKeyType = by.By.xpath("//*[@id=\"root\"]/section/div/section/form/div[2]/div[2]/div[1]/div[1]/div/label");
-const miningKeyType = by.By.xpath("//*[@id=\"root\"]/section/div/section/form/div[2]/div[2]/div[2]/div[1]/div/label");
-const activeTab = by.By.xpath("//*[@id=\"root\"]/section/header/div/div[1]/a[2]")
+const newBallotButton = by.By.xpath("//*[@id=\"root\"]/div/header/div/div/a");
+const keysBallotType = by.By.xpath("//*[@id=\"root\"]/div/section/section/form/div[2]/div[2]/div[1]/div[1]/div/label");
+const addKeyType = by.By.xpath("//*[@id=\"root\"]/div/section/section/form/div[2]/div[2]/div[1]/div[1]/div/label");
+const miningKeyType = by.By.xpath("//*[@id=\"root\"]/div/section/section/form/div[2]/div[2]/div[2]/div[1]/div/label");
+const activeTab = by.By.xpath("//*[@id=\"root\"]/div/header/div/div/div/a[2]/span")
 
 //validator data
 const fullNameInput = by.By.xpath("//*[@id=\"full-name\"]");
@@ -20,18 +20,18 @@ const licenseIdInput = by.By.xpath("//*[@id=\"license-id\"]");
 const licenseExpirationInput = by.By.xpath("//*[@id=\"license-expiration\"]");
 
 //voting data
-const descriptionInput = by.By.xpath("//*[@id=\"root\"]/section/div/section/form/div[2]/div[1]/div/textarea");
+const descriptionInput = by.By.xpath("//*[@id=\"ballot-description\"]");
 const endTimeInput = by.By.xpath("//*[@id=\"datetime-local\"]");
 const affectedKeyInput = by.By.xpath("//*[@id=\"key\"]");
-const miningKeyInput = by.By.xpath("//*[@id=\"root\"]/section/div/section/form/div[2]/div[4]/div/div[2]/div/div/div");
+const miningKeyInput = by.By.xpath("//*[@id=\"root\"]/div/section/section/form/div[2]/div[2]/div[2]/div[1]/div/label");
 const newMiningKeyXpath = by.By.xpath("//*[@id=\"react-select-2--option-0\"]");
-const addBallotButton = by.By.xpath("//*[@id=\"root\"]/section/div/section/form/div[2]/button");
+const addBallotButton = by.By.xpath("//*[@id=\"root\"]/div/section/section/form/div[2]/div[5]/button");
 const alertOKButton = by.By.xpath("/html/body/div[2]/div/div[10]/button[1]");
 
-const yesButton = by.By.xpath("//*[@id=\"root\"]/section/div[2]/section/div[1]/div[2]/div[2]/button");
-const finalizeButton = by.By.xpath("//*[@id=\"root\"]/section/div[2]/section/div[1]/div[4]/div[1]/button");
-const yesButtonOnActivePage = by.By.xpath("//*[@id=\"root\"]/section/div[2]/section/div[1]/div[2]/div[2]/button");
-const finalizeButtonOnActivePage = by.By.xpath("//*[@id=\"root\"]/section/div[2]/section/div[1]/div[4]/div[1]/button");
+const yesButton = by.By.xpath("//*[@id=\"root\"]/div/section/section/div/div[2]/div[2]/button");
+const finalizeButton = by.By.xpath("//*[@id=\"root\"]/div/section/section/div/div[4]/button");
+const yesButtonOnActivePage = by.By.xpath("//*[@id=\"root\"]/div/section/section/div/div[2]/div[2]/button");
+const finalizeButtonOnActivePage = by.By.xpath("//*[@id=\"root\"]/div/section/section/div/div[4]/button");
 
 class Voting extends page.Page {
   constructor(driver,URL){

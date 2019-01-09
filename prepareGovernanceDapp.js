@@ -84,7 +84,7 @@ const local = {
 	fs.writeFileSync(dappHelpers, dappHelpersContent);
 
 	// Change some constants
-	const dappConstants = `${constants.pathToGovernanceDAppRepo}/src/constants.js`;
+	const dappConstants = `${constants.pathToGovernanceDAppRepo}/src/utils/constants.js`;
 	let dappConstantsContent = fs.readFileSync(dappConstants, 'utf8');
 	dappConstantsContent = dappConstantsContent.replace('constants.minBallotDurationInDays = 2', 'constants.minBallotDurationInDays = 0');
 	dappConstantsContent = dappConstantsContent.replace('constants.startTimeOffsetInMinutes = 5', 'constants.startTimeOffsetInMinutes = 1');
