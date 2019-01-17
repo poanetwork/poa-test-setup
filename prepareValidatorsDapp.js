@@ -22,7 +22,7 @@ function main() {
 
 	let dappAddresses = `${constants.pathToValidatorsDAppRepo}/src/contracts/addresses.js`;
 	let addressesFromDapp = fs.readFileSync(dappAddresses, 'utf8');
-	let lastImport = `import messages from '../messages'`;
+	let lastImport = `import messages from '../utils/messages'`;
 	addressesFromDapp = addressesFromDapp.replace(lastImport, lastImport + addition)
 	addressesFromDapp = addressesFromDapp.replace('resolve({ addresses: json', 'resolve({ addresses: local')
 
