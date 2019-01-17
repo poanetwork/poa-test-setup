@@ -1,12 +1,22 @@
 #!/bin/bash
-
 set -u
 set -e
 
-validator_num=$1
-parityDebPath=./parity_1.9.2_amd64.deb
-if ! [ -x "$(command -v parity)" ]; then
-  cmd=$(sudo dpkg -i ${parityDebPath})
+source ./scripts/utils.sh
+
+res=$(checkclientversion)
+
+if [ ! -z "$res" -a "$res" != " " ]
+then
+	echo $res
+	exit 1
 fi
 
-cmd2=$(parity --config ./nodes/parity_validator_${validator_num}/node.toml > ./nodes/parity_validator_${validator_num}/parity.log 2>&1 &)
+validator_num=$1
+
+toml=./nodes/parity_validator_${validator_num}/node.toml
+log=./nodes/parity_validator_${validator_num}/parity.log
+
+cmd2=$(parity --config $toml > $log > /dev/null 2>&1 &)
+
+exit 0
