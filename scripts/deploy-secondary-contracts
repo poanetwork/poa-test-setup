@@ -8,5 +8,9 @@ directory=./submodules/poa-network-consensus-contracts
 consensus="0x8bf38d4764929064f2d4d3a56520a76ab3df415b"
 moc_object=$(cat ./keys/moc/moc.key) 
 moc=$(node -pe 'JSON.parse(process.argv[1]).address' "${moc_object}")
-cmd=$(cd ${directory} && DEMO=true SAVE_TO_FILE=true POA_NETWORK_CONSENSUS_ADDRESS=${consensus} MASTER_OF_CEREMONY=${moc} ./node_modules/.bin/truffle migrate --network sokol)
-#echo ${cmd}
+cmd=$(cd ${directory} \
+ && DEMO=true SAVE_TO_FILE=true \
+ POA_NETWORK_CONSENSUS_ADDRESS=${consensus} \
+ MASTER_OF_CEREMONY=${moc} \
+ ./node_modules/.bin/truffle migrate --network sokol)
+echo ${cmd}
