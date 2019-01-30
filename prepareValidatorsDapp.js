@@ -22,7 +22,7 @@ function main() {
 
 	let dappAddresses = `${constants.pathToValidatorsDAppRepo}/src/contracts/addresses.js`;
 	let addressesFromDapp = fs.readFileSync(dappAddresses, 'utf8');
-	let lastImport = `import messages from '../messages'`;
+	let lastImport = `import messages from '../utils/messages'`;
 	addressesFromDapp = addressesFromDapp.replace(lastImport, lastImport + addition)
 	addressesFromDapp = addressesFromDapp.replace('resolve({ addresses: json', 'resolve({ addresses: local')
 
@@ -53,8 +53,8 @@ function main() {
 	// in local Sokol Network (instead of live xDai Network)
 	const metadataContractPath = `${constants.pathToValidatorsDAppRepo}/src/contracts/Metadata.contract.js`;
 	let metadataContractText = fs.readFileSync(metadataContractPath, 'utf8');
-	const replacePattern = (net) => `if (this.netId === helpersGlobal.netIdByName('${net}')) {`;
-	metadataContractText = metadataContractText.replace(replacePattern('dai'), replacePattern('sokol'));
+	const replacePattern = (net) => `if (this.netId === helpersGlobal.netIdByName(${net})) {`;
+	metadataContractText = metadataContractText.replace(replacePattern('constants.branches.DAI'), replacePattern(`'sokol'`));
 	fs.writeFileSync(metadataContractPath, metadataContractText);
 
 	console.log("Validators Repo is prepared");

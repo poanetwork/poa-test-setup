@@ -4,8 +4,8 @@ const webdriver = require('selenium-webdriver'),
       firefox = require('selenium-webdriver/firefox'),
       by = require('selenium-webdriver/lib/by');
 
-const setMetadataTab = by.By.xpath("//*[@id=\"header\"]/div/div[1]/a[2]");
-const setMetadataButton = by.By.xpath("//*[@id=\"root\"]/section/div/div/div[2]/button");
+const setMetadataTab = by.By.xpath("//*[@id=\"root\"]/div/header/div/div/div/a[2]");
+const setMetadataButton = by.By.xpath("//*[@id=\"root\"]/div/section/div/button");
 const firstNameInput = by.By.xpath("//*[@id=\"firstName\"]");
 const lastNameInput = by.By.xpath("//*[@id=\"lastName\"]");
 const addrInput = by.By.xpath("//*[@id=\"address\"]");
