@@ -67,10 +67,6 @@ async function main() {
     
     driver.sleep(4000);
 
-    ceremonyPage.refresh();
-
-    driver.sleep(1000);
-
     ceremonyPage.clickButtonGenerateKeys();
 
     driver.sleep(2000);
