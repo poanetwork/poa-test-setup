@@ -14,7 +14,7 @@
     "password-generator": "^2.2.0",
     "path": "^0.12.7",
     "poa-dapps-keys-generation": "github:poanetwork/poa-dapps-keys-generation#e7577427fd28c6e9c52c2b10572cda6128b21ede",
-    "poa-dapps-validators": "github:poanetwork/poa-dapps-validators#90b3c7e56b5d8ffdac336f63b4340e75f255c4a5",
+    "poa-dapps-validators": "github:poanetwork/poa-dapps-validators#a0b772bf97db20c64edbded67283b8b18ff89b4b",
     "poa-dapps-voting": "github:poanetwork/poa-dapps-voting#0925b1e49f4252d0d6534257997bcfff4bb4ad75",
     "selenium-webdriver": "3.6.0",
     "toml": "^2.3.3",
