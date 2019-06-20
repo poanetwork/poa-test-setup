@@ -17,6 +17,6 @@ validator_num=$1
 toml=./nodes/parity_validator_${validator_num}/node.toml
 log=./nodes/parity_validator_${validator_num}/parity.log
 
-cmd2=$(parity --config $toml > $log > /dev/null 2>&1 &)
+cmd2=$(parity --config $toml > $log 2>&1 &)
 
 exit 0

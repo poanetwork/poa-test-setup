@@ -94,12 +94,12 @@ async function main() {
 
     validatorMetaData = generateValidatorMetadata();
 
-    votingPage.fillFullName(validatorMetaData.full_name);
-    votingPage.fillAddress(validatorMetaData.address);
-    votingPage.fillZipCode(validatorMetaData.zip_code);
-    votingPage.fillLicenseID(validatorMetaData.license_id);
-    votingPage.fillLicenseExpiration(validatorMetaData.license_expiration);
-    votingPage.fillState(validatorMetaData.us_state);
+    //votingPage.fillFullName(validatorMetaData.full_name);
+    //votingPage.fillAddress(validatorMetaData.address);
+    //votingPage.fillZipCode(validatorMetaData.zip_code);
+    //votingPage.fillLicenseID(validatorMetaData.license_id);
+    //votingPage.fillLicenseExpiration(validatorMetaData.license_expiration);
+    //votingPage.fillState(validatorMetaData.us_state);
 
     let votingMetaData = generateBallotMetadata(newMiningKeyAddress);
 

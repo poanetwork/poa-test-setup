@@ -15,6 +15,6 @@ fi
 toml=./nodes/parity-moc/moc.toml
 log=./nodes/parity-moc/parity.log
 
-cmd2=$(parity --config $toml > $log > /dev/null 2>&1 &)
+cmd2=$(parity --config $toml > $log 2>&1 &)
 
 exit 0

@@ -25,7 +25,7 @@ const endTimeInput = by.By.xpath("//*[@id=\"datetime-local\"]");
 const affectedKeyInput = by.By.xpath("//*[@id=\"key\"]");
 const miningKeyInput = by.By.xpath("//*[@id=\"root\"]/div/section/section/form/div[2]/div[2]/div[2]/div[1]/div/label");
 const newMiningKeyXpath = by.By.xpath("//*[@id=\"react-select-2--option-0\"]");
-const addBallotButton = by.By.xpath("//*[@id=\"root\"]/div/section/section/form/div[2]/div[5]/button");
+const addBallotButton = by.By.xpath("//*[@id=\"root\"]/div/section/section/form/div[2]/div[4]/button");
 const alertOKButton = by.By.xpath("/html/body/div[2]/div/div[10]/button[1]");
 
 const yesButton = by.By.xpath("//*[@id=\"root\"]/div/section/section/div/div[2]/div[2]/button");
