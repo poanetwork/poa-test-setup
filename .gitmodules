@@ -1,7 +1,3 @@
-[submodule "submodules/poa-scripts-moc"]
-	path = submodules/poa-scripts-moc
-	url = https://github.com/poanetwork/poa-scripts-moc
-	branch = sokol
 [submodule "submodules/poa-network-consensus-contracts"]
 	path = submodules/poa-network-consensus-contracts
 	url = https://github.com/poanetwork/poa-network-consensus-contracts
