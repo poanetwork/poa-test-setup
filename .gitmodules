@@ -2,3 +2,7 @@
 	path = submodules/poa-network-consensus-contracts
 	url = https://github.com/poanetwork/poa-network-consensus-contracts
 	branch = master
+[submodule "submodules/poa-scripts-moc"]
+	path = submodules/poa-scripts-moc
+	url = https://github.com/varasev/poa-scripts-moc
+	branch = patch-1
