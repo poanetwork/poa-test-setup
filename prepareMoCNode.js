@@ -41,6 +41,8 @@ async function main() {
 	].forEach(param => {
 		spec.params[param] = '0x0';
 	});
+	delete spec.engine.authorityRound.params.blockRewardContractAddress;
+	delete spec.engine.authorityRound.params.blockRewardContractTransition;
 	
 	utils.clearFolder(constants.mocKeysFolder);
 
