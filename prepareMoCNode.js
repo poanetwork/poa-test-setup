@@ -32,6 +32,16 @@ async function main() {
 		return console.log(e.message)
 	}
 
+	[
+		'eip145Transition',
+		'eip1014Transition',
+		'eip1052Transition',
+		'eip1283Transition',
+		'eip1283DisableTransition',
+	].forEach(param => {
+		spec.params[param] = '0x0';
+	});
+	
 	utils.clearFolder(constants.mocKeysFolder);
 
 	let POAKeysFolder = `${constants.masterNodeKeysFolder}${spec.name}`;
