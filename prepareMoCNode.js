@@ -37,12 +37,52 @@ async function main() {
 		'eip1014Transition',
 		'eip1052Transition',
 		'eip1283Transition',
-		'eip1283DisableTransition',
+		'eip1344Transition',
+		'eip1706Transition',
+		'eip1884Transition',
+		'eip2028Transition'
 	].forEach(param => {
 		spec.params[param] = '0x0';
 	});
-	delete spec.engine.authorityRound.params.blockRewardContractAddress;
-	delete spec.engine.authorityRound.params.blockRewardContractTransition;
+
+	delete spec.params['eip1283DisableTransition'];
+	delete spec.engine.authorityRound.params['blockRewardContractAddress'];
+	delete spec.engine.authorityRound.params['blockRewardContractTransition'];
+
+	spec.accounts['0000000000000000000000000000000000000006'].builtin['eip1108_transition'] = '0x0';
+	spec.accounts['0000000000000000000000000000000000000006'].builtin.pricing = {
+		alt_bn128_const_operations: {
+			price: 500,
+			eip1108_transition_price: 150,
+		},
+	};
+	spec.accounts['0000000000000000000000000000000000000007'].builtin['eip1108_transition'] = '0x0';
+	spec.accounts['0000000000000000000000000000000000000007'].builtin.pricing = {
+		alt_bn128_const_operations: {
+			price: 40000,
+			eip1108_transition_price: 6000,
+		},
+	};
+	spec.accounts['0000000000000000000000000000000000000008'].builtin['eip1108_transition'] = '0x0';
+	spec.accounts['0000000000000000000000000000000000000008'].builtin.pricing = {
+		alt_bn128_pairing: {
+			base: 100000,
+			pair: 80000,
+			eip1108_transition_base: 45000,
+			eip1108_transition_pair: 34000,
+		},
+	};
+	spec.accounts['0000000000000000000000000000000000000009'] = {
+		builtin: {
+			name: 'blake2_f',
+			activate_at: '0x0',
+			pricing: {
+				blake2_f: {
+					gas_per_round: 1,
+				},
+			},
+		},
+	};
 	
 	utils.clearFolder(constants.mocKeysFolder);
 
