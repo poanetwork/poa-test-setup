@@ -11,32 +11,25 @@ function timeout(ms) {
 main();
 
 async function main() {
-    const addresses = JSON.parse(fs.readFileSync(`${constants.pathToContractRepo}/contracts.json`));
+    const spec = JSON.parse(fs.readFileSync(`${constants.specFolder}/spec.json`));
+    const emissionFundsAddress = JSON.parse(fs.readFileSync(`${constants.pathToContractRepo}/contracts.json`)).EMISSION_FUNDS_ADDRESS;
     const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
-    async function getBalance() {
-        const data = await web3.eth.getBalance(addresses.EMISSION_FUNDS_ADDRESS);
-        return new BN(data);
+    const stepDurationMs = spec.engine.authorityRound.params.stepDuration * 1000;
+
+    let blockNumber = Number(await web3.eth.getBlockNumber());
+
+    while (blockNumber <= Number(spec.engine.authorityRound.params.blockRewardContractTransition) + 2) {
+        console.log('Waiting for blockRewardContractTransition...');
+        await timeout(stepDurationMs);
+        blockNumber = Number(await web3.eth.getBlockNumber());
     }
 
-    const balance = await getBalance();
-    if (!balance.gt(new BN(0))) {
-        throw Error('Zero balance');
+    const prevBalance = new BN(await web3.eth.getBalance(emissionFundsAddress, blockNumber - 1));
+    const balance = new BN(await web3.eth.getBalance(emissionFundsAddress, blockNumber));
+
+    if (!balance.gt(prevBalance)) {
+        throw Error('EmissionFunds contract balance hasn\'t been increased');
     }
 
-    const blockNumber = await web3.eth.getBlockNumber();
-    async function waitForNewBlock() {
-        await timeout(5000);
-        const currentBlockNumber = await web3.eth.getBlockNumber();
-        if (currentBlockNumber > blockNumber) {
-            const newBalance = await getBalance();
-            if (!newBalance.gt(balance)) {
-                throw Error('The balance has not changed');
-            }
-            return;
-        }
-        await waitForNewBlock();
-    }
-    await waitForNewBlock();
-
-    console.log('1');
+    console.log('OK');
 }
