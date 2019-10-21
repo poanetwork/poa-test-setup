@@ -25,7 +25,7 @@
 
 ## Requirements
 1. Linux, Mac OS
-2. Parity 1.9.2+
+2. Parity 2.5.9+
 3. Google Chrome
 
 ## Basic scenarios
@@ -33,6 +33,7 @@
 There are some options to start POA Network test setup depending on your needs:
 - [Start MoC node](#start-moc-node) - launches only MoC node, generates initial key
 - [Launch DApps](#launch-dapps) - launches Ceremony, Validators, Governance DApps
+- [Check Emission Funds balance](#check-emission-funds-balance) - checks whether Emission Funds balance is not zero
 - [Launch Ceremony](#launch-ceremony) - conducts Ceremony
 - [Set validator data](#set-validators-personal-data) - set validators personal data with Validators DApp
 - [Add validator from Governance](#add-validator-from-governance) - add new validator from Governance
@@ -73,9 +74,19 @@ $ npm run launch-dapps
 - Validators DApp is started on `http://localhost:3001`
 - Governance DApp is started on `http://localhost:3002`
 
-### Launch Ceremony
+### Check Emission Funds balance
 
 *Note*: can be started after [the previous step is completed](#launch-dapps)
+
+`npm run check-emission-funds-balance`
+
+#### Expected results:
+- no errors returned
+
+
+### Launch Ceremony
+
+*Note*: can be started after [the "Launch DApps" step is completed](#launch-dapps)
 
 For Ubuntu users: you should first install and use *X virtual framebuffer* if you want to move all graphical operations to the virtual memory without showing any screen output.
 ```

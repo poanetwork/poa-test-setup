@@ -15,6 +15,12 @@ fi
 toml=./nodes/parity-moc/moc.toml
 log=./nodes/parity-moc/parity.log
 
+# if the node is already started
+if lsof -t -i:8545 > /dev/null
+then
+	kill -9 $(lsof -t -i:8545)
+fi
+
 cmd2=$(parity --config $toml > $log 2>&1 &)
 
 exit 0
