@@ -49,6 +49,14 @@ function main() {
 	dappHelpersContent = dappHelpersContent.replace(lastGetABI, lastGetABI + abiAddition);
 	fs.writeFileSync(dappHelpers, dappHelpersContent);
 
+	const dappGetWeb3 = `${constants.pathToValidatorsDAppRepo}/src/utils/getWeb3.js`;
+	let dappGetWeb3Content = fs.readFileSync(dappGetWeb3, 'utf8');
+	function replaceDefaultNetId(network) {
+		return `const defaultNetId = helpers.netIdByName(constants.branches.${network})`
+	}
+	dappGetWeb3Content = dappGetWeb3Content.replace(replaceDefaultNetId('CORE'), replaceDefaultNetId('SOKOL'));
+	fs.writeFileSync(dappGetWeb3, dappGetWeb3Content);
+
 	// Fix Metadata.contract.js for using new ValidatorMetadata contract
 	// in local Sokol Network (instead of live xDai Network)
 	const metadataContractPath = `${constants.pathToValidatorsDAppRepo}/src/contracts/Metadata.contract.js`;
