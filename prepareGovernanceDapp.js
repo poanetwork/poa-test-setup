@@ -83,6 +83,14 @@ const local = {
 	dappHelpersContent = dappHelpersContent.replace(lastGetABI, lastGetABI + abiAddition);
 	fs.writeFileSync(dappHelpers, dappHelpersContent);
 
+	const dappGetWeb3 = `${constants.pathToGovernanceDAppRepo}/src/utils/getWeb3.js`;
+	let dappGetWeb3Content = fs.readFileSync(dappGetWeb3, 'utf8');
+	function replaceDefaultNetId(network) {
+		return `const defaultNetId = helpers.netIdByBranch(constants.${network})`
+	}
+	dappGetWeb3Content = dappGetWeb3Content.replace(replaceDefaultNetId('CORE'), replaceDefaultNetId('SOKOL'));
+	fs.writeFileSync(dappGetWeb3, dappGetWeb3Content);
+
 	// Change some constants
 	const dappConstants = `${constants.pathToGovernanceDAppRepo}/src/utils/constants.js`;
 	let dappConstantsContent = fs.readFileSync(dappConstants, 'utf8');
