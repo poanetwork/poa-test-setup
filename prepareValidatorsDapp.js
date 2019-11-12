@@ -52,7 +52,7 @@ function main() {
 	const dappGetWeb3 = `${constants.pathToValidatorsDAppRepo}/src/utils/getWeb3.js`;
 	let dappGetWeb3Content = fs.readFileSync(dappGetWeb3, 'utf8');
 	function replaceDefaultNetId(network) {
-		return `const defaultNetId = helpers.netIdByName(constants.branches.${network})`
+		return `const defaultNetId = helpers.netIdByBranch(constants.branches.${network})`
 	}
 	dappGetWeb3Content = dappGetWeb3Content.replace(replaceDefaultNetId('CORE'), replaceDefaultNetId('SOKOL'));
 	fs.writeFileSync(dappGetWeb3, dappGetWeb3Content);
