@@ -10,10 +10,10 @@ function checkclientversion()
 	patch=$(echo $parityversion | cut -d'.' -f 3)
 
 	majormin=2
-	minormin=5
-	patchmin=9
+	minormin=6
+	patchmin=5
 
-	errormsg="Parity Ethereum client version should be more or equal than v2.5.9. Your current installation has version $parityversion"
+	errormsg="Parity Ethereum client version should be more or equal to v2.6.5. Your current installation has version $parityversion"
 
 	function genError()
 	{

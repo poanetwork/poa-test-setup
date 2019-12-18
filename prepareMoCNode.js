@@ -32,6 +32,11 @@ async function main() {
 		return console.log(e.message)
 	}
 
+	delete spec.engine.authorityRound.params['blockRewardContractAddress'];
+	delete spec.engine.authorityRound.params['blockRewardContractTransition'];
+	delete spec.params['eip1283DisableTransition'];
+	delete spec.params['eip1283ReenableTransition'];
+
 	[
 		'eip145Transition',
 		'eip1014Transition',
@@ -45,45 +50,24 @@ async function main() {
 		spec.params[param] = '0x0';
 	});
 
-	delete spec.params['eip1283DisableTransition'];
-	delete spec.engine.authorityRound.params['blockRewardContractAddress'];
-	delete spec.engine.authorityRound.params['blockRewardContractTransition'];
+	delete spec.nodes;
 
-	spec.accounts['0000000000000000000000000000000000000006'].builtin['eip1108_transition'] = '0x0';
-	spec.accounts['0000000000000000000000000000000000000006'].builtin.pricing = {
-		alt_bn128_const_operations: {
-			price: 500,
-			eip1108_transition_price: 150,
-		},
-	};
-	spec.accounts['0000000000000000000000000000000000000007'].builtin['eip1108_transition'] = '0x0';
-	spec.accounts['0000000000000000000000000000000000000007'].builtin.pricing = {
-		alt_bn128_const_operations: {
-			price: 40000,
-			eip1108_transition_price: 6000,
-		},
-	};
-	spec.accounts['0000000000000000000000000000000000000008'].builtin['eip1108_transition'] = '0x0';
-	spec.accounts['0000000000000000000000000000000000000008'].builtin.pricing = {
-		alt_bn128_pairing: {
-			base: 100000,
-			pair: 80000,
-			eip1108_transition_base: 45000,
-			eip1108_transition_pair: 34000,
-		},
-	};
-	spec.accounts['0000000000000000000000000000000000000009'] = {
-		builtin: {
-			name: 'blake2_f',
-			activate_at: '0x0',
-			pricing: {
-				blake2_f: {
-					gas_per_round: 1,
-				},
-			},
-		},
-	};
-	
+	const accounts = Object.keys(spec.accounts);
+	for (let i = 0; i < accounts.length; i++) {
+		const address = accounts[i];
+		const addressTrimmed = leftTrimAddress(accounts[i]);
+		if (addressTrimmed >= 1 && addressTrimmed <= 9) {
+			const account = '0x' + addressTrimmed.padStart(40, '0')
+			const accountObj = spec.accounts[address];
+			delete spec.accounts[address];
+			spec.accounts[account] = accountObj;
+			spec.accounts[account].builtin['pricing'] = 
+				fixSpecPricing(spec.accounts[account].builtin['pricing']);
+		} else {
+			delete spec.accounts[address];
+		}
+	}
+
 	utils.clearFolder(constants.mocKeysFolder);
 
 	let POAKeysFolder = `${constants.masterNodeKeysFolder}${spec.name}`;
@@ -102,7 +86,7 @@ async function main() {
 
 	try { await utils.saveToFile(privateKeyFileName, JSON.stringify(key, null, 2)) }
 	catch (err) { return console.log(err.message); }
-	console.log(`MoC private key are generated to ${privateKeyFileName}`);
+	console.log(`MoC private key is generated to ${privateKeyFileName}`);
 
 
 	try { await utils.saveToFile(passwordFileName, mocPassword) }
@@ -161,6 +145,16 @@ async function main() {
 	console.log("MoC node is prepared");
 }
 
+function fixSpecPricing(pricing) {
+	const keys = Object.keys(pricing);
+	const lastKey = keys[keys.length - 1];
+	delete pricing[lastKey]['info'];
+	return { "0" : pricing[lastKey] };
+}
+
+function leftTrimAddress(address) {
+	return address.replace(/^[0|x]+/, '');
+}
 
 //generates initial key keystore file
 function generateAddress(password) {
