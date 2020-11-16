@@ -25,8 +25,9 @@
 
 ## Requirements
 1. Linux, Mac OS
-2. Parity 2.6.5+
-3. Google Chrome
+2. NodeJS@10
+3. Parity 2.6.5+
+4. Google Chrome
 
 ## Basic scenarios
 
