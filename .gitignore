@@ -58,3 +58,9 @@ typings/
 .env
 
 .DS_Store
+
+# Nodes data
+nodes/parity-moc
+nodes/parity_validator_*
+keys
+spec/spec.json
